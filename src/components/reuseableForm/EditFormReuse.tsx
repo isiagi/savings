@@ -27,9 +27,8 @@ function EditFormReuse({
     navigate(-1);
   };
   return (
-    <div className="w-full text-center min-h-[70vh] flex justify-center items-center">
+    <div className="w-full text-center flex justify-center items-center">
       <div className="w-full">
-        <h1 className="py-5">{title}</h1>
         <ReusableForm
           onFinish={handleFormSubmit}
           formFields={formFields}

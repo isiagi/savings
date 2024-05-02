@@ -10,7 +10,7 @@ function TableComponent({ dataSource, columns }) {
     <Table
       onRow={() => {
         return {
-          onClick: () => navigate("/detail"), // click row
+          onClick: () => navigate("/detail/2"), // click row
         };
       }}
       scroll={{ x: 400 }}
