@@ -1,6 +1,8 @@
 import { Space } from "antd";
 import HeaderBanner from "../HeaderBanner/HeaderBanner";
 import TableComponent from "../table/Table";
+import ModalComponent from "../modal/Modal";
+import useStore from "../../global/GlobalStates";
 
 const dataSource = [
   {
@@ -21,18 +23,28 @@ const dataSource = [
 
 const columns = [
   {
-    title: "Name",
-    dataIndex: "name",
+    title: "Member ID",
+    dataIndex: "Member ID",
     key: "name",
   },
 
   {
-    title: "Active Loan",
+    title: "Member Name",
     dataIndex: "loan",
     key: "loan",
   },
   {
-    title: "Last Saving",
+    title: "Savings Account Number:",
+    dataIndex: "interest",
+    key: "interest",
+  },
+  {
+    title: "Current Balance:",
+    dataIndex: "interest",
+    key: "interest",
+  },
+  {
+    title: "Last Deposit Date",
     dataIndex: "interest",
     key: "interest",
   },
@@ -47,10 +59,46 @@ const columns = [
   },
 ];
 
+const jobFormFields = [
+  {
+    name: "providerName",
+    label: "Member ID:",
+    rules: [{ required: true, message: "Please enter your name" }],
+  },
+  {
+    name: "country",
+    label: "Member Name:",
+    rules: [{ required: true, message: "Please enter your name" }],
+  },
+  {
+    name: "numberOffered",
+    label: "Savings Account Number:",
+    rules: [{ required: true, message: "Please enter your name" }],
+  },
+  {
+    name: "amount",
+    label: "Current Balance:",
+    rules: [{ required: true, message: "Please enter your name" }],
+  },
+  {
+    name: "purpose",
+    label: "Last Deposit Date:",
+    rules: [{ required: true, message: "Please enter your name" }],
+  },
+];
+
 function Savings() {
+  const openAddModal = useStore((state) => state.openAddModal);
+
   return (
     <div>
-      <HeaderBanner title="Savings" placeholder="Search Savings" />
+      <HeaderBanner
+        title="Savings"
+        placeholder="Search Savings"
+        openAddModal={openAddModal}
+      />
+
+      <ModalComponent data={jobFormFields} title={"Add Savings"} />
 
       <TableComponent dataSource={dataSource} columns={columns} />
     </div>

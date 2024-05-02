@@ -110,7 +110,6 @@ const App = () => {
             minHeight: 280,
             background: colorBgContainer,
             borderRadius: borderRadiusLG,
-            overflow: "hidden",
           }}
         >
           <Outlet />

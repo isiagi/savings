@@ -2,12 +2,13 @@ import PropTypes from "prop-types";
 
 import { Form, Modal } from "antd";
 import useStore from "../../global/GlobalStates";
-import FormReuse from "../reuseableForm/FormReuse";
 
-const ModalComponent = ({ data, title }) => {
-  const { addModalState, closeAddModal } = useStore((state) => ({
-    addModalState: state.addModalState,
-    closeAddModal: state.closeAddModal,
+import EditFormReuse from "../reuseableForm/EditFormReuse";
+
+const EditModalComponent = ({ data, title }) => {
+  const { editModalState, closeEditModal } = useStore((state) => ({
+    editModalState: state.editModalState,
+    closeEditModal: state.closeEditModal,
   }));
 
   const [form] = Form.useForm();
@@ -18,21 +19,21 @@ const ModalComponent = ({ data, title }) => {
   // const handleOk = (values) => {
   //   alert("Added Successfully");
   //   alert(values);
-  //   // closeAddModal();
+  //   // closeEditModal();
   // };
   const handleCancel = () => {
     form.resetFields();
-    closeAddModal();
+    closeEditModal();
   };
   return (
     <>
       <Modal
         title={title}
-        open={addModalState}
+        open={editModalState}
         onOk={form.submit}
         onCancel={handleCancel}
       >
-        <FormReuse
+        <EditFormReuse
           initialValues={data}
           formFields={data}
           title="Create Agent"
@@ -45,9 +46,9 @@ const ModalComponent = ({ data, title }) => {
   );
 };
 
-ModalComponent.propTypes = {
+EditModalComponent.propTypes = {
   data: PropTypes.any.isRequired,
   title: PropTypes.string.isRequired,
 };
 
-export default ModalComponent;
+export default EditModalComponent;

@@ -1,6 +1,8 @@
-import { Space } from "antd";
+import { Select, Space } from "antd";
 import HeaderBanner from "../HeaderBanner/HeaderBanner";
 import TableComponent from "../table/Table";
+import ModalComponent from "../modal/Modal";
+import useStore from "../../global/GlobalStates";
 
 const dataSource = [
   {
@@ -21,18 +23,18 @@ const dataSource = [
 
 const columns = [
   {
-    title: "Name",
+    title: "Borrower",
     dataIndex: "name",
     key: "name",
   },
 
   {
-    title: "Active Loan",
+    title: "Current Loan",
     dataIndex: "loan",
     key: "loan",
   },
   {
-    title: "Last Saving",
+    title: "Next Payment Schedule",
     dataIndex: "interest",
     key: "interest",
   },
@@ -47,10 +49,39 @@ const columns = [
   },
 ];
 
+const jobFormFields = [
+  {
+    name: "country",
+    label: "Member ID:",
+    rules: [{ required: true, message: "Please enter your name" }],
+    inputComponent: (
+      <Select
+        defaultValue="Select Status"
+        className="w-full"
+        allowClear
+        options={[
+          { value: "AVAILABLE", label: "AVAILABLE" },
+          { value: "CONTRACT APPROVAL", label: "CONTRACT APPROVAL" },
+          { value: "APPROVAL BY MINISTRY", label: "APPROVAL BY MINISTRY" },
+          { value: "TRAVELLED", label: "TRAVELLED" },
+        ]}
+      />
+    ),
+  },
+];
+
 function Borrowers() {
+  const openAddModal = useStore((state) => state.openAddModal);
+
   return (
     <div>
-      <HeaderBanner title="Borrowers" placeholder="Search Borrower" />
+      <HeaderBanner
+        title="Borrowers"
+        placeholder="Search Borrower"
+        openAddModal={openAddModal}
+      />
+
+      <ModalComponent data={jobFormFields} title={"Add Borrower"} />
 
       <TableComponent dataSource={dataSource} columns={columns} />
     </div>

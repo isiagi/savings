@@ -1,5 +1,39 @@
-import { Space } from "antd";
+import { Input, Space } from "antd";
 import TableComponent from "../table/Table";
+import useStore from "../../global/GlobalStates";
+import EditModalComponent from "../modal/EditModal";
+
+const agentFormFields = [
+  {
+    name: "companyName",
+    label: "Full Name:",
+    rules: [{ required: true, message: "Please enter your name" }],
+  },
+  {
+    name: "agentNames",
+    label: "Contact:",
+    rules: [{ required: true, message: "Please enter your name" }],
+  },
+  {
+    name: "phoneNumber1",
+    label: "Address:",
+    rules: [{ required: true, message: "Please enter your name" }],
+  },
+  {
+    name: "phoneNumber2",
+    label: "Member ID:",
+    rules: [{ required: true, message: "Please enter your name" }],
+  },
+  {
+    name: "email",
+    label: "Photo:",
+    rules: [
+      { required: true, message: "Please enter your email" },
+      { type: "email", message: "Please enter a valid email" },
+    ],
+    inputComponent: <Input type="email" />,
+  },
+];
 
 const dataSource = [
   {
@@ -18,39 +52,46 @@ const dataSource = [
   },
 ];
 
-const columns = [
-  {
-    title: "Saving",
-    dataIndex: "saving",
-    key: "saving",
-  },
-  {
-    title: "Wagubumbuzi",
-    dataIndex: "wagubumbuzi",
-    key: "wagubumbuzi",
-  },
-  {
-    title: "Loan",
-    dataIndex: "loan",
-    key: "loan",
-  },
-  {
-    title: "Interest",
-    dataIndex: "interest",
-    key: "interest",
-  },
-  {
-    title: "Action",
-    key: "action",
-    render: () => (
-      <Space size="middle">
-        <a>Edit</a>
-      </Space>
-    ),
-  },
-];
-
 function Users() {
+  const openEditModal = useStore((state) => state.openEditModal);
+
+  const columns = [
+    {
+      title: "Saving",
+      dataIndex: "saving",
+      key: "saving",
+    },
+    {
+      title: "Wagubumbuzi",
+      dataIndex: "wagubumbuzi",
+      key: "wagubumbuzi",
+    },
+    {
+      title: "Loan",
+      dataIndex: "loan",
+      key: "loan",
+    },
+    {
+      title: "Interest",
+      dataIndex: "interest",
+      key: "interest",
+    },
+    {
+      title: "Penalty",
+      dataIndex: "interest",
+      key: "interest",
+    },
+    {
+      title: "Action",
+      key: "action",
+      render: () => (
+        <Space size="middle">
+          <div onClick={() => openEditModal()}>Delete User</div>
+        </Space>
+      ),
+    },
+  ];
+
   return (
     <div className="h-[450px]">
       <div className="flex justify-between items-center mb-4">
@@ -67,6 +108,7 @@ function Users() {
           className="w-[150px] h-[100px] object-cover"
         />
       </div>
+      <EditModalComponent data={agentFormFields} title={"Edit User"} />
       <TableComponent dataSource={dataSource} columns={columns} />
     </div>
   );
