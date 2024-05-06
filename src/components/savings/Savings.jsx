@@ -1,4 +1,4 @@
-import { Space } from "antd";
+import { DatePicker, Space } from "antd";
 import HeaderBanner from "../HeaderBanner/HeaderBanner";
 import TableComponent from "../table/Table";
 import ModalComponent from "../modal/Modal";
@@ -77,13 +77,14 @@ const jobFormFields = [
   },
   {
     name: "amount",
-    label: "Current Balance:",
+    label: "Amount:",
     rules: [{ required: true, message: "Please enter your name" }],
   },
   {
-    name: "purpose",
-    label: "Last Deposit Date:",
+    name: "date",
+    label: "Date Of Deposit:",
     rules: [{ required: true, message: "Please enter your name" }],
+    inputComponent: <DatePicker className="w-full" />,
   },
 ];
 

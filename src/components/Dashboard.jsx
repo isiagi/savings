@@ -78,6 +78,11 @@ const App = () => {
             },
 
             {
+              key: "10",
+              icon: <BarChartOutlined />,
+              label: <Link to={"/wagubumbuzi/10"}>Wagubumbuzi</Link>,
+            },
+            {
               key: "5",
               icon: <BarChartOutlined />,
               label: <Link to={"/borrowers/5"}>Borrowers</Link>,

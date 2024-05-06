@@ -8,6 +8,7 @@ import UserComponent from "../components/users/User";
 import Users from "../components/users/Users";
 import Borrowers from "../components/borrowers/Borrowers";
 import Payment from "../components/payment/Payment";
+import Wagubumbuzi from "../components/wagubumbuzi/Wagubumbuzi";
 
 function index() {
   return (
@@ -20,6 +21,7 @@ function index() {
           <Route path="/reports/:key" element={<Report />} />
           <Route path="/loans/:key" element={<Loan />} />
           <Route path="/savings/:key" element={<Savings />} />
+          <Route path="/wagubumbuzi/:key" element={<Wagubumbuzi />} />
           <Route path="/payment/:key" element={<Payment />} />
           <Route path="/borrowers/:key" element={<Borrowers />} />
         </Route>
