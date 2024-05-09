@@ -1,6 +1,6 @@
-import { Space } from "antd";
-import HeaderBanner from "../HeaderBanner/HeaderBanner";
-import TableComponent from "../table/Table";
+import { DatePicker } from "antd";
+
+import PageUiComponent from "../ui/PageUiComponent";
 
 const dataSource = [
   {
@@ -21,39 +21,73 @@ const dataSource = [
 
 const columns = [
   {
-    title: "Name",
-    dataIndex: "name",
+    title: "Member ID",
+    dataIndex: "Member ID",
     key: "name",
   },
 
   {
-    title: "Active Loan",
+    title: "Member Name",
     dataIndex: "loan",
     key: "loan",
   },
   {
-    title: "Last Saving",
+    title: "Savings Account Number:",
     dataIndex: "interest",
     key: "interest",
   },
   {
-    title: "Action",
-    key: "action",
-    render: () => (
-      <Space size="middle">
-        <a>Delete</a>
-      </Space>
-    ),
+    title: "Current Balance:",
+    dataIndex: "interest",
+    key: "interest",
+  },
+  {
+    title: "Last Deposit Date",
+    dataIndex: "interest",
+    key: "interest",
+  },
+];
+
+const jobFormFields = [
+  {
+    name: "providerName",
+    label: "Member ID:",
+    rules: [{ required: true, message: "Please enter your name" }],
+  },
+  {
+    name: "country",
+    label: "Member Name:",
+    rules: [{ required: true, message: "Please enter your name" }],
+  },
+  {
+    name: "numberOffered",
+    label: "Savings Account Number:",
+    rules: [{ required: true, message: "Please enter your name" }],
+  },
+  {
+    name: "amount",
+    label: "Amount:",
+    rules: [{ required: true, message: "Please enter your name" }],
+  },
+  {
+    name: "date",
+    label: "Date Of Deposit:",
+    rules: [{ required: true, message: "Please enter your name" }],
+    inputComponent: <DatePicker className="w-full" />,
   },
 ];
 
 function Savings() {
   return (
-    <div>
-      <HeaderBanner title="Savings" placeholder="Search Savings" />
-
-      <TableComponent dataSource={dataSource} columns={columns} />
-    </div>
+    <PageUiComponent
+      headerTitle={"Savings"}
+      placeholder={"Search Savings"}
+      modalFields={jobFormFields}
+      addModalTitle={"Add Savings"}
+      columns={columns}
+      dataSource={dataSource}
+      editModalTitle="Edit Saving"
+    />
   );
 }
 

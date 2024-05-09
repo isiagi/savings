@@ -10,12 +10,23 @@ import {
 } from "@ant-design/icons";
 
 import { Button, Layout, Menu, theme } from "antd";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useParams } from "react-router-dom";
 
 const { Header, Sider, Content } = Layout;
 
 const App = () => {
   const [collapsed, setCollapsed] = useState(false);
+
+  const { key } = useParams();
+
+  const [selectedKey, setSelectedKey] = useState(key);
+
+  console.log(key);
+
+  const onClick = (e) => {
+    setSelectedKey(e.key); // Update selected tab when clicked
+  };
+
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
@@ -38,8 +49,10 @@ const App = () => {
         <div className="demo-logo-vertical" />
         <Menu
           theme="dark"
+          onClick={onClick}
           mode="inline"
           defaultSelectedKeys={["1"]}
+          selectedKeys={[selectedKey]}
           items={[
             {
               key: "1",
@@ -49,34 +62,45 @@ const App = () => {
             {
               key: "4",
               icon: <DollarOutlined />,
-              label: <Link to={"/loans"}>Loan</Link>,
+              label: <Link to={"/loans/4"}>Loan</Link>,
             },
 
             {
               key: "3",
               icon: <MoneyCollectOutlined />,
-              label: <Link to={"/savings"}>Savings</Link>,
+              label: <Link to={"/savings/3"}>Savings</Link>,
             },
 
             {
+              key: "9",
+              icon: <MoneyCollectOutlined />,
+              label: <Link to={"/payment/9"}>Payment</Link>,
+            },
+
+            {
+              key: "10",
+              icon: <BarChartOutlined />,
+              label: <Link to={"/wagubumbuzi/10"}>Wagubumbuzi</Link>,
+            },
+            {
               key: "5",
               icon: <BarChartOutlined />,
-              label: <Link to={"/borrowers"}>Borrowers</Link>,
+              label: <Link to={"/borrowers/5"}>Borrowers</Link>,
             },
             {
               key: "2",
               icon: <UserOutlined />,
-              label: <Link to="/users">Users</Link>,
+              label: <Link to="/users/2">Members</Link>,
             },
             {
               key: "6",
               icon: <BarChartOutlined />,
-              label: <Link to={"/reports"}>Reports</Link>,
+              label: <Link to={"/reports/6"}>Reports</Link>,
             },
             {
               key: "7",
               icon: <BarChartOutlined />,
-              label: <Link to={"/reports"}>LogOut</Link>,
+              label: <Link to={"/reports/7"}>LogOut</Link>,
             },
           ]}
         />
@@ -110,7 +134,6 @@ const App = () => {
             minHeight: 280,
             background: colorBgContainer,
             borderRadius: borderRadiusLG,
-            overflow: "hidden",
           }}
         >
           <Outlet />

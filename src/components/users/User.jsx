@@ -1,9 +1,6 @@
-import { Space } from "antd";
+import { Input } from "antd";
 
-import TableComponent from "../table/Table";
-import ModalComponent from "../modal/Modal";
-import useStore from "../../global/GlobalStates";
-import HeaderBanner from "../HeaderBanner/HeaderBanner";
+import PageUiComponent from "../ui/PageUiComponent";
 
 const dataSource = [
   {
@@ -20,56 +17,75 @@ const dataSource = [
   },
 ];
 
-const columns = [
+const agentFormFields = [
   {
-    title: "Image",
-    dataIndex: "image",
-    key: "image",
-    render: () => (
-      <img
-        src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
-        alt="helo"
-        className="w-[100px] h-[50px] object-cover"
-      />
-    ),
-  },
-
-  {
-    title: "Active Loan",
-    dataIndex: "loan",
-    key: "loan",
+    name: "companyName",
+    label: "Full Name:",
+    rules: [{ required: true, message: "Please enter your name" }],
   },
   {
-    title: "Last Saving",
-    dataIndex: "interest",
-    key: "interest",
+    name: "agentNames",
+    label: "Contact:",
+    rules: [{ required: true, message: "Please enter your name" }],
   },
   {
-    title: "Action",
-    key: "action",
-    render: () => (
-      <Space size="middle">
-        <a>Delete User</a>
-      </Space>
-    ),
+    name: "phoneNumber1",
+    label: "Address:",
+    rules: [{ required: true, message: "Please enter your name" }],
+  },
+  {
+    name: "phoneNumber2",
+    label: "Member ID:",
+    rules: [{ required: true, message: "Please enter your name" }],
+  },
+  {
+    name: "email",
+    label: "Photo:",
+    rules: [
+      { required: true, message: "Please enter your email" },
+      { type: "email", message: "Please enter a valid email" },
+    ],
+    inputComponent: <Input type="email" />,
   },
 ];
 
 function UserComponent() {
-  const openAddModal = useStore((state) => state.openAddModal);
+  const columns = [
+    {
+      title: "Image",
+      dataIndex: "image",
+      key: "image",
+      render: () => (
+        <img
+          src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+          alt="helo"
+          className="w-[100px] h-[50px] object-cover"
+        />
+      ),
+    },
+
+    {
+      title: "Active Loan",
+      dataIndex: "loan",
+      key: "loan",
+    },
+    {
+      title: "Last Saving",
+      dataIndex: "interest",
+      key: "interest",
+    },
+  ];
 
   return (
-    <div>
-      <HeaderBanner
-        title="Users"
-        placeholder="Search User"
-        openAddModal={openAddModal}
-      />
-
-      <ModalComponent />
-
-      <TableComponent dataSource={dataSource} columns={columns} />
-    </div>
+    <PageUiComponent
+      headerTitle={"Members"}
+      placeholder={"Search Member"}
+      modalFields={agentFormFields}
+      addModalTitle={"Add Member"}
+      columns={columns}
+      dataSource={dataSource}
+      editModalTitle="Edit Member"
+    />
   );
 }
 

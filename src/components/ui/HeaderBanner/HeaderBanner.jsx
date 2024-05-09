@@ -6,7 +6,7 @@ const { Search } = Input;
 
 function HeaderBanner({ title, placeholder, openAddModal }) {
   return (
-    <div className="flex items-center justify-between flex-wrap">
+    <div className="flex items-center justify-between flex-wrap pb-10">
       <h1>{title}</h1>
       <div>
         <Search
