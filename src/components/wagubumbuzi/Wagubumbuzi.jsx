@@ -1,5 +1,5 @@
 import { Space } from "antd";
-import TableComponent from "../table/Table";
+import TableComponent from "../ui/table/Table";
 
 const dataSource = [
   {

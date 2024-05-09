@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useNavigate } from "react-router-dom";
+// import createData from "../../hooks/createData";
 import ReusableForm from "./ReuseableForm";
-// import editData from "../../utils/editData";
 import React from "react";
 
 type Props = {
@@ -9,25 +9,29 @@ type Props = {
   initialValues: any;
   api?: string;
   title: string;
+  handleFormSubmit: (values: any) => void;
   formId: any;
+  closeAddModal: any;
 };
 
-function EditFormReuse({
+function FormReuse({
   formFields,
   initialValues,
   api,
   title,
   formId,
+  closeAddModal,
 }: Props) {
   const navigate = useNavigate();
 
   const handleFormSubmit = async (values: any) => {
-    // await editData(api, values);
-
-    navigate(-1);
+    // await createData(api, values);
+    alert("purple smile");
+    closeAddModal();
+    // navigate(-1);
   };
   return (
-    <div className="w-full text-center flex justify-center items-center">
+    <div className="w-full text-center  flex justify-center items-center">
       <div className="w-full">
         <ReusableForm
           onFinish={handleFormSubmit}
@@ -40,4 +44,4 @@ function EditFormReuse({
   );
 }
 
-export default EditFormReuse;
+export default FormReuse;

@@ -1,8 +1,6 @@
-import { Input, Select, Space } from "antd";
-import HeaderBanner from "../HeaderBanner/HeaderBanner";
-import TableComponent from "../table/Table";
-import ModalComponent from "../modal/Modal";
-import useStore from "../../global/GlobalStates";
+import { Input, Select } from "antd";
+
+import PageUiComponent from "../ui/PageUiComponent";
 
 const dataSource = [
   {
@@ -18,39 +16,6 @@ const dataSource = [
     loanDetails: 29900,
     payable: 10000,
     status: "Lwanga",
-  },
-];
-
-const columns = [
-  {
-    title: "Borrower",
-    dataIndex: "borrower",
-    key: "borrower",
-  },
-
-  {
-    title: "Loan Details",
-    dataIndex: "loanDetails",
-    key: "loanDetails",
-  },
-  {
-    title: "Next Payable Details",
-    dataIndex: "payable",
-    key: "payable",
-  },
-  {
-    title: "Status",
-    dataIndex: "status",
-    key: "status",
-  },
-  {
-    title: "Action",
-    key: "action",
-    render: () => (
-      <Space size="middle">
-        <a>Delete</a>
-      </Space>
-    ),
   },
 ];
 
@@ -110,20 +75,40 @@ const jobFormFields = [
 ];
 
 function Loan() {
-  const openAddModal = useStore((state) => state.openAddModal);
+  const columns = [
+    {
+      title: "Borrower",
+      dataIndex: "borrower",
+      key: "borrower",
+    },
+
+    {
+      title: "Loan Details",
+      dataIndex: "loanDetails",
+      key: "loanDetails",
+    },
+    {
+      title: "Next Payable Details",
+      dataIndex: "payable",
+      key: "payable",
+    },
+    {
+      title: "Status",
+      dataIndex: "status",
+      key: "status",
+    },
+  ];
 
   return (
-    <div>
-      <HeaderBanner
-        title="Loan"
-        placeholder="Search Loan"
-        openAddModal={openAddModal}
-      />
-
-      <ModalComponent data={jobFormFields} title="Add Loan Application" />
-
-      <TableComponent dataSource={dataSource} columns={columns} />
-    </div>
+    <PageUiComponent
+      headerTitle={"Loans"}
+      placeholder={"Search Loan"}
+      modalFields={jobFormFields}
+      addModalTitle={"Add Loan Application"}
+      columns={columns}
+      dataSource={dataSource}
+      editModalTitle="Edit Loan Application"
+    />
   );
 }
 

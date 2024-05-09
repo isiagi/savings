@@ -1,7 +1,7 @@
 import { Input, Space } from "antd";
-import TableComponent from "../table/Table";
+import TableComponent from "../ui/table/Table";
 import useStore from "../../global/GlobalStates";
-import EditModalComponent from "../modal/EditModal";
+import EditModalComponent from "../ui/modal/EditModal";
 
 const agentFormFields = [
   {

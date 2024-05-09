@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 
 import { Form, Modal } from "antd";
-import useStore from "../../global/GlobalStates";
+import useStore from "../../../global/GlobalStates";
 
 import EditFormReuse from "../reuseableForm/EditFormReuse";
 
@@ -40,6 +40,7 @@ const EditModalComponent = ({ data, title }) => {
           api="/v1/agents"
           // handleFormSubmit={handleOk}
           formId={form}
+          closeEditModal={closeEditModal}
         />
       </Modal>
     </>

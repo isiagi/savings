@@ -1,8 +1,6 @@
-import { DatePicker, Space } from "antd";
-import HeaderBanner from "../HeaderBanner/HeaderBanner";
-import TableComponent from "../table/Table";
-import ModalComponent from "../modal/Modal";
-import useStore from "../../global/GlobalStates";
+import { DatePicker } from "antd";
+
+import PageUiComponent from "../ui/PageUiComponent";
 
 const dataSource = [
   {
@@ -48,15 +46,6 @@ const columns = [
     dataIndex: "interest",
     key: "interest",
   },
-  {
-    title: "Action",
-    key: "action",
-    render: () => (
-      <Space size="middle">
-        <a>Delete</a>
-      </Space>
-    ),
-  },
 ];
 
 const jobFormFields = [
@@ -89,20 +78,16 @@ const jobFormFields = [
 ];
 
 function Savings() {
-  const openAddModal = useStore((state) => state.openAddModal);
-
   return (
-    <div>
-      <HeaderBanner
-        title="Savings"
-        placeholder="Search Savings"
-        openAddModal={openAddModal}
-      />
-
-      <ModalComponent data={jobFormFields} title={"Add Savings"} />
-
-      <TableComponent dataSource={dataSource} columns={columns} />
-    </div>
+    <PageUiComponent
+      headerTitle={"Savings"}
+      placeholder={"Search Savings"}
+      modalFields={jobFormFields}
+      addModalTitle={"Add Savings"}
+      columns={columns}
+      dataSource={dataSource}
+      editModalTitle="Edit Saving"
+    />
   );
 }
 

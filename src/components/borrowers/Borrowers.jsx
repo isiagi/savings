@@ -1,8 +1,6 @@
 import { Select, Space } from "antd";
-import HeaderBanner from "../HeaderBanner/HeaderBanner";
-import TableComponent from "../table/Table";
-import ModalComponent from "../modal/Modal";
-import useStore from "../../global/GlobalStates";
+
+import PageUiComponent from "../ui/PageUiComponent";
 
 const dataSource = [
   {
@@ -71,20 +69,16 @@ const jobFormFields = [
 ];
 
 function Borrowers() {
-  const openAddModal = useStore((state) => state.openAddModal);
-
   return (
-    <div>
-      <HeaderBanner
-        title="Borrowers"
-        placeholder="Search Borrower"
-        openAddModal={openAddModal}
-      />
-
-      <ModalComponent data={jobFormFields} title={"Add Borrower"} />
-
-      <TableComponent dataSource={dataSource} columns={columns} />
-    </div>
+    <PageUiComponent
+      headerTitle={"Borrowers"}
+      placeholder={"Search Borrower"}
+      modalFields={jobFormFields}
+      addModalTitle={"Add Borrower"}
+      columns={columns}
+      dataSource={dataSource}
+      editModalTitle="Edit Borrower"
+    />
   );
 }
 

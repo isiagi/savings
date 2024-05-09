@@ -1,8 +1,6 @@
 import { Space } from "antd";
-import useStore from "../../global/GlobalStates";
-import HeaderBanner from "../HeaderBanner/HeaderBanner";
-import ModalComponent from "../modal/Modal";
-import TableComponent from "../table/Table";
+
+import PageUiComponent from "../ui/PageUiComponent";
 
 const dataSource = [
   {
@@ -73,20 +71,16 @@ const jobFormFields = [
 ];
 
 function Payment() {
-  const openAddModal = useStore((state) => state.openAddModal);
-
   return (
-    <div>
-      <HeaderBanner
-        title="Payment"
-        placeholder="Search Payment"
-        openAddModal={openAddModal}
-      />
-
-      <ModalComponent data={jobFormFields} title={"Add Payment"} />
-
-      <TableComponent dataSource={dataSource} columns={columns} />
-    </div>
+    <PageUiComponent
+      headerTitle={"Payment"}
+      placeholder={"Search Payment"}
+      modalFields={jobFormFields}
+      addModalTitle={"Add Payment"}
+      columns={columns}
+      dataSource={dataSource}
+      editModalTitle="Edit Payment"
+    />
   );
 }
 

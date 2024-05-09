@@ -90,7 +90,7 @@ const App = () => {
             {
               key: "2",
               icon: <UserOutlined />,
-              label: <Link to="/users/2">Users</Link>,
+              label: <Link to="/users/2">Members</Link>,
             },
             {
               key: "6",

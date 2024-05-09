@@ -1,9 +1,6 @@
-import { Input, Space } from "antd";
+import { Input } from "antd";
 
-import TableComponent from "../table/Table";
-import ModalComponent from "../modal/Modal";
-import useStore from "../../global/GlobalStates";
-import HeaderBanner from "../HeaderBanner/HeaderBanner";
+import PageUiComponent from "../ui/PageUiComponent";
 
 const dataSource = [
   {
@@ -53,9 +50,6 @@ const agentFormFields = [
 ];
 
 function UserComponent() {
-  const openAddModal = useStore((state) => state.openAddModal);
-  const openEditModal = useStore((state) => state.openEditModal);
-
   const columns = [
     {
       title: "Image",
@@ -80,29 +74,18 @@ function UserComponent() {
       dataIndex: "interest",
       key: "interest",
     },
-    {
-      title: "Action",
-      key: "action",
-      render: () => (
-        <Space size="middle">
-          <div onClick={openEditModal}>Delete User</div>
-        </Space>
-      ),
-    },
   ];
 
   return (
-    <div>
-      <HeaderBanner
-        title="Members"
-        placeholder="Search User"
-        openAddModal={openAddModal}
-      />
-
-      <ModalComponent data={agentFormFields} title={"Add Member"} />
-
-      <TableComponent dataSource={dataSource} columns={columns} />
-    </div>
+    <PageUiComponent
+      headerTitle={"Members"}
+      placeholder={"Search Member"}
+      modalFields={agentFormFields}
+      addModalTitle={"Add Member"}
+      columns={columns}
+      dataSource={dataSource}
+      editModalTitle="Edit Member"
+    />
   );
 }
 
