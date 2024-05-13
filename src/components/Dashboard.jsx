@@ -57,50 +57,50 @@ const App = () => {
             {
               key: "1",
               icon: <DashboardOutlined />,
-              label: <Link to={"/"}>Dashboard</Link>,
+              label: <Link to={"/home"}>Dashboard</Link>,
             },
             {
               key: "4",
               icon: <DollarOutlined />,
-              label: <Link to={"/loans/4"}>Loan</Link>,
+              label: <Link to={"/home/loans/4"}>Loan</Link>,
             },
 
             {
               key: "3",
               icon: <MoneyCollectOutlined />,
-              label: <Link to={"/savings/3"}>Savings</Link>,
+              label: <Link to={"/home/savings/3"}>Savings</Link>,
             },
 
             {
               key: "9",
               icon: <MoneyCollectOutlined />,
-              label: <Link to={"/payment/9"}>Payment</Link>,
+              label: <Link to={"/home/payment/9"}>Payment</Link>,
             },
 
             {
               key: "10",
               icon: <BarChartOutlined />,
-              label: <Link to={"/wagubumbuzi/10"}>Wagubumbuzi</Link>,
+              label: <Link to={"/home/wagubumbuzi/10"}>Wagubumbuzi</Link>,
             },
             {
               key: "5",
               icon: <BarChartOutlined />,
-              label: <Link to={"/borrowers/5"}>Borrowers</Link>,
+              label: <Link to={"/home/borrowers/5"}>Borrowers</Link>,
             },
             {
               key: "2",
               icon: <UserOutlined />,
-              label: <Link to="/users/2">Members</Link>,
+              label: <Link to="/home/users/2">Members</Link>,
             },
             {
               key: "6",
               icon: <BarChartOutlined />,
-              label: <Link to={"/reports/6"}>Reports</Link>,
+              label: <Link to={"/home/reports/6"}>Reports</Link>,
             },
             {
               key: "7",
               icon: <BarChartOutlined />,
-              label: <Link to={"/reports/7"}>LogOut</Link>,
+              label: <Link to={"/home/reports/7"}>LogOut</Link>,
             },
           ]}
         />
