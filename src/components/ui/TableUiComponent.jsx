@@ -2,6 +2,7 @@ import useStore from "../../global/GlobalStates";
 import { createColumns } from "../../utils/tableColumnsCreation";
 import EditModalComponent from "./modal/EditModal";
 import TableComponent from "./table/Table";
+import useFetchData from "../../hooks/useFetchData";
 
 /* eslint-disable react/prop-types */
 function TableUiComponent({
@@ -15,6 +16,11 @@ function TableUiComponent({
   titlez,
 }) {
   const openEditModal = useStore((state) => state.openEditModal);
+
+  const tableData = useFetchData(fetchUrl);
+
+  console.log(tableData[0], "fdfd");
+
   const handleDelete = () => {
     alert("deleted");
   };
@@ -28,7 +34,7 @@ function TableUiComponent({
 
   return (
     <>
-      <TableComponent columns={columns} dataSource={fetchUrl} />
+      <TableComponent columns={columns} dataSource={tableData[0]} />
       <EditModalComponent data={data} title={titlez} />
     </>
   );

@@ -1,56 +1,40 @@
-import { Select, Space } from "antd";
+import { Select } from "antd";
 
 import PageUiComponent from "../ui/PageUiComponent";
 
 const dataSource = [
   {
     key: "1",
-    saving: 2000000,
-    loan: 32000,
-    interest: 2000,
+    membershipId: 2000000,
+
     name: "John Brown",
   },
   {
     key: "2",
-    saving: 4000000,
-    loan: 29900,
-    interest: 10000,
+    membershipId: 4000000,
+
     name: "Lwanga",
   },
 ];
 
 const columns = [
   {
-    title: "Borrower",
-    dataIndex: "name",
-    key: "name",
+    title: "Membership ID",
+    dataIndex: "membershipId",
+    key: "membershipId",
   },
 
   {
-    title: "Current Loan",
-    dataIndex: "loan",
-    key: "loan",
-  },
-  {
-    title: "Next Payment Schedule",
-    dataIndex: "interest",
-    key: "interest",
-  },
-  {
-    title: "Action",
-    key: "action",
-    render: () => (
-      <Space size="middle">
-        <a>Delete</a>
-      </Space>
-    ),
+    title: "Name",
+    dataIndex: "name",
+    key: "name",
   },
 ];
 
 const jobFormFields = [
   {
     name: "country",
-    label: "Member ID:",
+    label: "Membership ID:",
     rules: [{ required: true, message: "Please enter your name" }],
     inputComponent: (
       <Select
@@ -65,6 +49,11 @@ const jobFormFields = [
         ]}
       />
     ),
+  },
+  {
+    name: "name",
+    label: "Name:",
+    rules: [{ required: true, message: "Please enter your name" }],
   },
 ];
 

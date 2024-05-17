@@ -1,11 +1,10 @@
-import { Input, Space } from "antd";
+import { Input, Select } from "antd";
 import TableComponent from "../ui/table/Table";
-import useStore from "../../global/GlobalStates";
 import EditModalComponent from "../ui/modal/EditModal";
 
 const agentFormFields = [
   {
-    name: "companyName",
+    name: "fullName",
     label: "Full Name:",
     rules: [{ required: true, message: "Please enter your name" }],
   },
@@ -16,7 +15,7 @@ const agentFormFields = [
   },
   {
     name: "phoneNumber1",
-    label: "Address:",
+    label: "Place of residence:",
     rules: [{ required: true, message: "Please enter your name" }],
   },
   {
@@ -25,7 +24,12 @@ const agentFormFields = [
     rules: [{ required: true, message: "Please enter your name" }],
   },
   {
-    name: "email",
+    name: "occupation",
+    label: "Occupation:",
+    rules: [{ required: true, message: "Please enter your name" }],
+  },
+  {
+    name: "photo",
     label: "Photo:",
     rules: [
       { required: true, message: "Please enter your email" },
@@ -33,62 +37,68 @@ const agentFormFields = [
     ],
     inputComponent: <Input type="email" />,
   },
+  {
+    name: "gender",
+    label: "Gender:",
+    rules: [{ required: true, message: "Please enter your Gender" }],
+    inputComponent: (
+      <Select
+        defaultValue="Select Gender"
+        className="w-full"
+        allowClear
+        options={[
+          { value: "female", label: "Female" },
+          { value: "male", label: "Male" },
+        ]}
+      />
+    ),
+  },
 ];
 
 const dataSource = [
   {
     key: "1",
-    saving: 2000000,
-    loan: 32000,
-    interest: 2000,
-    wagubumbuzi: "paid",
+    fullName: 2000000,
+    placeOfResidence: 32000,
+    occupation: 2000,
   },
   {
     key: "2",
-    saving: 4000000,
-    loan: 29900,
-    interest: 10000,
-    wagubumbuzi: "paid",
+    fullName: 4000000,
+    placeOfResidence: 29900,
+    occupation: 10000,
   },
 ];
 
 function Users() {
-  const openEditModal = useStore((state) => state.openEditModal);
-
   const columns = [
     {
-      title: "Saving",
-      dataIndex: "saving",
-      key: "saving",
-    },
-    {
-      title: "Wagubumbuzi",
-      dataIndex: "wagubumbuzi",
-      key: "wagubumbuzi",
-    },
-    {
-      title: "Loan",
-      dataIndex: "loan",
-      key: "loan",
-    },
-    {
-      title: "Interest",
-      dataIndex: "interest",
-      key: "interest",
-    },
-    {
-      title: "Penalty",
-      dataIndex: "interest",
-      key: "interest",
-    },
-    {
-      title: "Action",
-      key: "action",
+      title: "Image",
+      dataIndex: "image",
+      key: "image",
       render: () => (
-        <Space size="middle">
-          <div onClick={() => openEditModal()}>Delete User</div>
-        </Space>
+        <img
+          src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+          alt="helo"
+          className="w-[100px] h-[50px] object-cover"
+        />
       ),
+    },
+
+    {
+      title: "Full Name",
+      dataIndex: "fullName",
+      key: "fullName",
+    },
+    {
+      title: "Place Of Residence",
+      dataIndex: "placeOfResidence",
+      key: "placeOfResidence",
+    },
+    {
+      title: "Occupation",
+      dataIndex: "occupation",
+      key: "occupation",
     },
   ];
 

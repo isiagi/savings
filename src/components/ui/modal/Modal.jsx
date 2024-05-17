@@ -4,7 +4,7 @@ import { Form, Modal } from "antd";
 import useStore from "../../../global/GlobalStates";
 import FormReuse from "../reuseableForm/FormReuse";
 
-const ModalComponent = ({ data, title }) => {
+const ModalComponent = ({ data, title, api }) => {
   const { addModalState, closeAddModal } = useStore((state) => ({
     addModalState: state.addModalState,
     closeAddModal: state.closeAddModal,
@@ -36,7 +36,7 @@ const ModalComponent = ({ data, title }) => {
           initialValues={data}
           formFields={data}
           title="Create Agent"
-          api="/v1/agents"
+          api={api}
           // handleFormSubmit={handleOk}
           formId={form}
           closeAddModal={closeAddModal}

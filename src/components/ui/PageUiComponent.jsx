@@ -12,6 +12,7 @@ function PageUiComponent({
   columns,
   dataSource,
   editModalTitle,
+  api,
 }) {
   const openAddModal = useStore((state) => state.openAddModal);
 
@@ -23,7 +24,7 @@ function PageUiComponent({
         openAddModal={openAddModal}
       />
 
-      <ModalComponent data={modalFields} title={addModalTitle} />
+      <ModalComponent api={api} data={modalFields} title={addModalTitle} />
 
       <TableUiComponent
         configs={columns}

@@ -2,67 +2,40 @@ import { DatePicker } from "antd";
 
 import PageUiComponent from "../ui/PageUiComponent";
 
-const dataSource = [
-  {
-    key: "1",
-    saving: 2000000,
-    loan: 32000,
-    interest: 2000,
-    name: "John Brown",
-  },
-  {
-    key: "2",
-    saving: 4000000,
-    loan: 29900,
-    interest: 10000,
-    name: "Lwanga",
-  },
-];
-
 const columns = [
   {
-    title: "Member ID",
-    dataIndex: "Member ID",
-    key: "name",
+    title: "Membership ID",
+    dataIndex: "member_id",
+    key: "member_id",
   },
 
   {
-    title: "Member Name",
-    dataIndex: "loan",
-    key: "loan",
+    title: "Member's Name",
+    dataIndex: "member_name",
+    key: "member_name",
   },
   {
-    title: "Savings Account Number:",
-    dataIndex: "interest",
-    key: "interest",
+    title: "Amount:",
+    dataIndex: "amount",
+    key: "amount",
   },
   {
-    title: "Current Balance:",
-    dataIndex: "interest",
-    key: "interest",
-  },
-  {
-    title: "Last Deposit Date",
-    dataIndex: "interest",
-    key: "interest",
+    title: "Date Of Deposit:",
+    dataIndex: "date_of_payment",
+    key: "date_of_payment",
   },
 ];
 
 const jobFormFields = [
   {
-    name: "providerName",
-    label: "Member ID:",
+    name: "membershipId",
+    label: "Membership ID:",
     rules: [{ required: true, message: "Please enter your name" }],
   },
   {
-    name: "country",
-    label: "Member Name:",
-    rules: [{ required: true, message: "Please enter your name" }],
-  },
-  {
-    name: "numberOffered",
-    label: "Savings Account Number:",
-    rules: [{ required: true, message: "Please enter your name" }],
+    name: "memberName",
+    label: "Member's Name:",
+    rules: [{ required: true, message: "Please enter your Member's Name" }],
   },
   {
     name: "amount",
@@ -70,7 +43,7 @@ const jobFormFields = [
     rules: [{ required: true, message: "Please enter your name" }],
   },
   {
-    name: "date",
+    name: "dateOfDesposit",
     label: "Date Of Deposit:",
     rules: [{ required: true, message: "Please enter your name" }],
     inputComponent: <DatePicker className="w-full" />,
@@ -85,7 +58,7 @@ function Savings() {
       modalFields={jobFormFields}
       addModalTitle={"Add Savings"}
       columns={columns}
-      dataSource={dataSource}
+      dataSource={"saving"}
       editModalTitle="Edit Saving"
     />
   );

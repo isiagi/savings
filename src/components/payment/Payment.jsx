@@ -1,5 +1,3 @@
-import { Space } from "antd";
-
 import PageUiComponent from "../ui/PageUiComponent";
 
 const dataSource = [
@@ -41,15 +39,6 @@ const columns = [
     dataIndex: "penalty",
     key: "penalty",
   },
-  {
-    title: "Action",
-    key: "action",
-    render: () => (
-      <Space size="middle">
-        <a>Delete</a>
-      </Space>
-    ),
-  },
 ];
 
 const jobFormFields = [
@@ -59,12 +48,12 @@ const jobFormFields = [
     rules: [{ required: true, message: "Please enter your name" }],
   },
   {
-    name: "country",
+    name: "payee",
     label: "Payee:",
     rules: [{ required: true, message: "Please enter your name" }],
   },
   {
-    name: "numberOffered",
+    name: "amount",
     label: "Amount:",
     rules: [{ required: true, message: "Please enter your name" }],
   },

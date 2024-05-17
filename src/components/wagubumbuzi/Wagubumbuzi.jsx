@@ -1,5 +1,6 @@
 import { Space } from "antd";
 import TableComponent from "../ui/table/Table";
+import useFetchData from "../../hooks/useFetchData";
 
 const dataSource = [
   {
@@ -32,29 +33,21 @@ const columns = [
   },
   {
     title: "Date Of Payment",
-    dataIndex: "interest",
-    key: "interest",
+    dataIndex: "date_created",
+    key: "date_created",
   },
   {
     title: "Month Paid",
-    dataIndex: "interest",
-    key: "interest",
-  },
-  {
-    title: "Action",
-    key: "action",
-    render: () => (
-      <Space size="middle">
-        <a>Delete</a>
-      </Space>
-    ),
+    dataIndex: "amount",
+    key: "amount",
   },
 ];
 
 function Wagubumbuzi() {
+  const tableData = useFetchData("wagubumbuzi");
   return (
     <div>
-      <TableComponent dataSource={dataSource} columns={columns} />
+      <TableComponent dataSource={tableData[0]} columns={columns} />
     </div>
   );
 }

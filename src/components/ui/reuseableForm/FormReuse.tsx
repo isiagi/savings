@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 // import createData from "../../hooks/createData";
 import ReusableForm from "./ReuseableForm";
 import React from "react";
+import useCreateData from "../../../hooks/useCreateData";
 
 type Props = {
   formFields: any;
@@ -26,6 +27,7 @@ function FormReuse({
 
   const handleFormSubmit = async (values: any) => {
     // await createData(api, values);
+    await useCreateData(api, values);
     alert("purple smile");
     closeAddModal();
     // navigate(-1);

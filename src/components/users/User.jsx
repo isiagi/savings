@@ -1,51 +1,72 @@
-import { Input } from "antd";
+import { Input, Select } from "antd";
 
 import PageUiComponent from "../ui/PageUiComponent";
 
 const dataSource = [
   {
     key: "1",
-    saving: 2000000,
-    loan: 32000,
-    interest: 2000,
+    fullName: 2000000,
+    placeOfResidence: 32000,
+    occupation: 2000,
   },
   {
     key: "2",
-    saving: 4000000,
-    loan: 29900,
-    interest: 10000,
+    fullName: 4000000,
+    placeOfResidence: 29900,
+    occupation: 10000,
   },
 ];
 
 const agentFormFields = [
   {
-    name: "companyName",
+    name: "fullName",
     label: "Full Name:",
     rules: [{ required: true, message: "Please enter your name" }],
   },
   {
-    name: "agentNames",
+    name: "contact",
     label: "Contact:",
     rules: [{ required: true, message: "Please enter your name" }],
   },
   {
-    name: "phoneNumber1",
-    label: "Address:",
+    name: "placeOfResidence",
+    label: "Place of residence:",
     rules: [{ required: true, message: "Please enter your name" }],
   },
   {
-    name: "phoneNumber2",
-    label: "Member ID:",
+    name: "membershipId",
+    label: "Membership ID:",
     rules: [{ required: true, message: "Please enter your name" }],
   },
   {
-    name: "email",
+    name: "occupation",
+    label: "Occupation:",
+    rules: [{ required: true, message: "Please enter your name" }],
+  },
+  {
+    name: "photo",
     label: "Photo:",
     rules: [
       { required: true, message: "Please enter your email" },
       { type: "email", message: "Please enter a valid email" },
     ],
     inputComponent: <Input type="email" />,
+  },
+  {
+    name: "gender",
+    label: "Gender:",
+    rules: [{ required: true, message: "Please enter your Gender" }],
+    inputComponent: (
+      <Select
+        defaultValue="Select Gender"
+        className="w-full"
+        allowClear
+        options={[
+          { value: "female", label: "Female" },
+          { value: "male", label: "Male" },
+        ]}
+      />
+    ),
   },
 ];
 
@@ -65,14 +86,19 @@ function UserComponent() {
     },
 
     {
-      title: "Active Loan",
-      dataIndex: "loan",
-      key: "loan",
+      title: "Full Name",
+      dataIndex: "fullName",
+      key: "fullName",
     },
     {
-      title: "Last Saving",
-      dataIndex: "interest",
-      key: "interest",
+      title: "Place Of Residence",
+      dataIndex: "placeOfResidence",
+      key: "placeOfResidence",
+    },
+    {
+      title: "Occupation",
+      dataIndex: "occupation",
+      key: "occupation",
     },
   ];
 
