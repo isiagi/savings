@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import ReusableForm from "./ReuseableForm";
 import React from "react";
 import useCreateData from "../../../hooks/useCreateData";
+import useFetchData from "../../../hooks/useFetchData";
 
 type Props = {
   formFields: any;
@@ -25,12 +26,16 @@ function FormReuse({
 }: Props) {
   const navigate = useNavigate();
 
+  const [res, loading, refetchData] = useFetchData(api);
+
   const handleFormSubmit = async (values: any) => {
     // await createData(api, values);
     await useCreateData(api, values);
+    // await refetchData();
+
     alert("purple smile");
     closeAddModal();
-    // navigate(-1);
+    // navigate(0);
   };
   return (
     <div className="w-full text-center  flex justify-center items-center">

@@ -49,6 +49,7 @@ const ModalComponent = ({ data, title, api }) => {
 ModalComponent.propTypes = {
   data: PropTypes.any.isRequired,
   title: PropTypes.string.isRequired,
+  api: PropTypes.string.isRequired,
 };
 
 export default ModalComponent;

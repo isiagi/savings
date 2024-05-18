@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import ReusableForm from "./ReuseableForm";
 // import editData from "../../utils/editData";
 import React from "react";
+import editData from "../../api/api_routes/editData";
 
 type Props = {
   formFields: any;
@@ -11,6 +12,7 @@ type Props = {
   title: string;
   formId: any;
   closeEditModal: any;
+  id: any;
 };
 
 function EditFormReuse({
@@ -20,11 +22,12 @@ function EditFormReuse({
   title,
   formId,
   closeEditModal,
+  id,
 }: Props) {
   const navigate = useNavigate();
 
   const handleFormSubmit = async (values: any) => {
-    // await editData(api, values);
+    await editData(`${api}/${id}`, values);
 
     // navigate(-1);
     closeEditModal();

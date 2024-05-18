@@ -1,6 +1,5 @@
-import { DatePicker } from "antd";
-
 import PageUiComponent from "../ui/PageUiComponent";
+import formFields from "../../utils/formFields";
 
 const columns = [
   {
@@ -26,40 +25,17 @@ const columns = [
   },
 ];
 
-const jobFormFields = [
-  {
-    name: "membershipId",
-    label: "Membership ID:",
-    rules: [{ required: true, message: "Please enter your name" }],
-  },
-  {
-    name: "memberName",
-    label: "Member's Name:",
-    rules: [{ required: true, message: "Please enter your Member's Name" }],
-  },
-  {
-    name: "amount",
-    label: "Amount:",
-    rules: [{ required: true, message: "Please enter your name" }],
-  },
-  {
-    name: "dateOfDesposit",
-    label: "Date Of Deposit:",
-    rules: [{ required: true, message: "Please enter your name" }],
-    inputComponent: <DatePicker className="w-full" />,
-  },
-];
-
 function Savings() {
   return (
     <PageUiComponent
       headerTitle={"Savings"}
       placeholder={"Search Savings"}
-      modalFields={jobFormFields}
+      modalFields={formFields.savingFormFields}
       addModalTitle={"Add Savings"}
       columns={columns}
       dataSource={"saving"}
       editModalTitle="Edit Saving"
+      api={"saving/"}
     />
   );
 }

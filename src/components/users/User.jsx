@@ -1,6 +1,5 @@
-import { Input, Select } from "antd";
-
 import PageUiComponent from "../ui/PageUiComponent";
+import formFields from "../../utils/formFields";
 
 const dataSource = [
   {
@@ -14,59 +13,6 @@ const dataSource = [
     fullName: 4000000,
     placeOfResidence: 29900,
     occupation: 10000,
-  },
-];
-
-const agentFormFields = [
-  {
-    name: "fullName",
-    label: "Full Name:",
-    rules: [{ required: true, message: "Please enter your name" }],
-  },
-  {
-    name: "contact",
-    label: "Contact:",
-    rules: [{ required: true, message: "Please enter your name" }],
-  },
-  {
-    name: "placeOfResidence",
-    label: "Place of residence:",
-    rules: [{ required: true, message: "Please enter your name" }],
-  },
-  {
-    name: "membershipId",
-    label: "Membership ID:",
-    rules: [{ required: true, message: "Please enter your name" }],
-  },
-  {
-    name: "occupation",
-    label: "Occupation:",
-    rules: [{ required: true, message: "Please enter your name" }],
-  },
-  {
-    name: "photo",
-    label: "Photo:",
-    rules: [
-      { required: true, message: "Please enter your email" },
-      { type: "email", message: "Please enter a valid email" },
-    ],
-    inputComponent: <Input type="email" />,
-  },
-  {
-    name: "gender",
-    label: "Gender:",
-    rules: [{ required: true, message: "Please enter your Gender" }],
-    inputComponent: (
-      <Select
-        defaultValue="Select Gender"
-        className="w-full"
-        allowClear
-        options={[
-          { value: "female", label: "Female" },
-          { value: "male", label: "Male" },
-        ]}
-      />
-    ),
   },
 ];
 
@@ -106,7 +52,7 @@ function UserComponent() {
     <PageUiComponent
       headerTitle={"Members"}
       placeholder={"Search Member"}
-      modalFields={agentFormFields}
+      modalFields={formFields.userFormFields}
       addModalTitle={"Add Member"}
       columns={columns}
       dataSource={dataSource}

@@ -43,7 +43,7 @@ export function createColumns(configs, handleRowClick, handleDelete) {
         )} */}
 
         <div
-          onClick={handleRowClick}
+          onClick={() => handleRowClick(record.id)}
           className="text-green-400 hover:text-green-600 flex items-center gap-1 cursor-pointer"
         >
           <EditOutlined />

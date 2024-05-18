@@ -5,7 +5,7 @@ import useStore from "../../../global/GlobalStates";
 
 import EditFormReuse from "../reuseableForm/EditFormReuse";
 
-const EditModalComponent = ({ data, title }) => {
+const EditModalComponent = ({ data, title, initial, api, id }) => {
   const { editModalState, closeEditModal } = useStore((state) => ({
     editModalState: state.editModalState,
     closeEditModal: state.closeEditModal,
@@ -34,10 +34,11 @@ const EditModalComponent = ({ data, title }) => {
         onCancel={handleCancel}
       >
         <EditFormReuse
-          initialValues={data}
+          initialValues={initial}
           formFields={data}
           title="Create Agent"
-          api="/v1/agents"
+          api={api}
+          id={id}
           // handleFormSubmit={handleOk}
           formId={form}
           closeEditModal={closeEditModal}
@@ -50,6 +51,7 @@ const EditModalComponent = ({ data, title }) => {
 EditModalComponent.propTypes = {
   data: PropTypes.any.isRequired,
   title: PropTypes.string.isRequired,
+  initial: PropTypes.any.isRequired,
 };
 
 export default EditModalComponent;

@@ -31,6 +31,7 @@ function PageUiComponent({
         fetchUrl={dataSource}
         data={modalFields}
         titlez={editModalTitle}
+        api={api}
       />
     </div>
   );
