@@ -1,125 +1,68 @@
-import { Input, Select } from "antd";
-import TableComponent from "../ui/table/Table";
+import { Button } from "antd";
+
 import EditModalComponent from "../ui/modal/EditModal";
 
-const agentFormFields = [
-  {
-    name: "fullName",
-    label: "Full Name:",
-    rules: [{ required: true, message: "Please enter your name" }],
-  },
-  {
-    name: "agentNames",
-    label: "Contact:",
-    rules: [{ required: true, message: "Please enter your name" }],
-  },
-  {
-    name: "phoneNumber1",
-    label: "Place of residence:",
-    rules: [{ required: true, message: "Please enter your name" }],
-  },
-  {
-    name: "phoneNumber2",
-    label: "Member ID:",
-    rules: [{ required: true, message: "Please enter your name" }],
-  },
-  {
-    name: "occupation",
-    label: "Occupation:",
-    rules: [{ required: true, message: "Please enter your name" }],
-  },
-  {
-    name: "photo",
-    label: "Photo:",
-    rules: [
-      { required: true, message: "Please enter your email" },
-      { type: "email", message: "Please enter a valid email" },
-    ],
-    inputComponent: <Input type="email" />,
-  },
-  {
-    name: "gender",
-    label: "Gender:",
-    rules: [{ required: true, message: "Please enter your Gender" }],
-    inputComponent: (
-      <Select
-        defaultValue="Select Gender"
-        className="w-full"
-        allowClear
-        options={[
-          { value: "female", label: "Female" },
-          { value: "male", label: "Male" },
-        ]}
-      />
-    ),
-  },
-];
-
-const dataSource = [
-  {
-    key: "1",
-    fullName: 2000000,
-    placeOfResidence: 32000,
-    occupation: 2000,
-  },
-  {
-    key: "2",
-    fullName: 4000000,
-    placeOfResidence: 29900,
-    occupation: 10000,
-  },
-];
+import useStore from "../../global/GlobalStates";
+import formFields from "../../utils/formFields";
+import useFetchData from "../../hooks/useFetchData";
 
 function Users() {
-  const columns = [
-    {
-      title: "Image",
-      dataIndex: "image",
-      key: "image",
-      render: () => (
-        <img
-          src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
-          alt="helo"
-          className="w-[100px] h-[50px] object-cover"
-        />
-      ),
-    },
+  const openEditModal = useStore((state) => state.openEditModal);
 
-    {
-      title: "Full Name",
-      dataIndex: "fullName",
-      key: "fullName",
-    },
-    {
-      title: "Place Of Residence",
-      dataIndex: "placeOfResidence",
-      key: "placeOfResidence",
-    },
-    {
-      title: "Occupation",
-      dataIndex: "occupation",
-      key: "occupation",
-    },
-  ];
+  const [res, loading] = useFetchData("user_profile/");
+
+  let userData;
+
+  if (res.length > 0) {
+    userData = res[0];
+  } else {
+    return <h1>{loading && "loading.."}</h1>;
+  }
+
+  const initialValue = {
+    first_name: res[0].user.first_name,
+    last_name: res[0].user.last_name,
+    email: res[0].user.email,
+    occupation: userData.occupation,
+    residence: userData.residence,
+  };
 
   return (
-    <div className="h-[450px]">
+    <div>
+      {loading && "loading.."}
       <div className="flex justify-between items-center mb-4">
-        <div>
-          <h1>Samson Lwanga</h1>
-          <h3>Contact: 995876544567</h3>
-          <h3>Address: Kira</h3>
-          <h3>Membership No.: ADA / 001 / 2024</h3>
-        </div>
-
         <img
-          src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+          src={
+            res[0].image_url ||
+            "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+          }
           alt="helo"
           className="w-[150px] h-[100px] object-cover"
         />
+        <Button onClick={openEditModal}>Edit Profile</Button>
       </div>
-      <EditModalComponent data={agentFormFields} title={"Edit User"} />
-      <TableComponent dataSource={dataSource} columns={columns} />
+      <EditModalComponent
+        data={formFields.userProvideFields}
+        title={"Edit Profile"}
+        initial={initialValue}
+        id={res[0].id}
+        api={"user_profile"}
+      />
+      <div>
+        <div>
+          <h1>
+            Full Name:{" "}
+            {`${userData.user.first_name} ${userData.user.last_name}`}
+          </h1>
+          <h1>Membership Id: {userData.user.username}</h1>
+          <h1>Email: {userData.user.email}</h1>
+          <h3>Contact: 995876544567</h3>
+          <h3>Occupation: {userData.occupation}</h3>
+          <h3>Residence: {userData.residence}</h3>
+          <h3>Is Admin: {userData.user.is_staff ? "True" : "False"}</h3>
+          <h3>Registered On: {userData.user.date_joined}</h3>
+        </div>
+      </div>
     </div>
   );
 }

@@ -26,7 +26,17 @@ const ReusableForm = ({
   useEffect(() => formId.resetFields(), [initialValues]);
 
   const handleSubmit = (values: any) => {
-    onFinish(values);
+    const formData = new FormData();
+
+    for (const name in values) {
+      if (name === "image_url") {
+        formData.append(name, values[name][0].originFileObj);
+      }
+      formData.append(name, values[name]); // there should be values.avatar which is a File object
+    }
+
+    onFinish(formData);
+
     form.resetFields();
   };
 
@@ -39,7 +49,7 @@ const ReusableForm = ({
             name={field.name}
             label={field.label}
             rules={field.rules}
-            style={{ marginBottom: "0px" }}
+            style={{ marginBottom: "5px" }}
             initialValue={initialValues && initialValues[`${field.name}`]}
             valuePropName={
               isUploadComponent(field.inputComponent) ? "fileList" : undefined

@@ -1,4 +1,5 @@
-import { DatePicker, Input, Select } from "antd";
+import { UploadOutlined } from "@ant-design/icons";
+import { Button, DatePicker, Input, Select, Upload } from "antd";
 
 const savingFormFields = [
   {
@@ -26,19 +27,21 @@ const savingFormFields = [
 
 const paymentFormFields = [
   {
-    name: "providerName",
+    name: "reference",
     label: "Loan Reference No.:",
-    rules: [{ required: true, message: "Please enter your name" }],
+    rules: [
+      { required: true, message: "Please enter your Loan Reference No." },
+    ],
   },
   {
     name: "payee",
     label: "Payee:",
-    rules: [{ required: true, message: "Please enter your name" }],
+    rules: [{ required: true, message: "Please enter your Payee" }],
   },
   {
     name: "amount",
     label: "Amount:",
-    rules: [{ required: true, message: "Please enter your name" }],
+    rules: [{ required: true, message: "Please enter your Amount" }],
   },
 ];
 
@@ -141,25 +144,48 @@ const borrowerFormFields = [
   },
 ];
 
-const userFormFields = [
+const userFormFielders = [
   {
-    name: "fullName",
-    label: "Full Name:",
-    rules: [{ required: true, message: "Please enter your name" }],
-  },
-  {
-    name: "contact",
-    label: "Contact:",
-    rules: [{ required: true, message: "Please enter your name" }],
-  },
-  {
-    name: "placeOfResidence",
-    label: "Place of residence:",
-    rules: [{ required: true, message: "Please enter your name" }],
-  },
-  {
-    name: "membershipId",
+    name: "username",
     label: "Membership ID:",
+    rules: [{ required: true, message: "Please enter your name" }],
+  },
+  {
+    name: "first_name",
+    label: "First Name:",
+    rules: [{ required: true, message: "Please enter your name" }],
+  },
+  {
+    name: "last_name",
+    label: "Last Name:",
+    rules: [{ required: true, message: "Please enter your name" }],
+  },
+  {
+    name: "email",
+    label: "Email:",
+    rules: [{ required: true, message: "Please enter your name" }],
+  },
+];
+
+const userProvideFields = [
+  {
+    name: "last_name",
+    label: "last Name:",
+    rules: [{ required: true, message: "Please enter your name" }],
+  },
+  {
+    name: "first_name",
+    label: "First Name:",
+    rules: [{ required: true, message: "Please enter your name" }],
+  },
+  {
+    name: "email",
+    label: "Email:",
+    rules: [{ required: true, message: "Please enter your name" }],
+  },
+  {
+    name: "residence",
+    label: "Place of residence:",
     rules: [{ required: true, message: "Please enter your name" }],
   },
   {
@@ -167,15 +193,12 @@ const userFormFields = [
     label: "Occupation:",
     rules: [{ required: true, message: "Please enter your name" }],
   },
-  {
-    name: "photo",
-    label: "Photo:",
-    rules: [
-      { required: true, message: "Please enter your email" },
-      { type: "email", message: "Please enter a valid email" },
-    ],
-    inputComponent: <Input type="email" />,
-  },
+  // {
+  //   name: "occupation",
+  //   label: "Occupation:",
+  //   rules: [{ required: true, message: "Please enter your name" }],
+  // },
+
   {
     name: "gender",
     label: "Gender:",
@@ -192,6 +215,23 @@ const userFormFields = [
       />
     ),
   },
+  {
+    name: "image_url",
+    label: "Photo:",
+    rules: [{ required: true, message: "Please enter your Photo" }],
+    inputComponent: (
+      <Upload
+        beforeUpload={() => false}
+        listType="picture"
+        className="bg-red-500 w-full"
+        maxCount={1}
+      >
+        <Button className="flex-1 max-w-[100%]" icon={<UploadOutlined />}>
+          Click to Upload
+        </Button>
+      </Upload>
+    ),
+  },
 ];
 
 const formFields = {
@@ -199,7 +239,8 @@ const formFields = {
   paymentFormFields,
   loanFormFields,
   borrowerFormFields,
-  userFormFields,
+  userFormFielders,
+  userProvideFields,
 };
 
 export default formFields;

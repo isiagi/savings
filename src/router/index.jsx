@@ -21,7 +21,7 @@ function index() {
           <Route path="/home" element={<Home />}>
             <Route index element={<HomeComponent />} />
             <Route path="users/:key" element={<UserComponent />} />
-            <Route path="detail/:key" element={<Users />} />
+            <Route path="detail/:key/:id" element={<Users />} />
             <Route path="reports/:key" element={<Report />} />
             <Route path="loans/:key" element={<Loan />} />
             <Route path="savings/:key" element={<Savings />} />

@@ -9,13 +9,15 @@ import {
   BarChartOutlined,
 } from "@ant-design/icons";
 
-import { Button, Layout, Menu, theme } from "antd";
+import { Button, Layout, Menu, theme, Popconfirm, message } from "antd";
 import { Link, Outlet, useParams } from "react-router-dom";
+import useAuthContext from "../store/useAuthContext";
 
 const { Header, Sider, Content } = Layout;
 
 const App = () => {
   const [collapsed, setCollapsed] = useState(false);
+  const logOut = useAuthContext((state) => state.logOut);
 
   const { key } = useParams();
 
@@ -25,6 +27,13 @@ const App = () => {
 
   const onClick = (e) => {
     setSelectedKey(e.key); // Update selected tab when clicked
+  };
+
+  const confirm = async () => {
+    await logOut();
+  };
+  const cancel = () => {
+    message.success("You are still Logged In");
   };
 
   const {
@@ -100,7 +109,19 @@ const App = () => {
             {
               key: "7",
               icon: <BarChartOutlined />,
-              label: <Link to={"/home/reports/7"}>LogOut</Link>,
+              label: (
+                <Popconfirm
+                  placement="rightTop"
+                  title="Logging out"
+                  description="Are you sure to Logout?"
+                  onConfirm={confirm}
+                  onCancel={cancel}
+                  okText="Yes"
+                  cancelText="No"
+                >
+                  <h1>LogOut</h1>
+                </Popconfirm>
+              ),
             },
           ]}
         />

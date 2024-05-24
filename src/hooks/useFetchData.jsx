@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import instance from "../components/api/axios/axios";
+import useCreate from "../global/DataState";
 
 // Set the AUTH token for any request
 instance.interceptors.request.use(function (config) {
@@ -12,6 +13,9 @@ instance.interceptors.request.use(function (config) {
 function useFetchData(path) {
   const [res, setRes] = useState([]);
   const [loading, setLoading] = useState(false);
+
+  const dataCreated = useCreate((state) => state.dataCreated);
+  const setNoCreated = useCreate((state) => state.setNoCreated);
 
   const fetchData = async () => {
     try {
@@ -35,6 +39,9 @@ function useFetchData(path) {
   const refetchData = async () => {
     await fetchData(); // Call fetchData again to refetch data
   };
+
+  dataCreated && refetchData();
+  dataCreated && setNoCreated();
 
   return [res, loading, refetchData];
 }

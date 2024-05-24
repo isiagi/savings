@@ -1,22 +1,11 @@
 import PageUiComponent from "../ui/PageUiComponent";
 import formFields from "../../utils/formFields";
-
-const dataSource = [
-  {
-    key: "1",
-    fullName: 2000000,
-    placeOfResidence: 32000,
-    occupation: 2000,
-  },
-  {
-    key: "2",
-    fullName: 4000000,
-    placeOfResidence: 29900,
-    occupation: 10000,
-  },
-];
+import { useNavigate } from "react-router-dom";
+import { Alert } from "antd";
 
 function UserComponent() {
+  const navigate = useNavigate();
+
   const columns = [
     {
       title: "Image",
@@ -29,35 +18,52 @@ function UserComponent() {
           className="w-[100px] h-[50px] object-cover"
         />
       ),
+      onClick: (id) => navigate(`/home/detail/2/${id}`),
     },
 
     {
-      title: "Full Name",
-      dataIndex: "fullName",
-      key: "fullName",
+      title: "Membership ID:",
+      dataIndex: "username",
+      key: "username",
+      onClick: (id) => navigate(`/home/detail/2/${id}`),
     },
     {
-      title: "Place Of Residence",
-      dataIndex: "placeOfResidence",
-      key: "placeOfResidence",
+      title: "First Name",
+      dataIndex: "first_name",
+      key: "first_name",
+      onClick: (id) => navigate(`/home/detail/2/${id}`),
     },
     {
-      title: "Occupation",
-      dataIndex: "occupation",
-      key: "occupation",
+      title: "Last Name",
+      dataIndex: "last_name",
+      key: "last_name",
+      onClick: (id) => navigate(`/home/detail/2/${id}`),
+    },
+    {
+      title: "Email",
+      dataIndex: "email",
+      key: "email",
     },
   ];
 
   return (
-    <PageUiComponent
-      headerTitle={"Members"}
-      placeholder={"Search Member"}
-      modalFields={formFields.userFormFields}
-      addModalTitle={"Add Member"}
-      columns={columns}
-      dataSource={dataSource}
-      editModalTitle="Edit Member"
-    />
+    <>
+      <Alert
+        message="Members Create Profile from Mobile App"
+        type="info"
+        className="w-fit"
+      />
+      <PageUiComponent
+        headerTitle={"Members"}
+        placeholder={"Search Member"}
+        modalFields={formFields.userFormFielders}
+        addModalTitle={"Add Member"}
+        columns={columns}
+        dataSource={"auth/users"}
+        editModalTitle="Edit Member"
+        api={"auth/signup/"}
+      />
+    </>
   );
 }
 

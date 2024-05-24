@@ -1,35 +1,17 @@
-import { Space } from "antd";
 import TableComponent from "../ui/table/Table";
 import useFetchData from "../../hooks/useFetchData";
-
-const dataSource = [
-  {
-    key: "1",
-    saving: 2000000,
-    loan: 32000,
-    interest: 2000,
-    name: "John Brown",
-  },
-  {
-    key: "2",
-    saving: 4000000,
-    loan: 29900,
-    interest: 10000,
-    name: "Lwanga",
-  },
-];
 
 const columns = [
   {
     title: "Member ID",
-    dataIndex: "name",
-    key: "name",
+    dataIndex: "username",
+    key: "username",
   },
 
   {
     title: "Member Name",
-    dataIndex: "loan",
-    key: "loan",
+    dataIndex: "full_name",
+    key: "full_name",
   },
   {
     title: "Date Of Payment",
@@ -45,9 +27,27 @@ const columns = [
 
 function Wagubumbuzi() {
   const tableData = useFetchData("wagubumbuzi");
+
+  console.log(tableData[0]);
+
+  const wagubumbuziDataFx = () => {
+    return (
+      tableData &&
+      tableData[0].map((item) => ({
+        id: item.id,
+        amount: item.amount,
+        date_created: item.date_created,
+        username: item.user.username,
+        full_name: `${item.user.first_name} ${item.user.last_name}`,
+      }))
+    );
+  };
+
+  const wagubumbuziData = wagubumbuziDataFx();
+
   return (
     <div>
-      <TableComponent dataSource={tableData[0]} columns={columns} />
+      <TableComponent dataSource={wagubumbuziData} columns={columns} />
     </div>
   );
 }

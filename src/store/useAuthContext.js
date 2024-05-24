@@ -48,8 +48,13 @@ const useAuthContext = create((set) => ({
     tokenInLocalStorage ? set({ token: true }) : set({ token: false });
   },
   logOut: async () => {
-    localStorage.removeItem("token");
-    set({ token: false });
+    try {
+      await instance.post("auth/logout");
+      localStorage.removeItem("token");
+      set({ token: false });
+    } catch (error) {
+      console.log(error);
+    }
   },
 }));
 

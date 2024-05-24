@@ -52,6 +52,8 @@ EditModalComponent.propTypes = {
   data: PropTypes.any.isRequired,
   title: PropTypes.string.isRequired,
   initial: PropTypes.any.isRequired,
+  id: PropTypes.any.isRequired,
+  api: PropTypes.any.isRequired,
 };
 
 export default EditModalComponent;

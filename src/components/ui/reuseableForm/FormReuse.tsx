@@ -5,6 +5,7 @@ import ReusableForm from "./ReuseableForm";
 import React from "react";
 import useCreateData from "../../../hooks/useCreateData";
 import useFetchData from "../../../hooks/useFetchData";
+import useCreate from "../../../global/DataState";
 
 type Props = {
   formFields: any;
@@ -26,12 +27,17 @@ function FormReuse({
 }: Props) {
   const navigate = useNavigate();
 
-  const [res, loading, refetchData] = useFetchData(api);
+  // const [res, loading, refetchData] = useFetchData(api);
+  const setDataCreated = useCreate((state) => state.setDataCreated);
 
   const handleFormSubmit = async (values: any) => {
     // await createData(api, values);
-    await useCreateData(api, values);
-    // await refetchData();
+    try {
+      await useCreateData(api, values);
+      setDataCreated();
+    } catch (error) {
+      console.log(error);
+    }
 
     alert("purple smile");
     closeAddModal();
