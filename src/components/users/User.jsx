@@ -1,25 +1,25 @@
 import PageUiComponent from "../ui/PageUiComponent";
 import formFields from "../../utils/formFields";
 import { useNavigate } from "react-router-dom";
-import { Alert } from "antd";
+// import { Alert } from "antd";
 
 function UserComponent() {
   const navigate = useNavigate();
 
   const columns = [
-    {
-      title: "Image",
-      dataIndex: "image",
-      key: "image",
-      render: () => (
-        <img
-          src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
-          alt="helo"
-          className="w-[100px] h-[50px] object-cover"
-        />
-      ),
-      onClick: (id) => navigate(`/home/detail/2/${id}`),
-    },
+    // {
+    //   title: "Image",
+    //   dataIndex: "image",
+    //   key: "image",
+    //   render: () => (
+    //     <img
+    //       src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+    //       alt="helo"
+    //       className="w-[100px] h-[50px] object-cover"
+    //     />
+    //   ),
+    //   onClick: (id) => navigate(`/home/detail/2/${id}`),
+    // },
 
     {
       title: "Membership ID:",
@@ -48,11 +48,11 @@ function UserComponent() {
 
   return (
     <>
-      <Alert
+      {/* <Alert
         message="Members Create Profile from Mobile App"
         type="info"
         className="w-fit"
-      />
+      /> */}
       <PageUiComponent
         headerTitle={"Members"}
         placeholder={"Search Member"}

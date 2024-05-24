@@ -5,24 +5,47 @@ import EditModalComponent from "../ui/modal/EditModal";
 import useStore from "../../global/GlobalStates";
 import formFields from "../../utils/formFields";
 import useFetchData from "../../hooks/useFetchData";
+import getById from "../api/api_routes/getById";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
 function Users() {
   const openEditModal = useStore((state) => state.openEditModal);
+  const [profileData, setProfileData] = useState();
 
   const [res, loading] = useFetchData("user_profile/");
 
+  const { id } = useParams();
+
+  const result = async () => {
+    try {
+      const response = await getById("user_profile/profile", id);
+      console.log("response", response.data);
+      setProfileData(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    result();
+    console.log("result", profileData);
+  }, []);
+
+  console.log("below", profileData);
+
   let userData;
 
-  if (res.length > 0) {
-    userData = res[0];
+  if (profileData && profileData.length > 0) {
+    userData = profileData[0];
   } else {
     return <h1>{loading && "loading.."}</h1>;
   }
 
   const initialValue = {
-    first_name: res[0].user.first_name,
-    last_name: res[0].user.last_name,
-    email: res[0].user.email,
+    first_name: profileData[0].user.first_name,
+    last_name: profileData[0].user.last_name,
+    email: profileData[0].user.email,
     occupation: userData.occupation,
     residence: userData.residence,
   };
@@ -33,7 +56,7 @@ function Users() {
       <div className="flex justify-between items-center mb-4">
         <img
           src={
-            res[0].image_url ||
+            profileData[0].image_url ||
             "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
           }
           alt="helo"
@@ -45,7 +68,7 @@ function Users() {
         data={formFields.userProvideFields}
         title={"Edit Profile"}
         initial={initialValue}
-        id={res[0].id}
+        id={profileData[0].id}
         api={"user_profile"}
       />
       <div>
@@ -68,3 +91,6 @@ function Users() {
 }
 
 export default Users;
+
+// TODO
+// serializer userId in url
