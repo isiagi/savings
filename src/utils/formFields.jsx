@@ -167,6 +167,19 @@ const userFormFielders = [
   },
 ];
 
+const borrowFormFielders = [
+  {
+    name: "membership_id",
+    label: "Membership ID:",
+    rules: [{ required: true, message: "Please enter your name" }],
+  },
+  {
+    name: "name",
+    label: "Name:",
+    rules: [{ required: true, message: "Please enter your name" }],
+  },
+];
+
 const userProvideFields = [
   {
     name: "last_name",
@@ -241,6 +254,7 @@ const formFields = {
   borrowerFormFields,
   userFormFielders,
   userProvideFields,
+  borrowFormFielders,
 };
 
 export default formFields;
