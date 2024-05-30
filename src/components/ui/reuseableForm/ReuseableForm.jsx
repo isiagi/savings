@@ -1,31 +1,27 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable react/prop-types */
 
-import { Form, Input, Button, Upload } from "antd";
-import React from "react";
+import { Form, Input, Upload } from "antd";
+
 import { useEffect } from "react";
 
-type Props = {
-  onFinish: any;
-  formFields: any;
-  initialValues: any;
-  formId?: any;
-};
+// type Props = {
+//   onFinish: any;
+//   formFields: any;
+//   initialValues: any;
+//   formId?: any;
+// };
 
-const ReusableForm = ({
-  onFinish,
-  formFields,
-  initialValues,
-  formId,
-}: Props) => {
-  const [form] = Form.useForm();
+const ReusableForm = ({ onFinish, formFields, initialValues, formId }) => {
+  // const [form] = Form.useForm();
 
-  const isUploadComponent = (inputComponent: any) => {
+  const isUploadComponent = (inputComponent) => {
     return inputComponent && inputComponent.type === Upload;
   };
 
   useEffect(() => formId.resetFields(), [initialValues]);
+  console.log("ini", initialValues);
 
-  const handleSubmit = (values: any) => {
+  const handleSubmit = (values) => {
     const formData = new FormData();
 
     for (const name in values) {
@@ -34,16 +30,18 @@ const ReusableForm = ({
       }
       formData.append(name, values[name]); // there should be values.avatar which is a File object
     }
-
-    onFinish(formData);
-
-    form.resetFields();
+    try {
+      onFinish(formData);
+      formId.resetFields();
+    } catch (error) {
+      formId.resetFields();
+    }
   };
 
   return (
     <div className=" mx-auto">
       <Form form={formId} layout="vertical" onFinish={handleSubmit}>
-        {formFields.map((field: any, index: any) => (
+        {formFields.map((field, index) => (
           <Form.Item
             key={index}
             name={field.name}
@@ -56,7 +54,7 @@ const ReusableForm = ({
             }
             getValueFromEvent={
               isUploadComponent(field.inputComponent)
-                ? (e: any) => {
+                ? (e) => {
                     if (Array.isArray(e)) {
                       return e;
                     }

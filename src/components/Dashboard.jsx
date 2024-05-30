@@ -7,6 +7,10 @@ import {
   DashboardOutlined,
   MoneyCollectOutlined,
   BarChartOutlined,
+  LogoutOutlined,
+  SwapOutlined,
+  RedEnvelopeOutlined,
+  TeamOutlined,
 } from "@ant-design/icons";
 
 import { Button, Layout, Menu, theme, Popconfirm, message } from "antd";
@@ -82,23 +86,23 @@ const App = () => {
 
             {
               key: "9",
-              icon: <MoneyCollectOutlined />,
+              icon: <UserOutlined />,
               label: <Link to={"/home/payment/9"}>Payment</Link>,
             },
 
             {
               key: "10",
-              icon: <BarChartOutlined />,
+              icon: <RedEnvelopeOutlined />,
               label: <Link to={"/home/wagubumbuzi/10"}>Wagubumbuzi</Link>,
             },
             {
               key: "5",
-              icon: <BarChartOutlined />,
+              icon: <SwapOutlined />,
               label: <Link to={"/home/borrowers/5"}>Borrowers</Link>,
             },
             {
               key: "2",
-              icon: <UserOutlined />,
+              icon: <TeamOutlined />,
               label: <Link to="/home/users/2">Members</Link>,
             },
             {
@@ -108,7 +112,7 @@ const App = () => {
             },
             {
               key: "7",
-              icon: <BarChartOutlined />,
+              icon: <LogoutOutlined />,
               label: (
                 <Popconfirm
                   placement="rightTop"
