@@ -73,6 +73,11 @@ const App = () => {
               label: <Link to={"/home"}>Dashboard</Link>,
             },
             {
+              key: "2",
+              icon: <TeamOutlined />,
+              label: <Link to="/home/users/2">Members</Link>,
+            },
+            {
               key: "4",
               icon: <DollarOutlined />,
               label: <Link to={"/home/loans/4"}>Loan</Link>,
@@ -100,11 +105,7 @@ const App = () => {
               icon: <SwapOutlined />,
               label: <Link to={"/home/borrowers/5"}>Borrowers</Link>,
             },
-            {
-              key: "2",
-              icon: <TeamOutlined />,
-              label: <Link to="/home/users/2">Members</Link>,
-            },
+
             {
               key: "6",
               icon: <BarChartOutlined />,

@@ -32,6 +32,7 @@ const paymentFormFields = [
     rules: [
       { required: true, message: "Please enter your Loan Reference No." },
     ],
+    path: "loan/meta",
   },
   {
     name: "payee",
@@ -172,6 +173,7 @@ const borrowFormFielders = [
     name: "membership_id",
     label: "Membership ID:",
     rules: [{ required: true, message: "Please enter your name" }],
+    path: "auth/meta",
   },
   {
     name: "name",
