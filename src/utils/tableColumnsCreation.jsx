@@ -52,7 +52,7 @@ export function createColumns(configs, handleRowClick, handleDelete, key) {
         )}
 
         <div
-          className="text-red-400 hover:text-red-600 flex items-center gap-1 cursor-pointer"
+          className="text-[#d1890dbe] hover:text-[#D18A0D] flex items-center gap-1 cursor-pointer"
           onClick={() => handleDelete(record.id)}
         >
           <DeleteOutlined />

@@ -6,11 +6,13 @@ const savingFormFields = [
     name: "member_id",
     label: "Membership ID:",
     rules: [{ required: true, message: "Please enter your name" }],
+    path: "auth/meta",
   },
   {
     name: "member_name",
     label: "Member's Name:",
     rules: [{ required: true, message: "Please enter your Member's Name" }],
+    path: "auth/meta/names",
   },
   {
     name: "amount",
@@ -51,11 +53,13 @@ const loanFormFields = [
     name: "member_name",
     label: "Name:",
     rules: [{ required: true, message: "Please enter your name" }],
+    path: "auth/meta/names",
   },
   {
     name: "member_id",
     label: "Member Id:",
     rules: [{ required: true, message: "Please enter your name" }],
+    path: "auth/meta",
   },
   {
     name: "type",
@@ -179,6 +183,7 @@ const borrowFormFielders = [
     name: "name",
     label: "Name:",
     rules: [{ required: true, message: "Please enter your name" }],
+    path: "auth/meta/names",
   },
 ];
 

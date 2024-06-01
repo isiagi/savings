@@ -19,7 +19,9 @@ function TableComponent({ dataSource, columns }) {
         <Table.Summary.Row>
           <Table.Summary.Cell>Balance</Table.Summary.Cell>
           <Table.Summary.Cell colSpan={1}>
-            <Text type="danger">1200000</Text>
+            <Text className="text-blue-500 font-semibold text-base">
+              1200000
+            </Text>
           </Table.Summary.Cell>
         </Table.Summary.Row>
       )}

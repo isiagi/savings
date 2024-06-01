@@ -54,7 +54,13 @@ const ReusableForm = ({ onFinish, formFields, initialValues, formId }) => {
     <div className=" mx-auto">
       <Form form={formId} layout="vertical" onFinish={handleSubmit}>
         {formFields.map((field, index) => {
-          if (field.name === "membership_id" || field.name === "reference") {
+          if (
+            field.name === "membership_id" ||
+            field.name === "reference" ||
+            field.name === "member_id" ||
+            field.name === "name" ||
+            field.name === "member_name"
+          ) {
             return (
               <Form.Item
                 rules={[
