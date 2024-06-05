@@ -6,9 +6,9 @@ const { Search } = Input;
 
 function HeaderBanner({ title, placeholder, openAddModal }) {
   return (
-    <div className="flex items-center justify-between flex-wrap pb-10">
-      <h1>{title}</h1>
-      <div>
+    <div className="flex items-center justify-between flex-wrap">
+      <h1 className="font-semibold text-xl text-[#0D68D1]">{title}</h1>
+      {/* <div>
         <Search
           placeholder={placeholder}
           onSearch={""}
@@ -16,8 +16,13 @@ function HeaderBanner({ title, placeholder, openAddModal }) {
             width: 200,
           }}
         />
-      </div>
-      <Button onClick={openAddModal}>Add {title}</Button>
+      </div> */}
+      <Button
+        className="bg-[#D18A0D] text-white hover:text-[#D18A0D] outline-none"
+        onClick={openAddModal}
+      >
+        Add {title}
+      </Button>
     </div>
   );
 }

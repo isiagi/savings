@@ -1,113 +1,63 @@
-import { Input, Select } from "antd";
-
 import PageUiComponent from "../ui/PageUiComponent";
-
-const dataSource = [
-  {
-    key: "1",
-    borrower: 2000000,
-    loanDetails: 32000,
-    payable: 2000,
-    status: "John Brown",
-  },
-  {
-    key: "2",
-    borrower: 4000000,
-    loanDetails: 29900,
-    payable: 10000,
-    status: "Lwanga",
-  },
-];
-
-const jobFormFields = [
-  {
-    name: "providerName",
-    label: "Borrower:",
-    rules: [{ required: true, message: "Please enter your name" }],
-  },
-  {
-    name: "country",
-    label: "Loan Type:",
-    rules: [{ required: true, message: "Please enter your name" }],
-    inputComponent: (
-      <Select
-        defaultValue="Select Status"
-        className="w-full"
-        allowClear
-        options={[
-          { value: "AVAILABLE", label: "AVAILABLE" },
-          { value: "CONTRACT APPROVAL", label: "CONTRACT APPROVAL" },
-          { value: "APPROVAL BY MINISTRY", label: "APPROVAL BY MINISTRY" },
-          { value: "TRAVELLED", label: "TRAVELLED" },
-        ]}
-      />
-    ),
-  },
-  {
-    name: "numberOffered",
-    label: "Loan Plan:",
-    rules: [{ required: true, message: "Please enter your name" }],
-    inputComponent: (
-      <Select
-        defaultValue="Select Status"
-        className="w-full"
-        allowClear
-        options={[
-          { value: "AVAILABLE", label: "AVAILABLE" },
-          { value: "CONTRACT APPROVAL", label: "CONTRACT APPROVAL" },
-          { value: "APPROVAL BY MINISTRY", label: "APPROVAL BY MINISTRY" },
-          { value: "TRAVELLED", label: "TRAVELLED" },
-        ]}
-      />
-    ),
-  },
-  {
-    name: "amount",
-    label: "Loan Amount:",
-    rules: [{ required: true, message: "Please enter your name" }],
-  },
-  {
-    name: "purpose",
-    label: "Purpose:",
-    rules: [{ required: true, message: "Please enter your name" }],
-    inputComponent: <Input.TextArea className="w-full" />,
-  },
-];
+import formFields from "../../utils/formFields";
 
 function Loan() {
   const columns = [
     {
-      title: "Borrower",
-      dataIndex: "borrower",
-      key: "borrower",
+      title: "Name",
+      dataIndex: "member_name",
+      key: "member_name",
     },
 
     {
-      title: "Loan Details",
-      dataIndex: "loanDetails",
-      key: "loanDetails",
+      title: "Membership Id",
+      dataIndex: "member_id",
+      key: "member_id",
+    },
+
+    // {
+    //   title: "Loan Type",
+    //   dataIndex: "type",
+    //   key: "type",
+    // },
+
+    {
+      title: "Loan Plan",
+      dataIndex: "plan",
+      key: "place",
     },
     {
-      title: "Next Payable Details",
-      dataIndex: "payable",
-      key: "payable",
+      title: "Loan Reference",
+      dataIndex: "reference_no",
+      key: "reference_no",
     },
     {
-      title: "Status",
-      dataIndex: "status",
-      key: "status",
+      title: "Loan Amount",
+      dataIndex: "amount",
+      key: "amount",
     },
+    {
+      title: "Loan Balance",
+      dataIndex: "remaining_amount",
+      key: "remaining_amount",
+    },
+    // {
+    //   title: "Granteers",
+    //   dataIndex: "granteers",
+    //   key: "granteers",
+    // },
   ];
 
   return (
     <PageUiComponent
       headerTitle={"Loans"}
       placeholder={"Search Loan"}
-      modalFields={jobFormFields}
+      modalFields={formFields.loanFormFields}
       addModalTitle={"Add Loan Application"}
       columns={columns}
-      dataSource={dataSource}
+      dataSource={"loan"}
       editModalTitle="Edit Loan Application"
+      api={"loan/"}
     />
   );
 }

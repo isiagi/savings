@@ -1,60 +1,53 @@
-import { Space } from "antd";
 import TableComponent from "../ui/table/Table";
-
-const dataSource = [
-  {
-    key: "1",
-    saving: 2000000,
-    loan: 32000,
-    interest: 2000,
-    name: "John Brown",
-  },
-  {
-    key: "2",
-    saving: 4000000,
-    loan: 29900,
-    interest: 10000,
-    name: "Lwanga",
-  },
-];
+import useFetchData from "../../hooks/useFetchData";
 
 const columns = [
   {
     title: "Member ID",
-    dataIndex: "name",
-    key: "name",
+    dataIndex: "username",
+    key: "username",
   },
 
   {
     title: "Member Name",
-    dataIndex: "loan",
-    key: "loan",
+    dataIndex: "full_name",
+    key: "full_name",
   },
   {
     title: "Date Of Payment",
-    dataIndex: "interest",
-    key: "interest",
+    dataIndex: "date_created",
+    key: "date_created",
   },
   {
     title: "Month Paid",
-    dataIndex: "interest",
-    key: "interest",
-  },
-  {
-    title: "Action",
-    key: "action",
-    render: () => (
-      <Space size="middle">
-        <a>Delete</a>
-      </Space>
-    ),
+    dataIndex: "amount",
+    key: "amount",
   },
 ];
 
 function Wagubumbuzi() {
+  const tableData = useFetchData("wagubumbuzi");
+
+  console.log(tableData[0]);
+
+  const wagubumbuziDataFx = () => {
+    return (
+      tableData &&
+      tableData[0].map((item) => ({
+        id: item.id,
+        amount: item.amount,
+        date_created: item.date_created,
+        username: item.user.username,
+        full_name: `${item.user.first_name} ${item.user.last_name}`,
+      }))
+    );
+  };
+
+  const wagubumbuziData = wagubumbuziDataFx();
+
   return (
     <div>
-      <TableComponent dataSource={dataSource} columns={columns} />
+      <TableComponent dataSource={wagubumbuziData} columns={columns} />
     </div>
   );
 }

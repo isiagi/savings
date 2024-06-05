@@ -18,14 +18,21 @@ import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 //   password?: any;
 // }
 
-export function createColumns(configs, handleRowClick, handleDelete) {
-  console.log("configs", configs);
+export function createColumns(
+  configs,
+  handleRowClick,
+  handleDelete,
+  key,
+  handleOpenModal
+) {
+  // console.log("configs", configs);
+
   const columns = configs.map((config) => ({
     ...config,
-    // onCell: (record) => ({
-    //   onClick: () =>
-    //     config.onClick ? config.onClick(record) : handleRowClick(record),
-    // }),
+    onCell: (record) => ({
+      onClick: () =>
+        config.onClick ? config.onClick(record.id) : handleOpenModal(record),
+    }),
     render: config.render ? config.render : (text) => <a>{text}</a>,
   }));
 
@@ -42,15 +49,17 @@ export function createColumns(configs, handleRowClick, handleDelete) {
           </Link>
         )} */}
 
-        <div
-          onClick={handleRowClick}
-          className="text-green-400 hover:text-green-600 flex items-center gap-1 cursor-pointer"
-        >
-          <EditOutlined />
-        </div>
+        {key != "9" && (
+          <div
+            onClick={() => handleRowClick(record.id)}
+            className="text-green-400 hover:text-green-600 flex items-center gap-1 cursor-pointer"
+          >
+            <EditOutlined />
+          </div>
+        )}
 
         <div
-          className="text-red-400 hover:text-red-600 flex items-center gap-1 cursor-pointer"
+          className="text-[#d1890dbe] hover:text-[#D18A0D] flex items-center gap-1 cursor-pointer"
           onClick={() => handleDelete(record.id)}
         >
           <DeleteOutlined />

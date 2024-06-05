@@ -1,7 +1,9 @@
 import PropTypes from "prop-types";
 
-import { Table } from "antd";
+import { Table, Typography } from "antd";
 // import { useNavigate } from "react-router-dom";
+
+const { Text } = Typography;
 
 function TableComponent({ dataSource, columns }) {
   // const navigate = useNavigate();
@@ -10,12 +12,27 @@ function TableComponent({ dataSource, columns }) {
     <Table
       // onRow={() => {
       //   return {
-      //     onClick: () => navigate("/detail/2"), // click row
+      //     onClick: ({
+      //   title: "Loan Type",
+      //   dataIndex: "type",
+      //   key: "type",
+      // },) => navigate("/detail/2"), // click row
       //   };
       // }}
+      summary={() => (
+        <Table.Summary.Row>
+          <Table.Summary.Cell>Balance</Table.Summary.Cell>
+          <Table.Summary.Cell colSpan={1}>
+            <Text className="text-blue-500 font-semibold text-base">
+              1200000
+            </Text>
+          </Table.Summary.Cell>
+        </Table.Summary.Row>
+      )}
       scroll={{ x: 400 }}
       dataSource={dataSource}
       columns={columns}
+      pagination={{ position: ["topRight"], pageSize: 5 }}
     />
   );
 }

@@ -1,23 +1,5 @@
-import { Space } from "antd";
-
+import formFields from "../../utils/formFields";
 import PageUiComponent from "../ui/PageUiComponent";
-
-const dataSource = [
-  {
-    key: "1",
-    reference: 2000000,
-    payee: 32000,
-    amount: 2000,
-    penalty: 0.0,
-  },
-  {
-    key: "2",
-    reference: 4000000,
-    payee: 29900,
-    amount: 10000,
-    penalty: 0.0,
-  },
-];
 
 const columns = [
   {
@@ -41,33 +23,6 @@ const columns = [
     dataIndex: "penalty",
     key: "penalty",
   },
-  {
-    title: "Action",
-    key: "action",
-    render: () => (
-      <Space size="middle">
-        <a>Delete</a>
-      </Space>
-    ),
-  },
-];
-
-const jobFormFields = [
-  {
-    name: "providerName",
-    label: "Loan Reference No.:",
-    rules: [{ required: true, message: "Please enter your name" }],
-  },
-  {
-    name: "country",
-    label: "Payee:",
-    rules: [{ required: true, message: "Please enter your name" }],
-  },
-  {
-    name: "numberOffered",
-    label: "Amount:",
-    rules: [{ required: true, message: "Please enter your name" }],
-  },
 ];
 
 function Payment() {
@@ -75,11 +30,12 @@ function Payment() {
     <PageUiComponent
       headerTitle={"Payment"}
       placeholder={"Search Payment"}
-      modalFields={jobFormFields}
+      modalFields={formFields.paymentFormFields}
       addModalTitle={"Add Payment"}
       columns={columns}
-      dataSource={dataSource}
+      dataSource={"payment"}
       editModalTitle="Edit Payment"
+      api={"payment/"}
     />
   );
 }

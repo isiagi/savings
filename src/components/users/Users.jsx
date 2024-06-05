@@ -1,117 +1,96 @@
-import { Input, Space } from "antd";
-import TableComponent from "../ui/table/Table";
-import useStore from "../../global/GlobalStates";
+import { Button } from "antd";
+
 import EditModalComponent from "../ui/modal/EditModal";
 
-const agentFormFields = [
-  {
-    name: "companyName",
-    label: "Full Name:",
-    rules: [{ required: true, message: "Please enter your name" }],
-  },
-  {
-    name: "agentNames",
-    label: "Contact:",
-    rules: [{ required: true, message: "Please enter your name" }],
-  },
-  {
-    name: "phoneNumber1",
-    label: "Address:",
-    rules: [{ required: true, message: "Please enter your name" }],
-  },
-  {
-    name: "phoneNumber2",
-    label: "Member ID:",
-    rules: [{ required: true, message: "Please enter your name" }],
-  },
-  {
-    name: "email",
-    label: "Photo:",
-    rules: [
-      { required: true, message: "Please enter your email" },
-      { type: "email", message: "Please enter a valid email" },
-    ],
-    inputComponent: <Input type="email" />,
-  },
-];
-
-const dataSource = [
-  {
-    key: "1",
-    saving: 2000000,
-    loan: 32000,
-    interest: 2000,
-    wagubumbuzi: "paid",
-  },
-  {
-    key: "2",
-    saving: 4000000,
-    loan: 29900,
-    interest: 10000,
-    wagubumbuzi: "paid",
-  },
-];
+import useStore from "../../global/GlobalStates";
+import formFields from "../../utils/formFields";
+import useFetchData from "../../hooks/useFetchData";
+import getById from "../api/api_routes/getById";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
 function Users() {
   const openEditModal = useStore((state) => state.openEditModal);
+  const [profileData, setProfileData] = useState();
 
-  const columns = [
-    {
-      title: "Saving",
-      dataIndex: "saving",
-      key: "saving",
-    },
-    {
-      title: "Wagubumbuzi",
-      dataIndex: "wagubumbuzi",
-      key: "wagubumbuzi",
-    },
-    {
-      title: "Loan",
-      dataIndex: "loan",
-      key: "loan",
-    },
-    {
-      title: "Interest",
-      dataIndex: "interest",
-      key: "interest",
-    },
-    {
-      title: "Penalty",
-      dataIndex: "interest",
-      key: "interest",
-    },
-    {
-      title: "Action",
-      key: "action",
-      render: () => (
-        <Space size="middle">
-          <div onClick={() => openEditModal()}>Delete User</div>
-        </Space>
-      ),
-    },
-  ];
+  const [res, loading] = useFetchData("user_profile/");
+
+  const { id } = useParams();
+
+  const result = async () => {
+    try {
+      const response = await getById("user_profile/profile", id);
+      console.log("response", response.data);
+      setProfileData(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    result();
+    console.log("result", profileData);
+  }, []);
+
+  console.log("below", profileData);
+
+  let userData;
+
+  if (profileData && profileData.length > 0) {
+    userData = profileData[0];
+  } else {
+    return <h1>{loading && "loading.."}</h1>;
+  }
+
+  const initialValue = {
+    first_name: profileData[0].user.first_name,
+    last_name: profileData[0].user.last_name,
+    email: profileData[0].user.email,
+    occupation: userData.occupation,
+    residence: userData.residence,
+  };
 
   return (
-    <div className="h-[450px]">
+    <div>
+      {loading && "loading.."}
       <div className="flex justify-between items-center mb-4">
-        <div>
-          <h1>Samson Lwanga</h1>
-          <h3>Contact: 995876544567</h3>
-          <h3>Address: Kira</h3>
-          <h3>Membership No.: ADA / 001 / 2024</h3>
-        </div>
-
         <img
-          src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+          src={
+            profileData[0].image_url ||
+            "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+          }
           alt="helo"
           className="w-[150px] h-[100px] object-cover"
         />
+        <Button onClick={openEditModal}>Edit Profile</Button>
       </div>
-      <EditModalComponent data={agentFormFields} title={"Edit User"} />
-      <TableComponent dataSource={dataSource} columns={columns} />
+      <EditModalComponent
+        data={formFields.userProvideFields}
+        title={"Edit Profile"}
+        initial={initialValue}
+        id={profileData[0].id}
+        api={"user_profile"}
+      />
+      <div>
+        <div>
+          <h1>
+            Full Name:{" "}
+            {`${userData.user.first_name} ${userData.user.last_name}`}
+          </h1>
+          <h1>Membership Id: {userData.user.username}</h1>
+          <h1>Email: {userData.user.email}</h1>
+          <h3>Contact: 995876544567</h3>
+          <h3>Occupation: {userData.occupation}</h3>
+          <h3>Residence: {userData.residence}</h3>
+          <h3>Is Admin: {userData.user.is_staff ? "True" : "False"}</h3>
+          <h3>Registered On: {userData.user.date_joined}</h3>
+        </div>
+      </div>
     </div>
   );
 }
 
 export default Users;
+
+// TODO
+// serializer userId in url
