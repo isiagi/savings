@@ -1,5 +1,7 @@
 import axios from "axios";
 
-const instance = axios.create({ baseURL: "http://127.0.0.1:8000/api/" });
+const instance = axios.create({
+  baseURL: "https://agalyawamm-backend.onrender.com/api/",
+});
 
 export default instance;

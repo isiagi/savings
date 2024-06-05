@@ -4,6 +4,7 @@ import { Form, Modal } from "antd";
 import useStore from "../../../global/GlobalStates";
 
 import EditFormReuse from "../reuseableForm/EditFormReuse";
+import useCreate from "../../../global/DataState";
 
 const EditModalComponent = ({ data, title, initial, api, id }) => {
   const { editModalState, closeEditModal } = useStore((state) => ({
@@ -12,6 +13,8 @@ const EditModalComponent = ({ data, title, initial, api, id }) => {
   }));
 
   const [form] = Form.useForm();
+
+  const createLoading = useCreate((state) => state.createLoading);
 
   // const showModal = () => {
   //   setIsModalOpen(true);
@@ -32,6 +35,7 @@ const EditModalComponent = ({ data, title, initial, api, id }) => {
         open={editModalState}
         onOk={form.submit}
         onCancel={handleCancel}
+        confirmLoading={createLoading}
       >
         <EditFormReuse
           initialValues={initial}

@@ -8,10 +8,12 @@ import useFetchData from "../../hooks/useFetchData";
 import getById from "../api/api_routes/getById";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import useCreate from "../../global/DataState";
 
 function Users() {
   const openEditModal = useStore((state) => state.openEditModal);
   const [profileData, setProfileData] = useState();
+  const dataCreated = useCreate((state) => state.dataCreated);
 
   const [res, loading] = useFetchData("user_profile/");
 
@@ -33,6 +35,7 @@ function Users() {
   }, []);
 
   console.log("below", profileData);
+  dataCreated && result();
 
   let userData;
 
@@ -60,7 +63,7 @@ function Users() {
             "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
           }
           alt="helo"
-          className="w-[150px] h-[100px] object-cover"
+          className="w-[150px] h-[150px] object-cover rounded-full"
         />
         <Button onClick={openEditModal}>Edit Profile</Button>
       </div>

@@ -48,30 +48,6 @@ function FormReuse({
     } catch (error) {
       console.log(error);
       setNoCreateLoading();
-      // if (error.response && error.response.data) {
-      //   // Assuming the error response is an object where each key contains an array of error messages
-      //   const errorMessages = error.response.data;
-      //   for (const key in errorMessages) {
-      //     if (errorMessages[key] && errorMessages[key].length > 0) {
-      //       errorMessages[key].forEach((msg) => {
-      //         if (msg.includes("username") && msg.includes("does not exist")) {
-      //           const customMessage = `Member with provided Membership Id not found.`;
-      //           messageApi.error(customMessage, 5);
-      //         } else if (
-      //           msg.includes("reference_no") &&
-      //           msg.includes("does not exist")
-      //         ) {
-      //           const customMessage = `Loan with provided Reference Number not found.`;
-      //           messageApi.error(customMessage, 5);
-      //         } else {
-      //           messageApi.error(msg, 5);
-      //         }
-      //       });
-      //     }
-      //   }
-      // } else {
-      //   messageApi.error("An unexpected error occurred.", 7);
-      // }
     }
 
     // alert("purple smile");

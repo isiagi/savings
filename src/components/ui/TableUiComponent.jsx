@@ -106,6 +106,7 @@ function TableUiComponent({ configs, fetchUrl, data, titlez, api }) {
       <TableComponent
         columns={columns}
         dataSource={res.users ? res.users : res}
+        loading={loading}
       />
       <Modal
         onOk={setCloseModal}
