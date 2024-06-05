@@ -15,7 +15,7 @@ function SelectOptions({ handleChange, path }) {
     try {
       setLoading(true);
       const response = await instance.get(path);
-      console.log(response);
+      // console.log(response);
       setSelectData(response.data);
       setLoading(false);
     } catch (error) {
@@ -27,7 +27,7 @@ function SelectOptions({ handleChange, path }) {
   return (
     <Select
       defaultValue={"Select from options"}
-      loading={loading ? true : false}
+      loading={loading}
       onChange={handleChange}
     >
       {selectData &&

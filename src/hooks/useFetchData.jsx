@@ -27,8 +27,11 @@ function useFetchData(path) {
       setRes(response.data);
       setLoading(false);
     } catch (error) {
-      console.log(error);
-
+      console.log(error.response.data.detail);
+      if (error.response.data.detail === "Invalid token.") {
+        localStorage.removeItem("token");
+        setLoading(false);
+      }
       setLoading(false);
     }
   };

@@ -15,11 +15,11 @@ function Loan() {
       key: "member_id",
     },
 
-    {
-      title: "Loan Type",
-      dataIndex: "type",
-      key: "type",
-    },
+    // {
+    //   title: "Loan Type",
+    //   dataIndex: "type",
+    //   key: "type",
+    // },
 
     {
       title: "Loan Plan",
@@ -41,11 +41,11 @@ function Loan() {
       dataIndex: "remaining_amount",
       key: "remaining_amount",
     },
-    {
-      title: "Granteers",
-      dataIndex: "granteers",
-      key: "granteers",
-    },
+    // {
+    //   title: "Granteers",
+    //   dataIndex: "granteers",
+    //   key: "granteers",
+    // },
   ];
 
   return (

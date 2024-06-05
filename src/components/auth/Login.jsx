@@ -1,16 +1,16 @@
 import { Form, Input, Button, Typography, Space, message } from "antd";
-import imgLogo from "../../assets/images/logo.jpeg";
+import imgLogo from "../../assets/images/ada.jpg";
 import useAuthContext from "../../store/useAuthContext";
 import { useNavigate } from "react-router-dom";
 
 function Login() {
   const logIn = useAuthContext((state) => state.logIn);
+  const loading = useAuthContext((state) => state.loading);
 
   const navigate = useNavigate();
   const [messageApi, contextHolder] = message.useMessage();
 
   const onFinish = async (values) => {
-    alert(JSON.stringify(values));
     try {
       await logIn(values);
       navigate("/home");
@@ -34,8 +34,14 @@ function Login() {
         <img src={imgLogo} alt="logo" className="w-[150px] h-[150px]" />
         <Typography.Title
           level={3}
-          style={{ margin: 0, textAlign: "center" }}
+          style={{
+            margin: 0,
+            textAlign: "center",
+            color: "#4195FD",
+            fontWeight: "400",
+          }}
           className="pb-0"
+          color="#4195FD"
         >
           ADA Login
         </Typography.Title>
@@ -63,6 +69,7 @@ function Login() {
             className="w-full"
             type="primary"
             htmlType="submit"
+            loading={loading}
           >
             Log In
           </Button>

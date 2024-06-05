@@ -1,5 +1,5 @@
 import { UploadOutlined } from "@ant-design/icons";
-import { Button, DatePicker, Input, Select, Upload } from "antd";
+import { Button, Input, Select, Upload } from "antd";
 
 const savingFormFields = [
   {
@@ -20,10 +20,10 @@ const savingFormFields = [
     rules: [{ required: true, message: "Please enter your name" }],
   },
   {
-    name: "date_of_paymen",
+    name: "date_of_payment",
     label: "Date Of Deposit:",
     rules: [{ required: true, message: "Please enter your name" }],
-    inputComponent: <DatePicker className="w-full" />,
+    // inputComponent: <DatePicker className="w-full" />,
   },
 ];
 

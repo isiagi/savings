@@ -11,12 +11,15 @@ import Payment from "../components/payment/Payment";
 import Wagubumbuzi from "../components/wagubumbuzi/Wagubumbuzi";
 import Login from "../components/auth/Login";
 import PrivateRoute from "../utils/PrivateRoute";
+import PrivateAuth from "../utils/PrivateAuth";
 
 function index() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Login />} />
+        <Route element={<PrivateAuth />}>
+          <Route path="/" element={<Login />} />
+        </Route>
         <Route element={<PrivateRoute />}>
           <Route path="/home" element={<Home />}>
             <Route index element={<HomeComponent />} />

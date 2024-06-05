@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 
-import { Form, Input, Upload } from "antd";
+import { DatePicker, Form, Input, Upload } from "antd";
+import moment from "moment";
 
 import { useEffect } from "react";
 import SelectOptions from "../../../utils/SelectOptions";
@@ -20,7 +21,7 @@ const ReusableForm = ({ onFinish, formFields, initialValues, formId }) => {
   };
 
   useEffect(() => formId.resetFields(), [initialValues]);
-  console.log("ini", initialValues);
+  // console.log("ini", initialValues);
 
   const handleChange = (value, name) => {
     console.log("vale", value);
@@ -32,8 +33,6 @@ const ReusableForm = ({ onFinish, formFields, initialValues, formId }) => {
 
   const handleSubmit = (values) => {
     const formData = new FormData();
-
-    console.log(values);
 
     for (const name in values) {
       if (name === "image_url") {
@@ -75,6 +74,27 @@ const ReusableForm = ({ onFinish, formFields, initialValues, formId }) => {
                   handleChange={(value) => handleChange(value, field.name)}
                   path={field.path}
                 />
+              </Form.Item>
+            );
+          } else if (field.name.includes("date")) {
+            return (
+              <Form.Item
+                key={index}
+                name={field.name}
+                label={field.name}
+                style={{ marginBottom: "0px" }}
+                rules={[
+                  {
+                    required: true,
+                  },
+                ]}
+                initialValue={initialValues && initialValues[`${field.name}`]}
+                getValueFromEvent={(_date, dateString) => dateString} // Extract dateString directly
+                getValueProps={(value) => ({
+                  value: value ? moment(value) : undefined, // Convert moment object to value
+                })}
+              >
+                <DatePicker className="w-full" format="YYYY-MM-DD" />
               </Form.Item>
             );
           } else {

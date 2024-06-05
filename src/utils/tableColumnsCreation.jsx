@@ -18,13 +18,20 @@ import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 //   password?: any;
 // }
 
-export function createColumns(configs, handleRowClick, handleDelete, key) {
-  console.log("configs", configs);
+export function createColumns(
+  configs,
+  handleRowClick,
+  handleDelete,
+  key,
+  handleOpenModal
+) {
+  // console.log("configs", configs);
 
   const columns = configs.map((config) => ({
     ...config,
     onCell: (record) => ({
-      onClick: () => config.onClick && config.onClick(record.id),
+      onClick: () =>
+        config.onClick ? config.onClick(record.id) : handleOpenModal(record),
     }),
     render: config.render ? config.render : (text) => <a>{text}</a>,
   }));

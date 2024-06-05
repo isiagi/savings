@@ -7,12 +7,22 @@ import deleteData from "../api/api_routes/deleteData";
 import getById from "../api/api_routes/getById";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
-import { message } from "antd";
+import { Modal, message } from "antd";
 import { format } from "date-fns";
 
 /* eslint-disable react/prop-types */
 function TableUiComponent({ configs, fetchUrl, data, titlez, api }) {
   const openEditModal = useStore((state) => state.openEditModal);
+  const { setModalState, setOpenModal, openModal, setCloseModal, modalState } =
+    useStore((state) => {
+      return {
+        setModalState: state.setModalState,
+        setOpenModal: state.setOpenModal,
+        openModal: state.openModal,
+        setCloseModal: state.setCloseModal,
+        modalState: state.modalState,
+      };
+    });
   const [messageApi, contextHolder] = message.useMessage();
 
   // eslint-disable-next-line no-unused-vars
@@ -21,6 +31,8 @@ function TableUiComponent({ configs, fetchUrl, data, titlez, api }) {
 
   const [resData, setResData] = useState();
   const [objId, setObjId] = useState();
+
+  // console.log(modalState);
 
   const handleDelete = async (id) => {
     // console.log("id", fetchUrl);
@@ -62,18 +74,29 @@ function TableUiComponent({ configs, fetchUrl, data, titlez, api }) {
 
   const { key } = useParams();
 
-  const columns = createColumns(configs, handleRowClick, handleDelete, key);
+  const handleOpenModal = (record) => {
+    setModalState(record);
+    setOpenModal();
+  };
+
+  const columns = createColumns(
+    configs,
+    handleRowClick,
+    handleDelete,
+    key,
+    handleOpenModal
+  );
 
   console.log(fetchUrl);
-  console.log("res", res);
+  // console.log("res", res);
   res.map((items) => {
     // console.log(items);
     for (const key in items) {
       // console.log("key", key);
       if (key.includes("date")) {
         const date = new Date(items[key]);
-        const yr = (items[key] = format(date, "yyyy-MM-dd HH:mm:ss"));
-        console.log(yr);
+        items[key] = format(date, "yyyy-MM-dd");
+        // console.log(yr);
       }
     }
   });
@@ -84,6 +107,26 @@ function TableUiComponent({ configs, fetchUrl, data, titlez, api }) {
         columns={columns}
         dataSource={res.users ? res.users : res}
       />
+      <Modal
+        onOk={setCloseModal}
+        onCancel={setCloseModal}
+        open={openModal}
+        title="Details"
+      >
+        {modalState &&
+          Object.entries(modalState)
+            .filter(
+              // eslint-disable-next-line no-unused-vars
+              ([item, _]) =>
+                item !== "id" && item !== "user" && item !== "user_id"
+            )
+            .map(([key, value]) => (
+              <h3 className="text-base" key={key}>
+                {`${key} : `}
+                <span className="font-medium">{`${value}`}</span>
+              </h3>
+            ))}
+      </Modal>
       <EditModalComponent
         api={fetchUrl}
         initial={resData}

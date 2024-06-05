@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { Form, Modal } from "antd";
 import useStore from "../../../global/GlobalStates";
 import FormReuse from "../reuseableForm/FormReuse";
+import useCreate from "../../../global/DataState";
 
 const ModalComponent = ({ data, title, api }) => {
   const { addModalState, closeAddModal } = useStore((state) => ({
@@ -11,6 +12,7 @@ const ModalComponent = ({ data, title, api }) => {
   }));
 
   const [form] = Form.useForm();
+  const createLoading = useCreate((state) => state.createLoading);
 
   // const showModal = () => {
   //   setIsModalOpen(true);
@@ -19,7 +21,9 @@ const ModalComponent = ({ data, title, api }) => {
   //   alert("Added Successfully");
   //   alert(values);
   //   // closeAddModal();
+
   // };
+
   const handleCancel = () => {
     form.resetFields();
     closeAddModal();
@@ -31,6 +35,7 @@ const ModalComponent = ({ data, title, api }) => {
         open={addModalState}
         onOk={form.submit}
         onCancel={handleCancel}
+        confirmLoading={createLoading}
       >
         <FormReuse
           initialValues={data}

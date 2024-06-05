@@ -12,7 +12,11 @@ function TableComponent({ dataSource, columns }) {
     <Table
       // onRow={() => {
       //   return {
-      //     onClick: () => navigate("/detail/2"), // click row
+      //     onClick: ({
+      //   title: "Loan Type",
+      //   dataIndex: "type",
+      //   key: "type",
+      // },) => navigate("/detail/2"), // click row
       //   };
       // }}
       summary={() => (
@@ -28,6 +32,7 @@ function TableComponent({ dataSource, columns }) {
       scroll={{ x: 400 }}
       dataSource={dataSource}
       columns={columns}
+      pagination={{ position: ["topRight"], pageSize: 5 }}
     />
   );
 }
