@@ -46,7 +46,8 @@ function FormReuse({
       messageApi.success("Data created successfully!", 5);
       setDataCreated();
     } catch (error) {
-      console.log(error);
+      console.log(error.response.data.detail);
+      messageApi.error(error.response.data.detail, 5);
       setNoCreateLoading();
     }
 
