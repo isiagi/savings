@@ -150,11 +150,11 @@ const borrowerFormFields = [
 ];
 
 const userFormFielders = [
-  {
-    name: "username",
-    label: "Membership ID:",
-    rules: [{ required: true, message: "Please enter your name" }],
-  },
+  // {
+  //   name: "username",
+  //   label: "Membership ID:",
+  //   rules: [{ required: true, message: "Please enter your name" }],
+  // },
   {
     name: "first_name",
     label: "First Name:",
