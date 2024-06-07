@@ -7,8 +7,8 @@ const useCreate = create((set) => {
 
     setDataCreated: () => set(() => ({ dataCreated: true })),
     setNoCreated: () => set(() => ({ dataCreated: false })),
-    setCreateLoading: () => set(() => ({ dataCreated: true })),
-    setNoCreateLoading: () => set(() => ({ dataCreated: false })),
+    setCreateLoading: () => set(() => ({ createLoading: true })),
+    setNoCreateLoading: () => set(() => ({ createLoading: false })),
   };
 });
 

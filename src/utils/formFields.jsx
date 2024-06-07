@@ -150,6 +150,7 @@ const borrowerFormFields = [
 ];
 
 const userFormFielders = [
+
   {
     name: "username",
     label: "Membership ID:",
@@ -162,6 +163,7 @@ const userFormFielders = [
       />
     ),
   },
+
   {
     name: "first_name",
     label: "First Name:",

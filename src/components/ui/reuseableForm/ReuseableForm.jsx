@@ -67,10 +67,12 @@ const ReusableForm = ({ onFinish, formFields, initialValues, formId }) => {
                 ]}
                 name={field.name}
                 label={field.label}
+                initialValue={initialValues && initialValues[`${field.name}`]}
                 key={index}
                 className="mb-2"
               >
                 <SelectOptions
+                  initialValue={initialValues && initialValues[`${field.name}`]}
                   handleChange={(value) => handleChange(value, field.name)}
                   path={field.path}
                 />

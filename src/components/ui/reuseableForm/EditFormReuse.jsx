@@ -76,8 +76,6 @@ function EditFormReuse({
   };
   tr();
 
-  console.log(initialValues.date_of_payment);
-
   return (
     <div className="w-full text-center flex justify-center items-center">
       <div className="w-full">

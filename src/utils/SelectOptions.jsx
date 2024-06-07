@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import instance from "../components/api/axios/axios";
 
 // eslint-disable-next-line react/prop-types
-function SelectOptions({ handleChange, path }) {
+function SelectOptions({ handleChange, path, initialValue }) {
   const [selectData, setSelectData] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -26,7 +26,7 @@ function SelectOptions({ handleChange, path }) {
 
   return (
     <Select
-      defaultValue={"Select from options"}
+      defaultValue={initialValue || "Select from options"}
       loading={loading}
       onChange={handleChange}
     >
