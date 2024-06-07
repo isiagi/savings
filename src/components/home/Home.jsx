@@ -1,3 +1,4 @@
+import { Alert, Spin } from "antd";
 import useFetchData from "../../hooks/useFetchData";
 import {
   TeamOutlined,
@@ -8,7 +9,7 @@ import {
 } from "@ant-design/icons";
 
 function Home() {
-  const [res] = useFetchData("loan/active");
+  const [res, loading] = useFetchData("loan/active");
 
   console.log(res);
 
@@ -49,6 +50,20 @@ function Home() {
       icon: <WalletOutlined />,
     },
   ];
+
+  if (loading)
+    return (
+      <div className="flex justify-center items-center h-full w-full">
+        <Spin tip="Loading...">
+          <Alert
+            message="Summary Info"
+            description="Please wait while we load the data"
+            type="info"
+          />
+        </Spin>
+      </div>
+    );
+
   return (
     <div className="grid grid-cols-auto-fit gap-5">
       {homeArr.map(({ id, bg, title, rate, icon }) => (

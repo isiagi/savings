@@ -8,7 +8,7 @@ import { useEffect } from "react";
 
 const { Text } = Typography;
 
-function TableComponent({ dataSource, columns }) {
+function TableComponent({ dataSource, columns, loading }) {
   // const navigate = useNavigate();
   const { key } = useParams();
   const [res, loading, refetchData] = useFetchData("auth/totals");
@@ -95,7 +95,11 @@ function TableComponent({ dataSource, columns }) {
       dataSource={dataSource}
       columns={columns}
       pagination={{ position: ["topRight"], pageSize: 5 }}
+
       rowClassName={"green"}
+
+      loading={loading}
+
     />
   );
 }
@@ -103,6 +107,7 @@ function TableComponent({ dataSource, columns }) {
 TableComponent.propTypes = {
   dataSource: PropTypes.array.isRequired,
   columns: PropTypes.array.isRequired,
+  loading: PropTypes.array.isRequired,
 };
 
 export default TableComponent;

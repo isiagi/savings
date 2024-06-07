@@ -32,20 +32,25 @@ const useAuthContext = create((set) => ({
   loading: false,
 
   logIn: async (data) => {
-    set({ loading: true });
-    const response = await instance.post("auth/login/", data);
-    set({ loading: false });
-    console.log("response", response);
-    localStorage.setItem("token", response.data.Token);
-    set({
-      firstName: response.data.firstName,
-      lastName: response.data.lastName,
-      username: response.data.username,
-    });
+    try {
+      set({ loading: true });
+      const response = await instance.post("auth/login/", data);
+      set({ loading: false });
+      console.log("response", response);
+      localStorage.setItem("token", response.data.Token);
+      set({
+        firstName: response.data.firstName,
+        lastName: response.data.lastName,
+        username: response.data.username,
+      });
 
-    const tokenInLocalStorage = localStorage.getItem("token");
+      const tokenInLocalStorage = localStorage.getItem("token");
 
-    tokenInLocalStorage ? set({ token: true }) : set({ token: false });
+      tokenInLocalStorage ? set({ token: true }) : set({ token: false });
+    } catch (error) {
+      console.log(error);
+      set({ loading: false });
+    }
   },
   logOut: async () => {
     try {
