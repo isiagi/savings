@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 
-import { Alert, Spin, Table, Typography } from "antd";
+import { Spin, Table, Typography } from "antd";
 import { useParams } from "react-router-dom";
 import useFetchData from "../../../hooks/useFetchData";
 import { useEffect } from "react";
@@ -11,6 +11,7 @@ const { Text } = Typography;
 function TableComponent({ dataSource, columns }) {
   // const navigate = useNavigate();
   const { key } = useParams();
+  // eslint-disable-next-line no-unused-vars
   const [res, loading, refetchData] = useFetchData("auth/totals");
 
   console.log("obj", key);
