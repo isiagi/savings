@@ -12,7 +12,7 @@ function TableComponent({ dataSource, columns, loading }) {
   // const navigate = useNavigate();
   const { key } = useParams();
   // eslint-disable-next-line no-unused-vars
-  const [res, loading, refetchData] = useFetchData("auth/totals");
+  const [res, _, refetchData] = useFetchData("auth/totals");
 
   console.log("obj", key);
 
@@ -96,11 +96,8 @@ function TableComponent({ dataSource, columns, loading }) {
       dataSource={dataSource}
       columns={columns}
       pagination={{ position: ["topRight"], pageSize: 5 }}
-
       rowClassName={"green"}
-
       loading={loading}
-
     />
   );
 }
