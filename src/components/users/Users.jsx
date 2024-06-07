@@ -1,4 +1,4 @@
-import { Button } from "antd";
+import { Alert, Button, Spin } from "antd";
 
 import EditModalComponent from "../ui/modal/EditModal";
 
@@ -42,7 +42,19 @@ function Users() {
   if (profileData && profileData.length > 0) {
     userData = profileData[0];
   } else {
-    return <h1>{loading && "loading.."}</h1>;
+    return (
+      <div className="h-full w-full flex justify-center items-center">
+        {loading && (
+          <Spin tip="Loading...">
+            <Alert
+              message="Profile Loading"
+              description="Please wait while we load your profile"
+              type="info"
+            />
+          </Spin>
+        )}
+      </div>
+    );
   }
 
   const initialValue = {
