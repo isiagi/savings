@@ -1,3 +1,20 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.ant-menu-item-selected {
+  background-color: #569e23 !important;
+}
+
+.ant-table-thead .ant-table-cell {
+  background-color: #569e23 !important;
+  color: #fff !important;
+}
+
+.green {
+  color: #364928;
+}
+
+.table-striped-rows tr:nth-child(2n) td {
+  background-color: #364928 !important;
+}

@@ -154,6 +154,13 @@ const userFormFielders = [
     name: "username",
     label: "Membership ID:",
     rules: [{ required: true, message: "Please enter your name" }],
+    inputComponent: (
+      <Input
+        addonBefore="ADA/"
+        addonAfter="/2024"
+        defaultValue="Enter membership id"
+      />
+    ),
   },
   {
     name: "first_name",
