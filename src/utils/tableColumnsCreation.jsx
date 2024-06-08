@@ -1,4 +1,4 @@
-import { Space } from "antd";
+import { Popconfirm, Space } from "antd";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 
 // interface ColumnConfig {
@@ -60,9 +60,19 @@ export function createColumns(
 
         <div
           className="text-[#d1890dbe] hover:text-[#D18A0D] flex items-center gap-1 cursor-pointer"
-          onClick={() => handleDelete(record.id)}
+          // onClick={() => handleDelete(record.id)}
         >
-          <DeleteOutlined />
+          <Popconfirm
+            placement="rightTop"
+            title="Delete"
+            description="Are you sure to delete this item?"
+            onConfirm={() => handleDelete(record.id)}
+            onCancel={""}
+            okText="Yes"
+            cancelText="No"
+          >
+            <DeleteOutlined />
+          </Popconfirm>
         </div>
       </Space>
     ),
