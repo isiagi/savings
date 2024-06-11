@@ -9,6 +9,7 @@ import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { Modal, message } from "antd";
 import { format } from "date-fns";
+import useCreate from "../../global/DataState";
 
 /* eslint-disable react/prop-types */
 function TableUiComponent({ configs, fetchUrl, data, titlez, api }) {
@@ -32,6 +33,9 @@ function TableUiComponent({ configs, fetchUrl, data, titlez, api }) {
   const [resData, setResData] = useState();
   const [objId, setObjId] = useState();
 
+  const setDataCreated = useCreate((state) => state.setDataCreated);
+  const setTableData = useCreate((state) => state.setTableData);
+
   // console.log(modalState);
 
   const handleDelete = async (id) => {
@@ -41,12 +45,14 @@ function TableUiComponent({ configs, fetchUrl, data, titlez, api }) {
       if (obj.key == 2) {
         await deleteData("auth", id);
         messageApi.success("Data delete successfully!", 7);
-        await refetchData();
+        // await refetchData();
+        setDataCreated();
       }
 
       await deleteData(fetchUrl, id);
       messageApi.success("Data delete successfully!", 7);
-      await refetchData();
+      // await refetchData();
+      setDataCreated();
     } catch (error) {
       if (error.response && error.response.data) {
         // Assuming the error response is an object where each key contains an array of error messages
@@ -100,6 +106,7 @@ function TableUiComponent({ configs, fetchUrl, data, titlez, api }) {
       }
     }
   });
+  setTableData(res);
   return (
     <>
       {contextHolder}

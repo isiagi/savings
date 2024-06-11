@@ -29,6 +29,8 @@ function EditFormReuse({
 }) {
   const [messageApi, contextHolder] = message.useMessage();
   const setDataCreated = useCreate((state) => state.setDataCreated);
+  const setCreateLoading = useCreate((state) => state.setCreateLoading);
+  const setNoCreateLoading = useCreate((state) => state.setNoCreateLoading);
   const obj = useParams();
 
   // alert(obj.id);
@@ -37,17 +39,21 @@ function EditFormReuse({
     console.log(values);
     try {
       if (obj.id) {
+        setCreateLoading();
         await editMultiData(`${api}/${id}`, values);
         messageApi.success("Update successfully!", 5);
         setDataCreated();
+        setNoCreateLoading();
         closeEditModal();
 
         return;
       }
 
+      setCreateLoading();
       await editData(`${obj.key != "2" ? api : "auth"}/${id}`, values);
       setDataCreated();
       messageApi.success("Update successfully!", 5);
+      setNoCreateLoading();
       closeEditModal();
     } catch (error) {
       if (error.response && error.response.data) {
