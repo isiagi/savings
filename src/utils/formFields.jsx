@@ -1,5 +1,5 @@
 import { UploadOutlined } from "@ant-design/icons";
-import { Button, Input, Select, Upload } from "antd";
+import { Button, Form, Image, Input, Select, Upload } from "antd";
 
 const savingFormFields = [
   {
@@ -150,18 +150,17 @@ const borrowerFormFields = [
 ];
 
 const userFormFielders = [
-
   {
     name: "username",
     label: "Membership ID:",
-    rules: [{ required: true, message: "Please enter your name" }],
-    inputComponent: (
-      <Input
-        addonBefore="ADA/"
-        addonAfter="/2024"
-        defaultValue="Enter membership id"
-      />
-    ),
+    rules: [
+      { required: true, message: "Please enter your Membership ID" },
+      {
+        pattern: new RegExp(/(\d{3})\/(\d{4})/),
+        message: "Membership ID must be in the format of 000/2020",
+      },
+    ],
+    inputComponent: <Input addonBefore="ADA/" defaultValue="000/2020" />,
   },
 
   {
@@ -177,8 +176,13 @@ const userFormFielders = [
   {
     name: "email",
     label: "Email:",
-    rules: [{ required: true, message: "Please enter your name" }],
+    rules: [{ required: false, message: "Please enter your name" }],
   },
+  // {
+  //   name: "telephone",
+  //   label: "Telephone:",
+  //   rules: [{ required: true, message: "Please enter your Telephone Number" }],
+  // },
 ];
 
 const borrowFormFielders = [
@@ -222,11 +226,11 @@ const userProvideFields = [
     label: "Occupation:",
     rules: [{ required: true, message: "Please enter your name" }],
   },
-  // {
-  //   name: "occupation",
-  //   label: "Occupation:",
-  //   rules: [{ required: true, message: "Please enter your name" }],
-  // },
+  {
+    name: "telephone",
+    label: "Telephone:",
+    rules: [{ required: true, message: "Please enter your name" }],
+  },
 
   {
     name: "gender",
@@ -258,6 +262,7 @@ const userProvideFields = [
         <Button className="flex-1 max-w-[100%]" icon={<UploadOutlined />}>
           Click to Upload
         </Button>
+        {/* <Image src=""/> */}
       </Upload>
     ),
   },

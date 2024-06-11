@@ -87,18 +87,42 @@ function Users() {
         api={"user_profile"}
       />
       <div>
-        <div>
-          <h1>
+        <div className="leading-loose">
+          <h1 className="text-base pt-2">
             Full Name:{" "}
-            {`${userData.user.first_name} ${userData.user.last_name}`}
+            <span className="text-base">{`${userData.user.first_name} ${userData.user.last_name}`}</span>
           </h1>
-          <h1>Membership Id: {userData.user.username}</h1>
-          <h1>Email: {userData.user.email}</h1>
-          <h3>Contact: 995876544567</h3>
-          <h3>Occupation: {userData.occupation}</h3>
-          <h3>Residence: {userData.residence}</h3>
-          <h3>Is Admin: {userData.user.is_staff ? "True" : "False"}</h3>
-          <h3>Registered On: {userData.user.date_joined}</h3>
+
+          <h1 className="text-base pt-1">
+            Membership Id: <span className="text-base"></span>
+            {userData.user.username}
+          </h1>
+          <h1 className="text-base pt-1">
+            Gender: <span className="text-base"></span>
+            {userData.gender}
+          </h1>
+          <h1 className="text-base pt-1">
+            Email: <span className="text-base">{userData.user.email}</span>
+          </h1>
+          <h3 className="text-base pt-1">
+            Contact: <span className="text-base">{userData.telephone}</span>
+          </h3>
+          <h3 className="text-base pt-1">
+            Occupation: <span className="text-base">{userData.occupation}</span>
+          </h3>
+          <h3 className="text-base pt-1">
+            Residence: <span className="text-base">{userData.residence}</span>
+          </h3>
+          <h3 className="text-base pt-1">
+            Is Admin:{" "}
+            <span className="text-base">
+              {userData.user.is_staff ? "True" : "False"}
+            </span>
+          </h3>
+          <h3 className="text-base pt-1">
+            Registered On:{" "}
+            <span className="text-base">{userData.user.date_joined}</span>
+          </h3>
         </div>
       </div>
     </div>

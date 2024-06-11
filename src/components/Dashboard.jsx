@@ -141,7 +141,13 @@ const App = () => {
         >
           <Button
             type="text"
-            icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+            icon={
+              collapsed ? (
+                <MenuUnfoldOutlined className="text-[#589E23]" />
+              ) : (
+                <MenuFoldOutlined className="text-[#9E9A23]" />
+              )
+            }
             onClick={() => setCollapsed(!collapsed)}
             style={{
               fontSize: "16px",
@@ -149,7 +155,7 @@ const App = () => {
               height: 64,
             }}
           />
-          <h1 style={{ textAlign: "center" }}>
+          <h1 className="text-[#589E23] font-medium text-[15px]">
             Agalyawamm Developmet Association (ADA){" "}
           </h1>
         </Header>

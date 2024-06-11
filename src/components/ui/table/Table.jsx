@@ -4,6 +4,7 @@ import { Spin, Table, Typography } from "antd";
 import { useParams } from "react-router-dom";
 import useFetchData from "../../../hooks/useFetchData";
 import { useEffect } from "react";
+import useCreate from "../../../global/DataState";
 // import { useNavigate } from "react-router-dom";
 
 const { Text } = Typography;
@@ -12,19 +13,42 @@ function TableComponent({ dataSource, columns, loading }) {
   // const navigate = useNavigate();
   const { key } = useParams();
   // eslint-disable-next-line no-unused-vars
-  const [res, _, refetchData] = useFetchData("auth/totals");
+  const [res, , refetchData] = useFetchData("auth/totals");
+  const dataCreated = useCreate((state) => state.dataCreated);
+  const tableData = useCreate((state) => state.tableData);
 
-  console.log("obj", key);
+  console.log(tableData, "table data");
 
-  // if (res.length === 0)
-  //   return (
-  //     <Spin tip="Loading" size="large">
-  //       Table Loading...
-  //     </Spin>
-  //   );
-  useEffect(() => {
-    refetchData();
-  }, [res]);
+  const calculateTotal = (tableData) => {
+    if (!tableData || tableData.length === 0) return 0;
+
+    const hasAmount = tableData.some((item) =>
+      Object.prototype.hasOwnProperty.call(item, "amount")
+    );
+
+    if (hasAmount) {
+      return tableData.reduce(
+        (acc, item) => acc + (parseFloat(item.amount) || 0),
+        0
+      );
+    } else {
+      return tableData.length;
+    }
+  };
+
+  const total = calculateTotal(dataSource);
+
+  const formattedTotal =
+    typeof total === "number" &&
+    dataSource.some((item) =>
+      Object.prototype.hasOwnProperty.call(item, "amount")
+    )
+      ? new Intl.NumberFormat("en-US", {
+          style: "currency",
+          currency: "UGX",
+          currencySign: "standard",
+        }).format(total)
+      : total;
 
   return (
     <Table
@@ -67,7 +91,7 @@ function TableComponent({ dataSource, columns, loading }) {
             tableTotal = res && res?.total_laon.total_laon; // loan
             break;
           case "5":
-            tableTotal = res && res?.total_loans; //borrowers
+            tableTotal = res && res?.total_borrower; //borrowers
             break;
           case "9":
             tableTotal = res && res?.total_payment.total_payment; //payments
@@ -76,8 +100,7 @@ function TableComponent({ dataSource, columns, loading }) {
             tableTotal = res && res?.total_wagubumbuzi.total_Wagubumbuzi; //wagui
             break;
           default:
-            tableTotal = 0;
-            break;
+            return (tableTotal = 0);
         }
         return (
           <Table.Summary.Row>
@@ -86,7 +109,7 @@ function TableComponent({ dataSource, columns, loading }) {
             </Table.Summary.Cell>
             <Table.Summary.Cell colSpan={1}>
               <Text className="text-[#569E23] font-medium text-base">
-                {!tableTotal ? 0 : tableTotal}
+                {formattedTotal}
               </Text>
             </Table.Summary.Cell>
           </Table.Summary.Row>

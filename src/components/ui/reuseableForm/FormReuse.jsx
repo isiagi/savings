@@ -37,18 +37,22 @@ function FormReuse({
   const handleFormSubmit = async (values) => {
     // await createData(api, values);
     console.log(values);
-
     try {
       setCreateLoading();
       // eslint-disable-next-line react-hooks/rules-of-hooks
       await useCreateData(api, values);
-      setNoCreateLoading();
-      messageApi.success("Data created successfully!", 5);
+      console.log("Setting dataCreated to true");
       setDataCreated();
+      messageApi.success("Data created successfully!", 5);
     } catch (error) {
-      console.log(error.response.data.detail);
-      messageApi.error(error.response.data.detail, 5);
+      console.error("Error:", error);
+      messageApi.error(
+        error.response?.data?.detail || "Error creating data",
+        5
+      );
+    } finally {
       setNoCreateLoading();
+      closeAddModal();
     }
 
     // alert("purple smile");
