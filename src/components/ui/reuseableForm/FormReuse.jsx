@@ -47,7 +47,9 @@ function FormReuse({
     } catch (error) {
       console.error("Error:", error);
       messageApi.error(
-        error.response?.data?.detail || "Error creating data",
+        error.response?.data?.detail ||
+          error.response?.data?.Error.username[0] ||
+          "Error creating data",
         5
       );
     } finally {
