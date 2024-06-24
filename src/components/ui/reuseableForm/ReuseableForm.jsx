@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 
 import { DatePicker, Form, Input, Upload } from "antd";
-import moment from "moment";
+import dayjs from "dayjs";
 
 import { useEffect } from "react";
 import SelectOptions from "../../../utils/SelectOptions";
@@ -93,7 +93,7 @@ const ReusableForm = ({ onFinish, formFields, initialValues, formId }) => {
                 initialValue={initialValues && initialValues[`${field.name}`]}
                 getValueFromEvent={(_date, dateString) => dateString} // Extract dateString directly
                 getValueProps={(value) => ({
-                  value: value ? moment(value) : undefined, // Convert moment object to value
+                  value: value ? dayjs(value) : undefined, // Convert moment object to value
                 })}
               >
                 <DatePicker className="w-full" format="YYYY-MM-DD" />
