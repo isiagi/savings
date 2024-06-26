@@ -19,12 +19,23 @@ function TableComponent({ dataSource, columns, loading }) {
 
   console.log(tableData, "table data");
 
-  const calculateTotal = (tableData) => {
+  const calculateTotal = (tableData, remain = false) => {
     if (!tableData || tableData.length === 0) return 0;
 
     const hasAmount = tableData.some((item) =>
       Object.prototype.hasOwnProperty.call(item, "amount")
     );
+
+    const hasRemainingAmount = tableData.some((item) =>
+      Object.prototype.hasOwnProperty.call(item, "remaining_amount")
+    );
+
+    if (remain && hasRemainingAmount) {
+      return tableData.reduce(
+        (acc, item) => acc + (parseFloat(item.remaining_amount) || 0),
+        0
+      );
+    }
 
     if (hasAmount) {
       return tableData.reduce(
@@ -37,6 +48,8 @@ function TableComponent({ dataSource, columns, loading }) {
   };
 
   const total = calculateTotal(dataSource);
+
+  const remainingTotal = calculateTotal(dataSource, true);
 
   const formattedTotal =
     typeof total === "number" &&
@@ -111,6 +124,12 @@ function TableComponent({ dataSource, columns, loading }) {
               <Text className="text-[#569E23] font-medium text-base">
                 {formattedTotal}
               </Text>
+              {remainingTotal !== 0 && key == "4" && (
+                <Text className="text-[#9E9A23] font-medium text-base">
+                  {" "}
+                  ({remainingTotal})
+                </Text>
+              )}
             </Table.Summary.Cell>
           </Table.Summary.Row>
         );
