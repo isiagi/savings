@@ -33,13 +33,19 @@ function Wagubumbuzi() {
   const wagubumbuziDataFx = () => {
     return (
       tableData &&
-      tableData[0].map((item) => ({
-        id: item.id,
-        amount: item.amount,
-        date_created: item.date_created,
-        username: item.user.username,
-        full_name: `${item.user.first_name} ${item.user.last_name}`,
-      }))
+      tableData[0].map((item) => {
+        const date = new Date(item.date_created);
+
+        return {
+          id: item.id,
+          amount: item.amount,
+          date_created: `${date.toLocaleString("default", {
+            month: "long",
+          })} ${date.getFullYear()}`,
+          username: item.user.username,
+          full_name: `${item.user.first_name} ${item.user.last_name}`,
+        };
+      })
     );
   };
 
