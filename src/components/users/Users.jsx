@@ -61,6 +61,7 @@ function Users() {
     first_name: profileData[0].user.first_name,
     last_name: profileData[0].user.last_name,
     email: profileData[0].user.email,
+    is_staff: profileData[0].user.is_staff,
     occupation: userData.occupation,
     residence: userData.residence,
   };

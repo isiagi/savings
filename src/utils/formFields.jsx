@@ -39,7 +39,8 @@ const paymentFormFields = [
   {
     name: "payee",
     label: "Payee:",
-    rules: [{ required: true, message: "Please enter your Payee" }],
+    rules: [{ required: true, message: "Please enter your Payee's Name" }],
+    path: "auth/meta/names",
   },
   {
     name: "amount",
@@ -247,6 +248,11 @@ const userProvideFields = [
         ]}
       />
     ),
+  },
+  {
+    name: "is_staff",
+    label: "IsAdmin",
+    rules: [{ required: true, message: "Please enter your Gender" }],
   },
   {
     name: "image_url",

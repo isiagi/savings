@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 
 import { DatePicker, Form, Input, Upload } from "antd";
+import { Checkbox } from "antd";
 import dayjs from "dayjs";
 
 import { useEffect } from "react";
@@ -31,7 +32,15 @@ const ReusableForm = ({ onFinish, formFields, initialValues, formId }) => {
     formId.setFieldsValue(obj);
   };
 
+  const onChange = (e) => {
+    console.log(`checked = `);
+    formId.setFieldsValue({
+      is_staff: `${e.target.checked == true ? "True" : "False"}`,
+    });
+  };
+
   const handleSubmit = (values) => {
+    console.log("values", values);
     const formData = new FormData();
 
     for (const name in values) {
@@ -58,7 +67,8 @@ const ReusableForm = ({ onFinish, formFields, initialValues, formId }) => {
             field.name === "reference" ||
             field.name === "member_id" ||
             field.name === "name" ||
-            field.name === "member_name"
+            field.name === "member_name" ||
+            field.name === "payee"
           ) {
             return (
               <Form.Item
@@ -97,6 +107,28 @@ const ReusableForm = ({ onFinish, formFields, initialValues, formId }) => {
                 })}
               >
                 <DatePicker className="w-full" format="YYYY-MM-DD" />
+              </Form.Item>
+            );
+          } else if (field.name.includes("is_staff")) {
+            return (
+              <Form.Item
+                rules={[
+                  { required: true, message: `${field.name} is required` },
+                ]}
+                name={field.name}
+                label={field.label}
+                // initialValue={initialValues && initialValues[`${field.name}`]}
+                key={index}
+                className="mb-2"
+              >
+                <Checkbox
+                  defaultChecked={
+                    initialValues && initialValues[`${field.name}`]
+                  }
+                  onChange={onChange}
+                >
+                  Set Admin Member
+                </Checkbox>
               </Form.Item>
             );
           } else {
