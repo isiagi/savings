@@ -31,17 +31,20 @@ function TableComponent({ dataSource, columns, loading }) {
     );
 
     if (remain && hasRemainingAmount) {
-      return tableData.reduce(
-        (acc, item) => acc + (parseFloat(item.remaining_amount) || 0),
-        0
-      );
+      return tableData.reduce((acc, item) => {
+        const remainingAmountValue = parseFloat(
+          item.remaining_amount.replace(/[^\d.-]/g, "")
+        );
+        return acc + (remainingAmountValue || 0);
+      }, 0);
     }
 
     if (hasAmount) {
-      return tableData.reduce(
-        (acc, item) => acc + (parseFloat(item.amount) || 0),
-        0
-      );
+      return tableData.reduce((acc, item) => {
+        // Assuming item.amount is in the format "UGX 100,000"
+        const amountValue = parseFloat(item.amount.replace(/[^\d.-]/g, ""));
+        return acc + (amountValue || 0);
+      }, 0);
     } else {
       return tableData.length;
     }
