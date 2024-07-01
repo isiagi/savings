@@ -104,6 +104,47 @@ function TableUiComponent({ configs, fetchUrl, data, titlez, api }) {
         items[key] = format(date, "yyyy-MM-dd");
         // console.log(yr);
       }
+
+      if (key.includes("amount")) {
+        console.log("key", items[key]);
+        const formatter = new Intl.NumberFormat("en-US", {
+          style: "currency",
+          currency: "UGX",
+        });
+
+        let amt = items[key];
+
+        // Log the type and value of amt for debugging
+        console.log("Original amount value:", amt, "Type:", typeof amt);
+
+        // Check for null, undefined, empty string
+        if (amt === null || amt === undefined || amt === "") {
+          console.error("Amount is null, undefined, or empty:", amt);
+          items[key] = "Invalid amount"; // Handle the invalid amount as desired
+        } else {
+          // Remove non-numeric characters (except the decimal point)
+          let cleanedAmt = amt.replace(/[^0-9.-]+/g, "");
+
+          // Log the cleaned amount for debugging
+          console.log("Cleaned amount value:", cleanedAmt);
+
+          // Attempt to parse float
+          let parsedAmt = parseFloat(cleanedAmt);
+
+          // Log the parsed amount for debugging
+          console.log("Parsed amount value:", parsedAmt);
+
+          if (isNaN(parsedAmt)) {
+            console.error("Parsed amount is NaN:", amt);
+            items[key] = "Invalid amount"; // Handle the invalid amount as desired
+          } else {
+            items[key] = formatter.format(parsedAmt);
+          }
+        }
+
+        // Log the formatted value for debugging
+        console.log("Formatted amount:", items[key]);
+      }
     }
   });
   setTableData(res);
