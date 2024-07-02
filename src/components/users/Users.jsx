@@ -64,6 +64,8 @@ function Users() {
     is_staff: profileData[0].user.is_staff,
     occupation: userData.occupation,
     residence: userData.residence,
+    telephone: userData.telephone,
+    gender: userData.gender,
   };
 
   return (
