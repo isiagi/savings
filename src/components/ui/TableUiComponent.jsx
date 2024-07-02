@@ -28,6 +28,10 @@ function TableUiComponent({ configs, fetchUrl, data, titlez, api }) {
 
   // eslint-disable-next-line no-unused-vars
   const [res, loading, refetchData] = useFetchData(fetchUrl);
+
+  const dataLoading = useCreate((state) => state.dataLoading);
+  const rawData = useCreate((state) => state.rawData);
+
   const obj = useParams();
 
   const [resData, setResData] = useState();
@@ -95,7 +99,7 @@ function TableUiComponent({ configs, fetchUrl, data, titlez, api }) {
 
   console.log(fetchUrl);
   // console.log("res", res);
-  res.map((items) => {
+  rawData.map((items) => {
     // console.log(items);
     for (const key in items) {
       // console.log("key", key);
@@ -147,14 +151,14 @@ function TableUiComponent({ configs, fetchUrl, data, titlez, api }) {
       }
     }
   });
-  setTableData(res);
+  setTableData(rawData);
   return (
     <>
       {contextHolder}
       <TableComponent
         columns={columns}
-        dataSource={res.users ? res.users : res}
-        loading={loading}
+        dataSource={rawData.users ? rawData.users : rawData}
+        loading={dataLoading}
       />
       <Modal
         onOk={setCloseModal}
