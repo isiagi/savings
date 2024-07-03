@@ -18,11 +18,11 @@ function PageUiComponent({
 
   return (
     <div>
-      <HeaderBanner
+      {/* <HeaderBanner
         title={headerTitle}
         placeholder={placeholder}
         openAddModal={openAddModal}
-      />
+      /> */}
 
       <ModalComponent api={api} data={modalFields} title={addModalTitle} />
 
@@ -32,6 +32,9 @@ function PageUiComponent({
         data={modalFields}
         titlez={editModalTitle}
         api={api}
+        headerTitle={headerTitle}
+        placeholder={placeholder}
+        openAddModal={openAddModal}
       />
     </div>
   );
