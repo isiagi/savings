@@ -4,14 +4,15 @@ import { Button, Input } from "antd";
 
 const { Search } = Input;
 
-function HeaderBanner({ title, placeholder, openAddModal }) {
+// eslint-disable-next-line react/prop-types
+function HeaderBanner({ title, placeholder, openAddModal, onSearch }) {
   return (
     <div className="flex items-center justify-between flex-wrap">
       <h1 className="font-medium text-xl text-[#569E23]">{title}</h1>
       <div>
         <Search
           placeholder={placeholder}
-          onSearch={""}
+          onSearch={onSearch}
           style={{
             width: 200,
           }}

@@ -5,14 +5,25 @@ import TableComponent from "./table/Table";
 import useFetchData from "../../hooks/useFetchData";
 import deleteData from "../api/api_routes/deleteData";
 import getById from "../api/api_routes/getById";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Modal, message } from "antd";
 import { format } from "date-fns";
 import useCreate from "../../global/DataState";
+import HeaderBanner from "./HeaderBanner/HeaderBanner";
+import fetchSearchData from "../../utils/fetchSearchData";
 
 /* eslint-disable react/prop-types */
-function TableUiComponent({ configs, fetchUrl, data, titlez, api }) {
+function TableUiComponent({
+  configs,
+  fetchUrl,
+  data,
+  titlez,
+  api,
+  headerTitle,
+  placeholder,
+  openAddModal,
+}) {
   const openEditModal = useStore((state) => state.openEditModal);
   const { setModalState, setOpenModal, openModal, setCloseModal, modalState } =
     useStore((state) => {
@@ -32,11 +43,17 @@ function TableUiComponent({ configs, fetchUrl, data, titlez, api }) {
 
   const [resData, setResData] = useState();
   const [objId, setObjId] = useState();
+  const [filteredData, setFilteredData] = useState([]);
+  const [searchLoading, setSearchLoading] = useState(false);
 
   const setDataCreated = useCreate((state) => state.setDataCreated);
   const setTableData = useCreate((state) => state.setTableData);
 
   // console.log(modalState);
+
+  useEffect(() => {
+    setFilteredData(res); // Set filtered data to res initially
+  }, [res]);
 
   const handleDelete = async (id) => {
     // console.log("id", fetchUrl);
@@ -93,9 +110,20 @@ function TableUiComponent({ configs, fetchUrl, data, titlez, api }) {
     handleOpenModal
   );
 
+  const handleSearch = async (value) => {
+    setSearchLoading(true);
+    try {
+      const data = await fetchSearchData(`${fetchUrl}?member_name=${value}`);
+      setFilteredData(data);
+    } catch (error) {
+      messageApi.error("Search failed. Please try again.", 7);
+    }
+    setSearchLoading(false);
+  };
+
   console.log(fetchUrl);
   // console.log("res", res);
-  res.map((items) => {
+  filteredData.map((items) => {
     // console.log(items);
     for (const key in items) {
       // console.log("key", key);
@@ -147,14 +175,20 @@ function TableUiComponent({ configs, fetchUrl, data, titlez, api }) {
       }
     }
   });
-  setTableData(res);
+  setTableData(filteredData);
   return (
     <>
       {contextHolder}
+      <HeaderBanner
+        title={headerTitle}
+        placeholder={placeholder}
+        openAddModal={openAddModal}
+        onSearch={handleSearch}
+      />
       <TableComponent
         columns={columns}
-        dataSource={res.users ? res.users : res}
-        loading={loading}
+        dataSource={filteredData.users ? filteredData.users : filteredData}
+        loading={loading || searchLoading}
       />
       <Modal
         onOk={setCloseModal}
