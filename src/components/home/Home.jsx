@@ -64,6 +64,11 @@ function Home() {
       </div>
     );
 
+  const formatter = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "UGX",
+  });
+
   return (
     <div className="grid grid-cols-auto-fit gap-5">
       {homeArr.map(({ id, bg, title, rate, icon }) => (
@@ -75,7 +80,11 @@ function Home() {
           <div className="flex justify-between items-center">
             <div>
               <h2>{title}</h2>
-              <h2 className="font-medium text-2xl pt-2">{rate}</h2>
+              <h2 className="font-medium text-2xl pt-2">
+                {title !== "Members" && title !== "Active Loans"
+                  ? formatter.format(rate)
+                  : rate}
+              </h2>
             </div>
             <div className="text-2xl">{icon && icon}</div>
           </div>
