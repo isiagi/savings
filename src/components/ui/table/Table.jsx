@@ -66,6 +66,16 @@ function TableComponent({ dataSource, columns, loading }) {
         }).format(total)
       : total;
 
+  const formattedData =
+    key === "3" &&
+    dataSource.map((item) => ({
+      ...item,
+      member_id: item.member_id.username,
+      member_name: `${item.member_id.first_name} ${item.member_id.last_name}`,
+    }));
+
+  console.log(formattedData, "formattedData");
+
   return (
     <Table
       // onRow={() => {
@@ -138,7 +148,7 @@ function TableComponent({ dataSource, columns, loading }) {
         );
       }}
       scroll={{ x: 400 }}
-      dataSource={dataSource}
+      dataSource={key === "3" ? formattedData : dataSource}
       columns={columns}
       pagination={{ position: ["topRight"], pageSize: 5 }}
       rowClassName={"green"}

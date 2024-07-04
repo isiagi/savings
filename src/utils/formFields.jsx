@@ -8,12 +8,12 @@ const savingFormFields = [
     rules: [{ required: true, message: "Please enter your name" }],
     path: "auth/meta",
   },
-  {
-    name: "member_name",
-    label: "Member's Name:",
-    rules: [{ required: true, message: "Please enter your Member's Name" }],
-    path: "auth/meta/names",
-  },
+  // {
+  //   name: "member_name",
+  //   label: "Member's Name:",
+  //   rules: [{ required: true, message: "Please enter your Member's Name" }],
+  //   path: "auth/meta/names",
+  // },
   {
     name: "amount",
     label: "Amount:",
