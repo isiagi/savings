@@ -20,8 +20,8 @@ const columns = [
   },
   {
     title: "Penalty:",
-    dataIndex: "penalty",
-    key: "penalty",
+    dataIndex: "penality",
+    key: "penality",
   },
 ];
 

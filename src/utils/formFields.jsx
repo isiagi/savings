@@ -47,15 +47,20 @@ const paymentFormFields = [
     label: "Amount:",
     rules: [{ required: true, message: "Please enter your Amount" }],
   },
+  {
+    name: "penality",
+    label: "Penalty:",
+    rules: [{ required: true, message: "Please enter your Penalty" }],
+  },
 ];
 
 const loanFormFields = [
-  {
-    name: "member_name",
-    label: "Name:",
-    rules: [{ required: true, message: "Please enter your name" }],
-    path: "auth/meta/names",
-  },
+  // {
+  //   name: "member_name",
+  //   label: "Name:",
+  //   rules: [{ required: true, message: "Please enter your name" }],
+  //   path: "auth/meta/names",
+  // },
   {
     name: "member_id",
     label: "Member Id:",
@@ -193,12 +198,12 @@ const borrowFormFielders = [
     rules: [{ required: true, message: "Please enter your name" }],
     path: "auth/meta",
   },
-  {
-    name: "name",
-    label: "Name:",
-    rules: [{ required: true, message: "Please enter your name" }],
-    path: "auth/meta/names",
-  },
+  // {
+  //   name: "name",
+  //   label: "Name:",
+  //   rules: [{ required: true, message: "Please enter your name" }],
+  //   path: "auth/meta/names",
+  // },
 ];
 
 const userProvideFields = [
@@ -215,6 +220,11 @@ const userProvideFields = [
   {
     name: "email",
     label: "Email:",
+    rules: [{ required: true, message: "Please enter your name" }],
+  },
+  {
+    name: "nin",
+    label: "Nin_number:",
     rules: [{ required: true, message: "Please enter your name" }],
   },
   {

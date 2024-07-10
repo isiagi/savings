@@ -66,13 +66,25 @@ function TableComponent({ dataSource, columns, loading }) {
         }).format(total)
       : total;
 
-  const formattedData =
-    key === "3" &&
-    dataSource.map((item) => ({
-      ...item,
-      member_id: item.member_id.username,
-      member_name: `${item.member_id.first_name} ${item.member_id.last_name}`,
-    }));
+  const formattedData = dataSource.map((item) => {
+    if (key === "3" || (key === "4" && typeof item.member_id === "object")) {
+      return {
+        ...item,
+        member_id: item.member_id.username,
+        member_name: `${item.member_id.first_name} ${item.member_id.last_name}`,
+      };
+    }
+
+    if (key === "5") {
+      return {
+        ...item,
+        membership_id: item.membership_id.username,
+        name: `${item.membership_id.first_name} ${item.membership_id.last_name}`,
+      };
+    }
+
+    return item; // return the item as is for other cases
+  });
 
   console.log(formattedData, "formattedData");
 
@@ -148,7 +160,7 @@ function TableComponent({ dataSource, columns, loading }) {
         );
       }}
       scroll={{ x: 400 }}
-      dataSource={key === "3" ? formattedData : dataSource}
+      dataSource={formattedData}
       columns={columns}
       pagination={{ position: ["topRight"], pageSize: 5 }}
       rowClassName={"green"}

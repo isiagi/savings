@@ -49,14 +49,14 @@ export function createColumns(
           </Link>
         )} */}
 
-        {key != "9" && (
+        {
           <div
             onClick={() => handleRowClick(record.id)}
             className="text-green-400 hover:text-green-600 flex items-center gap-1 cursor-pointer"
           >
             <EditOutlined />
           </div>
-        )}
+        }
 
         <div
           className="text-[#d1890dbe] hover:text-[#D18A0D] flex items-center gap-1 cursor-pointer"

@@ -21,7 +21,7 @@ const ReusableForm = ({ onFinish, formFields, initialValues, formId }) => {
     return inputComponent && inputComponent.type === Upload;
   };
 
-  useEffect(() => formId.resetFields(), [initialValues]);
+  useEffect(() => formId.resetFields(), [initialValues, formId]);
   // console.log("ini", initialValues);
 
   const handleChange = (value, name) => {
@@ -46,8 +46,11 @@ const ReusableForm = ({ onFinish, formFields, initialValues, formId }) => {
     for (const name in values) {
       if (name === "image_url") {
         formData.append(name, values[name][0].originFileObj);
+      } else if (name === "is_staff") {
+        formData.append(name, values[name] === true ? "True" : "False");
+      } else {
+        formData.append(name, values[name]); // there should be values.avatar which is a File object
       }
-      formData.append(name, values[name]); // there should be values.avatar which is a File object
     }
 
     try {
@@ -117,7 +120,7 @@ const ReusableForm = ({ onFinish, formFields, initialValues, formId }) => {
                 ]}
                 name={field.name}
                 label={field.label}
-                // initialValue={initialValues && initialValues[`${field.name}`]}
+                initialValue={initialValues && initialValues[`${field.name}`]}
                 key={index}
                 className="mb-2"
               >
