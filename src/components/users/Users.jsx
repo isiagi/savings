@@ -66,6 +66,7 @@ function Users() {
     residence: userData.residence,
     telephone: userData.telephone,
     gender: userData.gender,
+    nin: userData.nin,
   };
 
   return (
@@ -109,6 +110,10 @@ function Users() {
           </h1>
           <h3 className="text-base pt-1">
             Contact: <span className="text-base">{userData.telephone}</span>
+          </h3>
+          <h3 className="text-base pt-1">
+            Nin:{" "}
+            <span className="text-base">{userData.nin && userData.nin}</span>
           </h3>
           <h3 className="text-base pt-1">
             Occupation: <span className="text-base">{userData.occupation}</span>

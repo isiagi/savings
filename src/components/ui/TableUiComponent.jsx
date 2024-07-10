@@ -45,11 +45,12 @@ function TableUiComponent({
   const [objId, setObjId] = useState();
   const [filteredData, setFilteredData] = useState([]);
   const [searchLoading, setSearchLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const setDataCreated = useCreate((state) => state.setDataCreated);
   const setTableData = useCreate((state) => state.setTableData);
 
-  // console.log(modalState);
+  console.log(res, "res");
 
   useEffect(() => {
     setFilteredData(res); // Set filtered data to res initially
@@ -86,16 +87,27 @@ function TableUiComponent({
   };
 
   const handleRowClick = async (id) => {
-    const data =
-      obj.key != 2 ? await getById(fetchUrl, id) : await getById("auth", id);
+    try {
+      setIsLoading(true);
+      const data =
+        obj.key != 2 ? await getById(fetchUrl, id) : await getById("auth", id);
 
-    setResData(data.data);
-    setObjId(id);
+      setResData(data.data);
+      setObjId(id);
 
-    openEditModal();
+      openEditModal();
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const { key } = useParams();
+
+  console.log("====================================");
+  console.log(key);
+  console.log("====================================");
 
   const handleOpenModal = (record) => {
     setModalState(record);
@@ -110,10 +122,14 @@ function TableUiComponent({
     handleOpenModal
   );
 
+  if (isLoading) {
+    messageApi.loading("Loading Edit Data...");
+  }
+
   const handleSearch = async (value) => {
     setSearchLoading(true);
     try {
-      const data = await fetchSearchData(`${fetchUrl}?member_name=${value}`);
+      const data = await fetchSearchData(`${fetchUrl}?member_id=${value}`);
       setFilteredData(data);
     } catch (error) {
       messageApi.error("Search failed. Please try again.", 7);
