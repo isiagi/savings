@@ -40,7 +40,7 @@ import { Alert, Spin } from "antd";
 Chart.register(CategoryScale, Filler, Legend);
 
 function LineGraph() {
-  const [res, loading] = useFetchData("saving/data/2024/6");
+  const [res, loading] = useFetchData("saving/data/");
 
   console.log("res", res);
   // const [chartData, setChartData] = useState({
@@ -56,11 +56,11 @@ function LineGraph() {
   //   ],
   // });
   const chartData = {
-    labels: res && res?.map((data) => data.week),
+    labels: res && res?.map((data) => data.month),
     datasets: [
       {
-        label: "Saving June 2024",
-        data: res && res?.map((data) => data.count),
+        label: "Saving 2024",
+        data: res && res?.map((data) => data.total_amount),
         backgroundColor: ["#589E23"],
         borderColor: "#2B3325",
         borderWidth: 1,
@@ -97,7 +97,7 @@ function LineGraph() {
           plugins: {
             title: {
               display: true,
-              text: "Weekly Savings Per Month",
+              text: "Monthly Savings (2024)",
             },
           },
         }}
