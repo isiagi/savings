@@ -128,8 +128,9 @@ function TableUiComponent({
 
   const handleSearch = async (value) => {
     setSearchLoading(true);
+    const queryParam = key === "2" ? `username=${value}` : `member_id=${value}`;
     try {
-      const data = await fetchSearchData(`${fetchUrl}?member_id=${value}`);
+      const data = await fetchSearchData(`${fetchUrl}?${queryParam}`);
       setFilteredData(data);
     } catch (error) {
       messageApi.error("Search failed. Please try again.", 7);

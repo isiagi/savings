@@ -156,7 +156,7 @@ const App = () => {
             }}
           />
           <h1 className="text-[#589E23] font-medium text-[15px]">
-            Agalyawamu Developmet Association (ADA){" "}
+            Agalyawamu Development Association (ADA){" "}
           </h1>
         </Header>
         <Content

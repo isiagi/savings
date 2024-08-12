@@ -55,8 +55,22 @@ function LineGraph() {
   //     },
   //   ],
   // });
+  const monthNames = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
   const chartData = {
-    labels: res && res?.map((data) => data.month),
+    labels: res && res?.map((data) => monthNames[data.month - 1]),
     datasets: [
       {
         label: "Saving 2024",

@@ -6,6 +6,7 @@ import {
   PauseCircleOutlined,
   WalletOutlined,
   DollarOutlined,
+  SwitcherOutlined,
 } from "@ant-design/icons";
 
 function Home() {
@@ -48,6 +49,13 @@ function Home() {
       title: "Total Saving Amount",
       rate: res && res.total_saving,
       icon: <WalletOutlined />,
+    },
+    {
+      id: 6,
+      bg: "#569E23",
+      title: "Total Wagubumbuzi Amount",
+      rate: res && res.total_wagubumbuzi,
+      icon: <SwitcherOutlined />,
     },
   ];
 
