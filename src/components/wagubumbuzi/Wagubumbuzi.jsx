@@ -1,5 +1,10 @@
+import { useState, useMemo } from "react";
+import { Input } from "antd";
 import TableComponent from "../ui/table/Table";
 import useFetchData from "../../hooks/useFetchData";
+import fetchSearchData from "../../utils/fetchSearchData";
+
+const { Search } = Input;
 
 const columns = [
   {
@@ -7,7 +12,6 @@ const columns = [
     dataIndex: "username",
     key: "username",
   },
-
   {
     title: "Member Name",
     dataIndex: "full_name",
@@ -26,16 +30,33 @@ const columns = [
 ];
 
 function Wagubumbuzi() {
-  const tableData = useFetchData("wagubumbuzi");
+  const [searchLoading, setSearchLoading] = useState(false);
+  const [filteredData, setFilteredData] = useState(null);
 
-  console.log(tableData[0]);
+  const [tableData, loading] = useFetchData("wagubumbuzi");
 
-  const wagubumbuziDataFx = () => {
-    return (
-      tableData &&
-      tableData[0].map((item) => {
+  const wagubumbuziData = useMemo(() => {
+    if (!tableData) return [];
+    return tableData.map((item) => {
+      const date = new Date(item.date_created);
+      return {
+        id: item.id,
+        amount: item.amount,
+        date_created: `${date.toLocaleString("default", {
+          month: "long",
+        })} ${date.getFullYear()}`,
+        username: item.user.username,
+        full_name: `${item.user.first_name} ${item.user.last_name}`,
+      };
+    });
+  }, [tableData]);
+
+  const onSearch = async (value) => {
+    setSearchLoading(true);
+    try {
+      const data = await fetchSearchData(`wagubumbuzi?username=${value}`);
+      const transformedData = data.map((item) => {
         const date = new Date(item.date_created);
-
         return {
           id: item.id,
           amount: item.amount,
@@ -45,15 +66,32 @@ function Wagubumbuzi() {
           username: item.user.username,
           full_name: `${item.user.first_name} ${item.user.last_name}`,
         };
-      })
-    );
+      });
+      setFilteredData(transformedData);
+    } catch (error) {
+      console.error("Search error:", error);
+    }
+    setSearchLoading(false);
   };
-
-  const wagubumbuziData = wagubumbuziDataFx();
 
   return (
     <div>
-      <TableComponent dataSource={wagubumbuziData} columns={columns} />
+      <div className="flex items-center justify-between flex-wrap">
+        <h1 className="font-medium text-xl text-[#569E23]">{"Wagubumbuzi"}</h1>
+        <div>
+          <Search
+            placeholder="Search"
+            onSearch={onSearch}
+            loading={searchLoading}
+            style={{ width: 200 }}
+          />
+        </div>
+      </div>
+      <TableComponent
+        dataSource={filteredData || wagubumbuziData}
+        columns={columns}
+        loading={loading || searchLoading}
+      />
     </div>
   );
 }

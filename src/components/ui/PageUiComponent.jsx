@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import useStore from "../../global/GlobalStates";
-import HeaderBanner from "./HeaderBanner/HeaderBanner";
+// import HeaderBanner from "./HeaderBanner/HeaderBanner";
 import ModalComponent from "./modal/Modal";
 import TableUiComponent from "./TableUiComponent";
 
