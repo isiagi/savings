@@ -12,15 +12,14 @@ const handleItemClick = async (key) => {
       break;
     case "2":
       console.log("Downloading Loans Pdf Reports");
-      endpoint = "pdfs/Loans/";
+      endpoint = "pdfs/Loan/";
       break;
     case "3":
-      console.log("Downloading Payment Pdf Report");
       endpoint = "pdfs/Payment/";
       break;
     case "4":
       console.log("Downloading Members Pdf Report");
-      endpoint = "pdfs/Members/";
+      endpoint = "pdfs/User/";
       break;
     default:
       break;
@@ -32,6 +31,7 @@ const handleItemClick = async (key) => {
       const response = await instance.get(`${endpoint}`, {
         responseType: "blob", // Ensure response type is blob
       });
+
       if (response.status === 200) {
         const blob = new Blob([response.data], { type: "application/pdf" });
         const url = window.URL.createObjectURL(blob);
@@ -41,6 +41,8 @@ const handleItemClick = async (key) => {
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
+        window.URL.revokeObjectURL(url);
+        message.destroy(key);
       } else {
         console.error(
           "Error downloading PDF: Unexpected status",
@@ -48,7 +50,13 @@ const handleItemClick = async (key) => {
         );
       }
     } catch (error) {
-      console.error("Error downloading PDF:", error);
+      console.log("Error downloading PDF:", error);
+      message.destroy(key);
+      await message.error(
+        `Error downloading PDF. May sure ${
+          endpoint.split("/")[1]
+        } is not empty or try again later.`
+      );
     } finally {
       message.destroy(key);
     }
@@ -60,11 +68,7 @@ const items = [
     key: "4",
     label: (
       <Menu.Item key="4">
-        <a
-          rel="noopener noreferrer"
-          href="#"
-          onClick={() => handleItemClick("4")}
-        >
+        <a rel="noopener noreferrer" onClick={() => handleItemClick("4")}>
           Members Pdf Report
         </a>
       </Menu.Item>
@@ -74,11 +78,7 @@ const items = [
     key: "1",
     label: (
       <Menu.Item key="1">
-        <a
-          rel="noopener noreferrer"
-          href="#"
-          onClick={() => handleItemClick("1")}
-        >
+        <a rel="noopener noreferrer" onClick={() => handleItemClick("1")}>
           Savings Pdf Report
         </a>
       </Menu.Item>
@@ -91,7 +91,6 @@ const items = [
         <a
           target="_blank"
           rel="noopener noreferrer"
-          href="#"
           onClick={() => handleItemClick("2")}
         >
           Loans Pdf Reports
@@ -106,7 +105,6 @@ const items = [
         <a
           target="_blank"
           rel="noopener noreferrer"
-          href="#"
           onClick={() => handleItemClick("3")}
         >
           Payment Pdf Report
@@ -121,7 +119,6 @@ function Report() {
 
   return (
     <div>
-      {/* {contextHolder} */}
       <div className="flex">
         <LineGraph />
         <Dropdown overlay={menu} placement="bottomLeft" arrow>
