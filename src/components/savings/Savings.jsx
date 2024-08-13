@@ -29,7 +29,7 @@ function Savings() {
   return (
     <PageUiComponent
       headerTitle={"Savings"}
-      placeholder={"Search Savings"}
+      placeholder={"Enter Membership_id"}
       modalFields={formFields.savingFormFields}
       addModalTitle={"Add Savings"}
       columns={columns}

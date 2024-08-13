@@ -19,7 +19,7 @@ function Borrowers() {
   return (
     <PageUiComponent
       headerTitle={"Borrowers"}
-      placeholder={"Search Borrower"}
+      placeholder={"Enter Membership_id"}
       modalFields={formFields.borrowFormFielders}
       addModalTitle={"Add Borrower"}
       columns={columns}

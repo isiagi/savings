@@ -55,7 +55,7 @@ function UserComponent() {
       /> */}
       <PageUiComponent
         headerTitle={"Members"}
-        placeholder={"Search Member"}
+        placeholder={"Enter Membership_id"}
         modalFields={formFields.userFormFielders}
         addModalTitle={"Add Member"}
         columns={columns}

@@ -80,7 +80,7 @@ function Wagubumbuzi() {
         <h1 className="font-medium text-xl text-[#569E23]">{"Wagubumbuzi"}</h1>
         <div>
           <Search
-            placeholder="Search"
+            placeholder="Enter Membership_id"
             onSearch={onSearch}
             loading={searchLoading}
             style={{ width: 200 }}
