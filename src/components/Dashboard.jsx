@@ -11,6 +11,7 @@ import {
   SwapOutlined,
   RedEnvelopeOutlined,
   TeamOutlined,
+  MailOutlined,
 } from "@ant-design/icons";
 
 import { Button, Layout, Menu, theme, Popconfirm, message } from "antd";
@@ -110,6 +111,12 @@ const App = () => {
               key: "6",
               icon: <BarChartOutlined />,
               label: <Link to={"/home/reports/6"}>Reports</Link>,
+            },
+
+            {
+              key: "8",
+              icon: <MailOutlined />,
+              label: <Link to={"/home/contact/8"}>Send Mail</Link>,
             },
             {
               key: "7",
