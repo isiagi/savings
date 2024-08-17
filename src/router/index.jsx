@@ -12,6 +12,7 @@ import Wagubumbuzi from "../components/wagubumbuzi/Wagubumbuzi";
 import Login from "../components/auth/Login";
 import PrivateRoute from "../utils/PrivateRoute";
 import PrivateAuth from "../utils/PrivateAuth";
+import Contact from "../components/contact/Contact";
 
 function index() {
   return (
@@ -31,6 +32,7 @@ function index() {
             <Route path="wagubumbuzi/:key" element={<Wagubumbuzi />} />
             <Route path="payment/:key" element={<Payment />} />
             <Route path="borrowers/:key" element={<Borrowers />} />
+            <Route path="contact/:key" element={<Contact />} />
           </Route>
         </Route>
       </Routes>
