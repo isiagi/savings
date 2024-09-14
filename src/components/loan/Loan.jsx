@@ -41,6 +41,11 @@ function Loan() {
       dataIndex: "remaining_amount",
       key: "remaining_amount",
     },
+    {
+      title: "Extra Amount",
+      dataIndex: "loan_cost",
+      key: "loan_cost",
+    },
     // {
     //   title: "Granteers",
     //   dataIndex: "granteers",
