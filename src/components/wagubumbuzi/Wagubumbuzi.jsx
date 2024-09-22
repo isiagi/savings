@@ -1,10 +1,9 @@
 import { useState, useMemo } from "react";
-import { Button, Input } from "antd";
+import { Input } from "antd";
 import TableComponent from "../ui/table/Table";
 import useFetchData from "../../hooks/useFetchData";
 import fetchSearchData from "../../utils/fetchSearchData";
 
-import { Modal } from "antd";
 
 const { Search } = Input;
 
@@ -34,19 +33,6 @@ const columns = [
 function Wagubumbuzi() {
   const [searchLoading, setSearchLoading] = useState(false);
   const [filteredData, setFilteredData] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const showModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const handleOk = () => {
-    setIsModalOpen(false);
-  };
-
-  const handleCancel = () => {
-    setIsModalOpen(false);
-  };
 
   const [tableData, loading] = useFetchData("wagubumbuzi");
 
@@ -89,10 +75,6 @@ function Wagubumbuzi() {
     setSearchLoading(false);
   };
 
-  const onChange = (e) => {
-    console.log(e.target.value);
-  };
-
   return (
     <div>
       <div className="flex items-center justify-between flex-wrap">
@@ -106,17 +88,6 @@ function Wagubumbuzi() {
           />
         </div>
 
-        <Button onClick={showModal}>Input Wagubumbuzi</Button>
-
-        <Modal
-          title="Basic Modal"
-          open={isModalOpen}
-          onOk={handleOk}
-          onCancel={handleCancel}
-        >
-          <Input onChange={onChange} />
-          <Button type="primary">Submit</Button>
-        </Modal>
       </div>
       <TableComponent
         dataSource={filteredData || wagubumbuziData}
