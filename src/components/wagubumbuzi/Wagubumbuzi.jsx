@@ -4,6 +4,7 @@ import TableComponent from "../ui/table/Table";
 import useFetchData from "../../hooks/useFetchData";
 import fetchSearchData from "../../utils/fetchSearchData";
 
+
 const { Search } = Input;
 
 const columns = [
@@ -86,6 +87,7 @@ function Wagubumbuzi() {
             style={{ width: 200 }}
           />
         </div>
+
       </div>
       <TableComponent
         dataSource={filteredData || wagubumbuziData}

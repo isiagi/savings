@@ -21,6 +21,10 @@ const handleItemClick = async (key) => {
       console.log("Downloading Members Pdf Report");
       endpoint = "pdfs/User/";
       break;
+    case "5":
+      console.log("Downloading Totals Pdf Report");
+      endpoint = "pdfs/staff-totals-pdf/";
+      break;
     default:
       break;
   }
@@ -108,6 +112,20 @@ const items = [
           onClick={() => handleItemClick("3")}
         >
           Payment Pdf Report
+        </a>
+      </Menu.Item>
+    ),
+  },
+  {
+    key: "5",
+    label: (
+      <Menu.Item key="5">
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={() => handleItemClick("5")}
+        >
+          Totals Pdf Report
         </a>
       </Menu.Item>
     ),

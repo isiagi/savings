@@ -150,7 +150,7 @@ function TableUiComponent({
         // console.log(yr);
       }
 
-      if (key.includes("amount")) {
+      if (key.includes("amount") || key.includes("cost")) {
         console.log("key", items[key]);
         const formatter = new Intl.NumberFormat("en-US", {
           style: "currency",
@@ -168,7 +168,7 @@ function TableUiComponent({
           items[key] = "Invalid amount"; // Handle the invalid amount as desired
         } else {
           // Remove non-numeric characters (except the decimal point)
-          let cleanedAmt = amt.replace(/[^0-9.-]+/g, "");
+          let cleanedAmt = amt && amt.replace(/[^0-9.-]+/g, "");
 
           // Log the cleaned amount for debugging
           console.log("Cleaned amount value:", cleanedAmt);
@@ -181,7 +181,7 @@ function TableUiComponent({
 
           if (isNaN(parsedAmt)) {
             console.error("Parsed amount is NaN:", amt);
-            items[key] = "Invalid amount"; // Handle the invalid amount as desired
+            items[key] = 0; // Handle the invalid amount as desired
           } else {
             items[key] = formatter.format(parsedAmt);
           }
