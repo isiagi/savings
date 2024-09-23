@@ -42,7 +42,7 @@ function Loan() {
       key: "remaining_amount",
     },
     {
-      title: "Extra Amount",
+      title: "Loan Cost",
       dataIndex: "loan_cost",
       key: "loan_cost",
     },
