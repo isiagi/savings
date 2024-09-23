@@ -7,6 +7,7 @@ import {
   WalletOutlined,
   DollarOutlined,
   SwitcherOutlined,
+  MonitorOutlined,
 } from "@ant-design/icons";
 
 function Home() {
@@ -37,11 +38,18 @@ function Home() {
       icon: <DollarOutlined />,
     },
     {
-      id: 4,
-      bg: "#472849",
+      id: 3,
+      bg: "#415E2C",
       title: "Unpaid Loans Amount",
       rate: res && res.total_remaining_amount,
       icon: <PauseCircleOutlined />,
+    },
+    {
+      id: 9,
+      bg: "#472849",
+      title: "Total Loan Cost",
+      rate: res && res.total_cost,
+      icon: <MonitorOutlined />,
     },
     {
       id: 5,
@@ -97,9 +105,9 @@ function Home() {
             <div className="text-2xl">{icon && icon}</div>
           </div>
           <div className="w-full h-[1px] my-4 bg-gray-300" />
-          <div>
+          {/* <div>
             <p>View Details</p>
-          </div>
+          </div> */}
         </div>
       ))}
     </div>
