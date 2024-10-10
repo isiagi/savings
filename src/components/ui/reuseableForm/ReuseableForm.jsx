@@ -109,7 +109,11 @@ const ReusableForm = ({ onFinish, formFields, initialValues, formId }) => {
                   value: value ? dayjs(value) : undefined, // Convert moment object to value
                 })}
               >
-                <DatePicker className="w-full" format="YYYY-MM-DD" />
+                <DatePicker
+                  placement="bottomRight"
+                  className="w-full"
+                  format="YYYY-MM-DD"
+                />
               </Form.Item>
             );
           } else if (field.name.includes("is_staff")) {

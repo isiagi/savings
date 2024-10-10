@@ -15,15 +15,15 @@ const savingFormFields = [
   //   path: "auth/meta/names",
   // },
   {
-    name: "amount",
-    label: "Amount:",
-    rules: [{ required: true, message: "Please enter your name" }],
-  },
-  {
     name: "date_of_payment",
     label: "Date Of Deposit:",
     rules: [{ required: true, message: "Please enter your name" }],
     // inputComponent: <DatePicker className="w-full" />,
+  },
+  {
+    name: "amount",
+    label: "Amount:",
+    rules: [{ required: true, message: "Please enter your name" }],
   },
 ];
 
