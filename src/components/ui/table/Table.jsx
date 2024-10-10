@@ -159,7 +159,7 @@ function TableComponent({ dataSource, columns, loading }) {
           </Table.Summary.Row>
         );
       }}
-      scroll={{ x: 400 }}
+      scroll={{ x: 400, y: 300 }}
       dataSource={formattedData}
       columns={columns}
       pagination={{ position: ["topRight"], pageSize: 5 }}
