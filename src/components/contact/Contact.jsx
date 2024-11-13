@@ -33,7 +33,7 @@ function Contact() {
     setLoading(true);
     try {
       await axios.post(
-        "http://127.0.0.1:8000/api/auth/contact_members/",
+        "https://agalyawamm-backend.onrender.com/api/auth/contact_members/",
         {
           subject: email.subject,
           message: email.message,
