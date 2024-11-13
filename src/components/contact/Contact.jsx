@@ -1,6 +1,7 @@
 import { Button, Input, message } from "antd";
 import axios from "axios";
 import { useState } from "react";
+import instance from "../api/axios/axios";
 
 const { TextArea } = Input;
 
@@ -32,8 +33,8 @@ function Contact() {
     // console.log(email);
     setLoading(true);
     try {
-      await axios.post(
-        "https://agalyawamm-backend.onrender.com/api/auth/contact_members/",
+      await instance.post(
+        "auth/contact_members/",
         {
           subject: email.subject,
           message: email.message,
