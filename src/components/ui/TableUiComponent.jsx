@@ -128,7 +128,13 @@ function TableUiComponent({
 
   const handleSearch = async (value) => {
     setSearchLoading(true);
-    const queryParam = key === "2" ? `username=${value}` : `member_id=${value}`;
+    const queryParam =
+      key === "2"
+        ? `username=${value}`
+        : key === "9"
+        ? `reference=${value}`
+        : `member_id=${value}`;
+
     try {
       const data = await fetchSearchData(`${fetchUrl}?${queryParam}`);
       setFilteredData(data);
