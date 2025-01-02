@@ -1,10 +1,9 @@
-import { useState, useMemo } from "react";
-import { Button, Input } from "antd";
+import { useState, useMemo, useEffect } from "react";
+import { Button, Input, message } from "antd";
 import TableComponent from "../ui/table/Table";
 import useFetchData from "../../hooks/useFetchData";
 import fetchSearchData from "../../utils/fetchSearchData";
 import { postAmount } from "../../utils/postAmount";
-
 
 const { Search } = Input;
 
@@ -34,10 +33,33 @@ const columns = [
 function Wagubumbuzi() {
   const [searchLoading, setSearchLoading] = useState(false);
   const [filteredData, setFilteredData] = useState(null);
-  const [inputAmount, setInputAmount] = useState(0);
+  const [inputAmount, setInputAmount] = useState("");
+  const [amountLoading, setAmountLoading] = useState(false);
+  const [wagubumbuziAmounts, setWagubumbuziAmounts] = useState({
+    totalAfterReduction: 0,
+    amountReduced: 0,
+  });
 
+  const [tableData, loading, refetchData] = useFetchData("wagubumbuzi");
 
-  const [tableData, loading] = useFetchData("wagubumbuzi");
+  // Calculate amounts whenever tableData changes
+  useEffect(() => {
+    if (tableData && tableData.length > 0) {
+      const totalAmount = tableData.reduce(
+        (acc, item) => acc + parseFloat(item.amount),
+        0
+      );
+      const totalReduced = tableData.reduce(
+        (acc, item) => acc + parseFloat(item.amount_reduced),
+        0
+      );
+
+      setWagubumbuziAmounts({
+        totalAfterReduction: totalAmount - totalReduced,
+        amountReduced: totalReduced,
+      });
+    }
+  }, [tableData]);
 
   const wagubumbuziData = useMemo(() => {
     if (!tableData) return [];
@@ -74,35 +96,51 @@ function Wagubumbuzi() {
       setFilteredData(transformedData);
     } catch (error) {
       console.error("Search error:", error);
+      message.error("Failed to search members");
     }
     setSearchLoading(false);
   };
 
   const handleInputAmount = async () => {
-    // if inputAmount is not a number, return
-    if (isNaN(inputAmount)) {
+    if (isNaN(inputAmount) || !inputAmount) {
+      message.error("Please enter a valid amount");
       return;
     }
 
     try {
+      setAmountLoading(true);
       const response = await postAmount(inputAmount);
-      console.log("response", response);
-      // set to local storage
-      localStorage.setItem("wagubumbuzi_amount", response.total_after_reduction);
-      setInputAmount(response.total_after_reduction)
-    } catch (error) {
-      console.log(error);
-    }
 
-  }
+      setInputAmount("");
+      await refetchData(); // This will trigger the useEffect to recalculate amounts
+      message.success("Amount updated successfully");
+    } catch (error) {
+      console.error("Error posting amount:", error);
+      message.error("Failed to update amount");
+    } finally {
+      setAmountLoading(false);
+    }
+  };
 
   return (
     <div>
       <div className="flex items-center justify-between flex-wrap">
         <h1 className="font-medium text-xl text-[#569E23]">{"Wagubumbuzi"}</h1>
-        <div>
-          <Input onChange={(e) => setInputAmount(e.target.value)} placeholder="Enter Amount" style={{ width: 200 }} />
-          <Button onClick={handleInputAmount} type="primary">Enter</Button>
+        <div className="flex gap-2">
+          <Input
+            onChange={(e) => setInputAmount(e.target.value)}
+            placeholder="Enter Amount"
+            style={{ width: 200 }}
+            value={inputAmount}
+            type="number"
+          />
+          <Button
+            loading={amountLoading}
+            onClick={handleInputAmount}
+            type="primary"
+          >
+            Enter
+          </Button>
         </div>
         <div>
           <Search
@@ -112,12 +150,12 @@ function Wagubumbuzi() {
             style={{ width: 200 }}
           />
         </div>
-
       </div>
       <TableComponent
         dataSource={filteredData || wagubumbuziData}
         columns={columns}
         loading={loading || searchLoading}
+        wagubumbuziAmounts={wagubumbuziAmounts}
       />
     </div>
   );

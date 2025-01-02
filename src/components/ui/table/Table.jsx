@@ -9,7 +9,7 @@ import useCreate from "../../../global/DataState";
 
 const { Text } = Typography;
 
-function TableComponent({ dataSource, columns, loading }) {
+function TableComponent({ dataSource, columns, loading, wagubumbuziAmounts }) {
   // const navigate = useNavigate();
   const { key } = useParams();
   // eslint-disable-next-line no-unused-vars
@@ -163,10 +163,18 @@ function TableComponent({ dataSource, columns, loading }) {
                   Wagubumzi Available
                 </Table.Summary.Cell>
                 <Table.Summary.Cell colSpan={1}>
-                  {localStorage.getItem("wagubumbuzi_amount") ? (
+                  {localStorage.getItem("wagubumbuzi_reduce_amount") ? (
                     <Text className="text-[#9E9A23] font-medium text-base">
                       {" "}
-                      ({localStorage.getItem("wagubumbuzi_amount")})
+                      (
+                      {wagubumbuziAmounts.amountReduced.toLocaleString(
+                        "en-US",
+                        {
+                          style: "currency",
+                          currency: "UGX",
+                        }
+                      )}
+                      )
                     </Text>
                   ) : (
                     <Text className="text-[#9E9A23] font-medium text-base">
@@ -184,7 +192,13 @@ function TableComponent({ dataSource, columns, loading }) {
                   {localStorage.getItem("wagubumbuzi_amount") ? (
                     <Text className="text-[#9E9A23] font-medium text-base">
                       {" "}
-                      {localStorage.getItem("wagubumbuzi_amount")}
+                      {wagubumbuziAmounts.totalAfterReduction.toLocaleString(
+                        "en-US",
+                        {
+                          style: "currency",
+                          currency: "UGX",
+                        }
+                      )}
                     </Text>
                   ) : (
                     <Text className="text-[#9E9A23] font-medium text-base">
