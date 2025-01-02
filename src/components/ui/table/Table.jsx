@@ -9,7 +9,7 @@ import useCreate from "../../../global/DataState";
 
 const { Text } = Typography;
 
-function TableComponent({ dataSource, columns, loading }) {
+function TableComponent({ dataSource, columns, loading, wagubumbuziAmounts }) {
   // const navigate = useNavigate();
   const { key } = useParams();
   // eslint-disable-next-line no-unused-vars
@@ -17,7 +17,7 @@ function TableComponent({ dataSource, columns, loading }) {
   const dataCreated = useCreate((state) => state.dataCreated);
   const tableData = useCreate((state) => state.tableData);
 
-  console.log(tableData, "table data");
+  // console.log(tableData, "table data");
 
   const calculateTotal = (tableData, remain = false) => {
     if (!tableData || tableData.length === 0) return 0;
@@ -86,7 +86,7 @@ function TableComponent({ dataSource, columns, loading }) {
     return item; // return the item as is for other cases
   });
 
-  console.log(formattedData, "formattedData");
+  // console.log(formattedData, "formattedData");
 
   return (
     <Table
@@ -156,6 +156,59 @@ function TableComponent({ dataSource, columns, loading }) {
                 </Text>
               )}
             </Table.Summary.Cell>
+
+            {key == "10" && (
+              <>
+                <Table.Summary.Cell className="text-[#9E9A23] font-semibold">
+                  Wagubumzi Available
+                </Table.Summary.Cell>
+                <Table.Summary.Cell colSpan={1}>
+                  {localStorage.getItem("wagubumbuzi_reduce_amount") ? (
+                    <Text className="text-[#9E9A23] font-medium text-base">
+                      {" "}
+                      (
+                      {wagubumbuziAmounts.amountReduced.toLocaleString(
+                        "en-US",
+                        {
+                          style: "currency",
+                          currency: "UGX",
+                        }
+                      )}
+                      )
+                    </Text>
+                  ) : (
+                    <Text className="text-[#9E9A23] font-medium text-base">
+                      {" "}
+                      (0)
+                    </Text>
+                  )}
+                  {/* {remainingTotal !== 0 && key == "4" && (
+                <Text className="text-[#9E9A23] font-medium text-base">
+                  {" "}
+                  ({remainingTotal})
+                </Text>
+              )} */}
+                  {/* if local storage has wagubumbuzi_amount then show else 0 */}
+                  {localStorage.getItem("wagubumbuzi_amount") ? (
+                    <Text className="text-[#9E9A23] font-medium text-base">
+                      {" "}
+                      {wagubumbuziAmounts.totalAfterReduction.toLocaleString(
+                        "en-US",
+                        {
+                          style: "currency",
+                          currency: "UGX",
+                        }
+                      )}
+                    </Text>
+                  ) : (
+                    <Text className="text-[#9E9A23] font-medium text-base">
+                      {" "}
+                      (0)
+                    </Text>
+                  )}
+                </Table.Summary.Cell>
+              </>
+            )}
           </Table.Summary.Row>
         );
       }}
