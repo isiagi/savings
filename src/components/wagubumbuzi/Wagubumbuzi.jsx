@@ -3,7 +3,9 @@ import { Button, Input, message } from "antd";
 import TableComponent from "../ui/table/Table";
 import useFetchData from "../../hooks/useFetchData";
 import fetchSearchData from "../../utils/fetchSearchData";
-import { postAmount } from "../../utils/postAmount";
+
+import { getAmount, postAmount } from "../../utils/postAmount";
+
 
 const { Search } = Input;
 
@@ -40,24 +42,59 @@ function Wagubumbuzi() {
     amountReduced: 0,
   });
 
+  const [fetchingReduction, setFetchingReduction] = useState(false);
+
   const [tableData, loading, refetchData] = useFetchData("wagubumbuzi");
 
-  // Calculate amounts whenever tableData changes
+  // Fetch current reduction data on component mount
+  useEffect(() => {
+    const fetchCurrentReduction = async () => {
+      setFetchingReduction(true);
+      try {
+        const response = await getAmount(); // Update with your actual endpoint
+
+        setWagubumbuziAmounts({
+          totalAfterReduction: response.total_after_reduction,
+          amountReduced: response.amount_reduced,
+        });
+
+        // Save to localStorage for persistence
+        localStorage.setItem(
+          "wagubumbuziAmounts",
+          JSON.stringify({
+            totalAfterReduction: response.data.total_after_reduction,
+            amountReduced: response.data.amount_reduced,
+          })
+        );
+      } catch (error) {
+        console.error("Error fetching current reduction:", error);
+
+        // Try to retrieve from localStorage as fallback
+        const savedAmounts = localStorage.getItem("wagubumbuziAmounts");
+        if (savedAmounts) {
+          setWagubumbuziAmounts(JSON.parse(savedAmounts));
+        }
+      } finally {
+        setFetchingReduction(false);
+      }
+    };
+
+    fetchCurrentReduction();
+  }, []);
+
+  // Original useEffect for calculating from table data - might not be needed now
+  // but keeping for compatibility
+
   useEffect(() => {
     if (tableData && tableData.length > 0) {
       const totalAmount = tableData.reduce(
         (acc, item) => acc + parseFloat(item.amount),
         0
       );
-      const totalReduced = tableData.reduce(
-        (acc, item) => acc + parseFloat(item.amount_reduced),
-        0
-      );
 
-      setWagubumbuziAmounts({
-        totalAfterReduction: totalAmount - totalReduced,
-        amountReduced: totalReduced,
-      });
+      // We don't need to calculate amount_reduced from individual records anymore
+      // since we're now using the global reduction model
+
     }
   }, [tableData]);
 
@@ -111,7 +148,23 @@ function Wagubumbuzi() {
       setAmountLoading(true);
       const response = await postAmount(inputAmount);
 
+      setAmountLoading(false);
+
       setInputAmount("");
+      setWagubumbuziAmounts({
+        totalAfterReduction: response.total_after_reduction,
+        amountReduced: response.amount_reduced,
+      });
+
+      // set to local storage
+      localStorage.setItem(
+        "wagubumbuziAmounts",
+        JSON.stringify({
+          totalAfterReduction: response.total_after_reduction,
+          amountReduced: response.amount_reduced,
+        })
+      );
+
       await refetchData(); // This will trigger the useEffect to recalculate amounts
       message.success("Amount updated successfully");
     } catch (error) {
@@ -154,7 +207,9 @@ function Wagubumbuzi() {
       <TableComponent
         dataSource={filteredData || wagubumbuziData}
         columns={columns}
-        loading={loading || searchLoading}
+
+        loading={loading || searchLoading || fetchingReduction}
+
         wagubumbuziAmounts={wagubumbuziAmounts}
       />
     </div>
