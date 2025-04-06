@@ -17,6 +17,7 @@ export const postAmount = async (amount) => {
   } catch (error) {
     console.log(error);
   }
+
 };
 
 export const getAmount = async () => {
@@ -27,3 +28,4 @@ export const getAmount = async () => {
     console.log(error);
   }
 };
+
