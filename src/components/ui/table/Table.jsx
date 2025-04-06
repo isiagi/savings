@@ -163,25 +163,10 @@ function TableComponent({ dataSource, columns, loading, wagubumbuziAmounts }) {
                   Wagubumzi Available
                 </Table.Summary.Cell>
                 <Table.Summary.Cell colSpan={1}>
-                  {localStorage.getItem("wagubumbuzi_reduce_amount") ? (
-                    <Text className="text-[#9E9A23] font-medium text-base">
-                      {" "}
-                      (
-                      {wagubumbuziAmounts.amountReduced.toLocaleString(
-                        "en-US",
-                        {
-                          style: "currency",
-                          currency: "UGX",
-                        }
-                      )}
-                      )
-                    </Text>
-                  ) : (
-                    <Text className="text-[#9E9A23] font-medium text-base">
-                      {" "}
-                      (0)
-                    </Text>
-                  )}
+                  {wagubumbuziAmounts.amountReduced.toLocaleString("en-US", {
+                    style: "currency",
+                    currency: "UGX",
+                  })}
                   {/* {remainingTotal !== 0 && key == "4" && (
                 <Text className="text-[#9E9A23] font-medium text-base">
                   {" "}
@@ -189,7 +174,7 @@ function TableComponent({ dataSource, columns, loading, wagubumbuziAmounts }) {
                 </Text>
               )} */}
                   {/* if local storage has wagubumbuzi_amount then show else 0 */}
-                  {localStorage.getItem("wagubumbuzi_amount") ? (
+                  {
                     <Text className="text-[#9E9A23] font-medium text-base">
                       {" "}
                       {wagubumbuziAmounts.totalAfterReduction.toLocaleString(
@@ -198,14 +183,9 @@ function TableComponent({ dataSource, columns, loading, wagubumbuziAmounts }) {
                           style: "currency",
                           currency: "UGX",
                         }
-                      )}
+                      ) || 0}
                     </Text>
-                  ) : (
-                    <Text className="text-[#9E9A23] font-medium text-base">
-                      {" "}
-                      (0)
-                    </Text>
-                  )}
+                  }
                 </Table.Summary.Cell>
               </>
             )}

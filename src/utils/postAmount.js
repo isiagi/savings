@@ -18,3 +18,12 @@ export const postAmount = async (amount) => {
     console.log(error);
   }
 };
+
+export const getAmount = async () => {
+  try {
+    const response = await instance.get("wagubumbuzi/reduce/");
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
