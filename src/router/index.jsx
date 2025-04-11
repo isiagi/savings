@@ -13,6 +13,7 @@ import Login from "../components/auth/Login";
 import PrivateRoute from "../utils/PrivateRoute";
 import PrivateAuth from "../utils/PrivateAuth";
 import Contact from "../components/contact/Contact";
+import Archives from "../components/archives/Archives";
 
 function index() {
   return (
@@ -33,6 +34,7 @@ function index() {
             <Route path="payment/:key" element={<Payment />} />
             <Route path="borrowers/:key" element={<Borrowers />} />
             <Route path="contact/:key" element={<Contact />} />
+            <Route path="archives/:key" element={<Archives />} />
           </Route>
         </Route>
       </Routes>

@@ -50,7 +50,7 @@ function TableUiComponent({
   const setDataCreated = useCreate((state) => state.setDataCreated);
   const setTableData = useCreate((state) => state.setTableData);
 
-  console.log(res, "res");
+  console.log(res, "res archived");
 
   useEffect(() => {
     setFilteredData(res); // Set filtered data to res initially
@@ -222,14 +222,21 @@ function TableUiComponent({
         {modalState &&
           Object.entries(modalState)
             .filter(
-              // eslint-disable-next-line no-unused-vars
               ([item, _]) =>
                 item !== "id" && item !== "user" && item !== "user_id"
             )
             .map(([key, value]) => (
               <h3 className="text-base" key={key}>
                 {`${key} : `}
-                <span className="font-medium">{`${value}`}</span>
+                <span className="font-medium">
+                  {typeof value === "object" && value !== null
+                    ? value.username ||
+                      `${value.first_name || ""} ${
+                        value.last_name || ""
+                      }`.trim() ||
+                      JSON.stringify(value)
+                    : `${value}`}
+                </span>
               </h3>
             ))}
       </Modal>
