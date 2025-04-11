@@ -12,6 +12,7 @@ import {
   RedEnvelopeOutlined,
   TeamOutlined,
   MailOutlined,
+  ContainerOutlined,
 } from "@ant-design/icons";
 
 import { Button, Layout, Menu, theme, Popconfirm, message } from "antd";
@@ -111,6 +112,12 @@ const App = () => {
               key: "6",
               icon: <BarChartOutlined />,
               label: <Link to={"/home/reports/6"}>Reports</Link>,
+            },
+
+            {
+              key: "20",
+              icon: <ContainerOutlined />,
+              label: <Link to={"/home/archives/20"}>Archives</Link>,
             },
 
             {
