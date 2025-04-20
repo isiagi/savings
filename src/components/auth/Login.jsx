@@ -63,6 +63,9 @@ function Login() {
           <Input.Password />
         </Form.Item>
 
+        {/* Forget password */}
+        <Typography.Link href="/reset">Forget Password?</Typography.Link>
+
         <Form.Item>
           <Button
             size="large"

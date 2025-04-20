@@ -9,11 +9,13 @@ import Users from "../components/users/Users";
 import Borrowers from "../components/borrowers/Borrowers";
 import Payment from "../components/payment/Payment";
 import Wagubumbuzi from "../components/wagubumbuzi/Wagubumbuzi";
+import Reset from "../components/auth/Reset";
 import Login from "../components/auth/Login";
 import PrivateRoute from "../utils/PrivateRoute";
 import PrivateAuth from "../utils/PrivateAuth";
 import Contact from "../components/contact/Contact";
 import Archives from "../components/archives/Archives";
+import NewPassword from "../components/auth/NewPassword";
 
 function index() {
   return (
@@ -21,6 +23,11 @@ function index() {
       <Routes>
         <Route element={<PrivateAuth />}>
           <Route path="/" element={<Login />} />
+          <Route path="/reset" element={<Reset />} />
+          <Route
+            path="/api/auth/reset_password/:keyId/:keyToken"
+            element={<NewPassword />}
+          />
         </Route>
         <Route element={<PrivateRoute />}>
           <Route path="/home" element={<Home />}>
