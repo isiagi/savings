@@ -267,7 +267,7 @@ const userProvideFields = [
   {
     name: "image_url",
     label: "Photo:",
-    rules: [{ required: true, message: "Please enter your Photo" }],
+    rules: [{ required: false, message: "Please enter your Photo" }],
     inputComponent: (
       <Upload
         beforeUpload={() => false}
