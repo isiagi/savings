@@ -15,7 +15,9 @@ import PrivateRoute from "../utils/PrivateRoute";
 import PrivateAuth from "../utils/PrivateAuth";
 import Contact from "../components/contact/Contact";
 import Archives from "../components/archives/Archives";
+
 import NewPassword from "../components/auth/NewPassword";
+
 
 function index() {
   return (
