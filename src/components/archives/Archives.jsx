@@ -81,7 +81,7 @@ function Loan() {
 
   return (
     <PageUiComponent
-      headerTitle={"Loans"}
+      headerTitle={"Archived Loans"}
       placeholder={"Enter Membership_id"}
       modalFields={formFields.loanFormFields}
       addModalTitle={"Add Loan Application"}
