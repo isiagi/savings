@@ -128,6 +128,8 @@ function TableUiComponent({
 
   const handleSearch = async (value) => {
     setSearchLoading(true);
+
+    // Generate the query parameter based on key
     const queryParam =
       key === "2"
         ? `username=${value}`
@@ -135,8 +137,18 @@ function TableUiComponent({
         ? `reference=${value}`
         : `member_id=${value}`;
 
+    // Determine the correct connector
+    let url;
+    if (key === "20") {
+      // For key 20, append with & (assuming fetchUrl already has a ? parameter)
+      url = `${fetchUrl}&${queryParam}`;
+    } else {
+      // For all other keys, use ? as the first parameter indicator
+      url = `${fetchUrl}?${queryParam}`;
+    }
+
     try {
-      const data = await fetchSearchData(`${fetchUrl}?${queryParam}`);
+      const data = await fetchSearchData(url);
       setFilteredData(data);
     } catch (error) {
       messageApi.error("Search failed. Please try again.", 7);

@@ -50,8 +50,9 @@ function FormReuse({
       // OR Option 3: Set to empty string
       // cleanedValues.image_url = "";
     }
+    alert(JSON.stringify(cleanedValues));
 
-    console.log(cleanedValues);
+    console.log(cleanedValues, "cleanedValues");
 
     try {
       setCreateLoading();
