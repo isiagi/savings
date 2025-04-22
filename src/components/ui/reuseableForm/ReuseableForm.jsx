@@ -33,9 +33,8 @@ const ReusableForm = ({ onFinish, formFields, initialValues, formId }) => {
   };
 
   const onChange = (e) => {
-    console.log(`checked = `);
     formId.setFieldsValue({
-      is_staff: `${e.target.checked == true ? "True" : "False"}`,
+      is_staff: e.target.checked,
     });
   };
 
@@ -47,10 +46,15 @@ const ReusableForm = ({ onFinish, formFields, initialValues, formId }) => {
       if (name === "image_url") {
         formData.append(name, values[name][0].originFileObj);
       } else if (name === "is_staff") {
-        formData.append(name, values[name] === true ? "True" : "False");
+        formData.append(name, values[name] ? "True" : "False");
       } else {
         formData.append(name, values[name]); // there should be values.avatar which is a File object
       }
+    }
+
+    // log formData
+    for (const pair of formData.entries()) {
+      console.log(pair[0] + ": " + pair[1]);
     }
 
     try {
@@ -124,7 +128,10 @@ const ReusableForm = ({ onFinish, formFields, initialValues, formId }) => {
                 ]}
                 name={field.name}
                 label={field.label}
-                initialValue={initialValues && initialValues[`${field.name}`]}
+                initialValue={
+                  initialValues &&
+                  (initialValues[`${field.name}`] === "True" ? true : false)
+                }
                 key={index}
                 className="mb-2"
               >
