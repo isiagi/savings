@@ -6,7 +6,6 @@ import fetchSearchData from "../../utils/fetchSearchData";
 
 import { getAmount, postAmount } from "../../utils/postAmount";
 
-
 const { Search } = Input;
 
 const columns = [
@@ -53,27 +52,33 @@ function Wagubumbuzi() {
       try {
         const response = await getAmount(); // Update with your actual endpoint
 
+        console.log("response threrre", response);
+
         setWagubumbuziAmounts({
-          totalAfterReduction: response.total_after_reduction,
-          amountReduced: response.amount_reduced,
+          totalAfterReduction: response?.total_after_reduction || 0,
+          amountReduced: response?.amount_reduced || 0,
         });
 
-        // Save to localStorage for persistence
+        // Save to localStorage for persistence - fixed to use the correct response structure
         localStorage.setItem(
           "wagubumbuziAmounts",
           JSON.stringify({
-            totalAfterReduction: response.data.total_after_reduction,
-            amountReduced: response.data.amount_reduced,
+            totalAfterReduction: response?.total_after_reduction || 0,
+            amountReduced: response?.amount_reduced || 0,
           })
         );
       } catch (error) {
         console.error("Error fetching current reduction:", error);
 
         // Try to retrieve from localStorage as fallback
-        const savedAmounts = localStorage.getItem("wagubumbuziAmounts");
-        if (savedAmounts) {
-          setWagubumbuziAmounts(JSON.parse(savedAmounts));
-        }
+        // const savedAmounts = localStorage.getItem("wagubumbuziAmounts");
+        // if (savedAmounts) {
+        //   setWagubumbuziAmounts(JSON.parse(savedAmounts));
+        // }
+        setWagubumbuziAmounts({
+          totalAfterReduction: 0,
+          amountReduced: 0,
+        });
       } finally {
         setFetchingReduction(false);
       }
@@ -94,7 +99,6 @@ function Wagubumbuzi() {
 
       // We don't need to calculate amount_reduced from individual records anymore
       // since we're now using the global reduction model
-
     }
   }, [tableData]);
 
@@ -152,16 +156,16 @@ function Wagubumbuzi() {
 
       setInputAmount("");
       setWagubumbuziAmounts({
-        totalAfterReduction: response.total_after_reduction,
-        amountReduced: response.amount_reduced,
+        totalAfterReduction: response.total_after_reduction || 0,
+        amountReduced: response.amount_reduced || 0,
       });
 
-      // set to local storage
+      // set to local storage - fixed to use the correct response structure
       localStorage.setItem(
         "wagubumbuziAmounts",
         JSON.stringify({
-          totalAfterReduction: response.total_after_reduction,
-          amountReduced: response.amount_reduced,
+          totalAfterReduction: response.total_after_reduction || 0,
+          amountReduced: response.amount_reduced || 0,
         })
       );
 
@@ -207,9 +211,7 @@ function Wagubumbuzi() {
       <TableComponent
         dataSource={filteredData || wagubumbuziData}
         columns={columns}
-
         loading={loading || searchLoading || fetchingReduction}
-
         wagubumbuziAmounts={wagubumbuziAmounts}
       />
     </div>
