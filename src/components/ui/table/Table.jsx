@@ -163,7 +163,6 @@ function TableComponent({ dataSource, columns, loading, wagubumbuziAmounts }) {
                   Wagubumzi Available
                 </Table.Summary.Cell>
                 <Table.Summary.Cell colSpan={1}>
-
                   {wagubumbuziAmounts.amountReduced.toLocaleString("en-US", {
                     style: "currency",
                     currency: "UGX",
@@ -178,7 +177,6 @@ function TableComponent({ dataSource, columns, loading, wagubumbuziAmounts }) {
                   {/* if local storage has wagubumbuzi_amount then show else 0 */}
 
                   {
-
                     <Text className="text-[#9E9A23] font-medium text-base">
                       {" "}
                       {wagubumbuziAmounts.totalAfterReduction.toLocaleString(
@@ -187,11 +185,9 @@ function TableComponent({ dataSource, columns, loading, wagubumbuziAmounts }) {
                           style: "currency",
                           currency: "UGX",
                         }
-
                       ) || 0}
                     </Text>
                   }
-
                 </Table.Summary.Cell>
               </>
             )}
